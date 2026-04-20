@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>the mattress | one more</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: 'hsl(30, 10%, 15%)',      /* --foreground */
+            brandHover: 'hsl(30, 8%, 35%)',  /* --charcoal-light */
+            accent: 'hsl(30, 10%, 15%)',     /* same as brand for sleek look */
+            lightBlue: 'hsl(35, 15%, 88%)',  /* --secondary */
+            bgTheme: 'hsl(40, 30%, 97%)',    /* --background */
+            cardBorder: 'hsl(35, 15%, 85%)', /* --border */
+            creamDark: 'hsl(38, 25%, 92%)'   /* --cream-dark */
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bgTheme text-brand font-sans antialiased">
+
+  <!-- TOP NAV PLACEHOLDER -->
+  <header class="border-b border-cardBorder py-6 px-6 sm:px-12 flex justify-between items-center bg-transparent sticky top-0 z-50 backdrop-blur-md">
+    <div class="text-2xl font-serif text-brand tracking-tight">one more</div>
+    <div class="hidden md:flex gap-10 text-sm font-sans tracking-wide text-brand/60">
+      <a href="mattress.html" class="text-brand border-b focus:border-brand border-transparent hover:border-brand pb-1 transition-all">mattresses</a>
+      <a href="shop.html" class="hover:text-brand transition-colors">shop</a>
+      <a href="why.html" class="hover:text-brand transition-colors">why one more</a>
+      <a href="about.html" class="hover:text-brand transition-colors">about</a>
+    </div>
+    <div class="flex gap-4">
+      <span class="text-sm tracking-wide">cart (0)</span>
+    </div>
+  </header>
+
+  <!-- SECONDARY NAV (Shop, Inside, Compare, Reviews) -->
+  <div class="bg-transparent border-b border-cardBorder py-4 hidden md:block sticky top-0 z-50 bg-bgTheme/90 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 flex justify-center gap-12 text-xs uppercase tracking-wide font-medium items-center">
+      <a href="#shop" class="sec-nav-link text-brand bg-cardBorder/50 border-cardBorder rounded-full px-5 py-1.5 border transition-all duration-300">Shop</a>
+      <a href="#inside" class="sec-nav-link text-brand/60 hover:text-brand border-transparent rounded-full px-5 py-1.5 border transition-all duration-300">What's inside</a>
+      <a href="#compare" class="sec-nav-link text-brand/60 hover:text-brand border-transparent rounded-full px-5 py-1.5 border transition-all duration-300">Compare</a>
+      <a href="#reviews" class="sec-nav-link text-brand/60 hover:text-brand border-transparent rounded-full px-5 py-1.5 border transition-all duration-300">Reviews</a>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- HERO SECTION -->
+    <section id="shop" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-24 items-start scroll-mt-24">
+      
+      <!-- LEFT COL: Gallery structure using OneMore Photos -->
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <!-- Main Product Box -->
+        <div class="w-full aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
+            <img src="img/mattress-overhead.jpg" alt="the mattress" class="w-full h-full object-cover">
+        </div>
+        <!-- Grid Thumbnails -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="w-full aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
+             <img src="img/hero-bed.jpg" alt="hero bed" class="w-full h-full object-cover grayscale opacity-90 mix-blend-multiply hover:grayscale-0 hover:mix-blend-normal transition-all duration-500">
+          </div>
+          <div class="w-full aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
+             <img src="img/mattress-layers.jpg" alt="mattress layers" class="w-full h-full object-cover mix-blend-multiply hover:mix-blend-normal hover:scale-105 transition-all duration-700">
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COL: Add To Cart sticky area -->
+      <div class="lg:col-span-5 flex flex-col pt-2 lg:sticky lg:top-32 max-h-[calc(100vh-120px)] overflow-y-auto pb-10 hide-scrollbar scroll-smooth">
+        
+        <div class="flex items-center gap-2 mb-3">
+           <div class="flex text-brand text-[15px] gap-0.5">★★★★★</div>
+           <span class="text-[13px] font-bold text-brand ml-1">4.9</span>
+           <span class="text-[13px] text-brand/60">(420 reviews)</span>
+        </div>
+
+        <p class="text-[10px] uppercase tracking-[0.2em] font-medium text-brand/60 mb-2">the hero product</p>
+        <h1 class="font-serif text-[42px] leading-[1.1] text-brand mb-2 tracking-tight">the one more mattress</h1>
+        <p class="text-lg text-brand/80 mb-6">wider than king. smarter than the rest.</p>
+
+        <!-- Pricing -->
+        <div class="flex items-end gap-3 mb-2">
+          <span class="text-[28px] font-sans font-medium text-brand tracking-tight">$2,495</span>
+          <span class="bg-brand/10 text-brand text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider mb-2">FREE SHIPPING</span>
+        </div>
+        <p class="text-xs text-brand/60 mb-8 border-b border-cardBorder pb-6 tracking-wide">
+          120-night trial. or 0% APR with <strong>affirm</strong>. <a href="#" class="underline">See if you qualify</a>
+        </p>
+
+        <p class="text-[15px] text-brand/80 leading-relaxed mb-8">
+          designed for however many people you share your bed with—partners, kids, pets, all of the above. 20% wider than a standard king. enough space for everyone without feeling absurd.
+        </p>
+
+        <!-- Model Selector (Repurposed for Bed Frame Bundle vs Solo) -->
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-3">
+             <span class="text-[13px] tracking-wide font-medium text-brand">select sleep system:</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+             <!-- Solo Option -->
+             <label class="border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors text-center block bg-bgTheme">
+                <input type="radio" name="model" class="hidden">
+                <div class="flex justify-between items-center mb-1 w-full text-center">
+                   <div class="font-bold text-sm mx-auto">mattress only</div>
+                </div>
+                <p class="text-xs text-brand/60 mt-1">the standalone mattress.</p>
+             </label>
+             <!-- Bundle Option -->
+             <label class="border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer relative text-center block">
+                <input type="radio" name="model" class="hidden" checked>
+                <div class="absolute -top-2.5 right-3 bg-brand text-bgTheme text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">SAVE $135</div>
+                <div class="font-bold text-sm mb-1 text-brand">the bundle</div>
+                <p class="text-xs text-brand/70 mt-1">mattress + sheets + pillows + frame.</p>
+             </label>
+          </div>
+        </div>
+
+        <!-- Size Selector -->
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-3">
+             <span class="text-[13px] tracking-wide font-medium text-brand">select your size:</span>
+             <button id="size-chart-trigger" class="text-[11px] font-bold uppercase tracking-wider text-brand/60 hover:text-brand underline decoration-brand/30 underline-offset-4">Size guide</button>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+             <button class="border-2 border-brand bg-brand text-bgTheme font-medium rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-default">one more size (84" x 80")</button>
+             <div class="relative group">
+                 <button class="border border-cardBorder text-brand/40 bg-bgTheme rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-not-allowed line-through">king</button>
+             </div>
+             <div class="relative group">
+                 <button class="border border-cardBorder text-brand/40 bg-bgTheme rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-not-allowed line-through">queen</button>
+             </div>
+          </div>
+        </div>
+
+        <!-- Cross-sells (Add to save) -->
+        <div class="mb-8 border-t border-cardBorder pt-6">
+           <h3 class="text-[13px] tracking-wide font-medium text-brand mb-4">Add 1 or more and save:</h3>
+           <div class="flex flex-col gap-3">
+                  <!-- Sheets -->
+               <div class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
+                  <div class="w-14 h-14 bg-creamDark rounded border border-cardBorder flex items-center justify-center overflow-hidden relative shrink-0">
+                     <span class="absolute top-0 left-0 bg-brand text-bgTheme text-[8px] font-bold px-1 py-0.5 z-10 w-full text-center tracking-widest">SAVE</span>
+                     <img src="img/sheets-product.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
+                  </div>
+                  <div class="flex-1">
+                     <h4 class="text-xs font-bold text-brand">the one more sheets</h4>
+                     <p class="text-[10px] text-brand/60 mb-1">cotton percale</p>
+                     <span class="text-xs font-bold text-accent">+$295</span>
+                  </div>
+                  <div class="pr-2">
+                     <input type="checkbox" id="chk-sheets" data-price="295" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
+                  </div>
+               </div>
+
+               <!-- Pillows -->
+               <div class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
+                  <div class="w-14 h-14 bg-lightBlue rounded border border-cardBorder flex items-center justify-center overflow-hidden relative shrink-0">
+                     <img src="img/pillows-product.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
+                  </div>
+                  <div class="flex-1">
+                     <h4 class="text-xs font-bold text-brand">the one more pillows</h4>
+                     <p class="text-[10px] text-brand/60 mb-1">set of 3</p>
+                     <span class="text-xs font-bold text-accent">+$195</span>
+                  </div>
+                  <div class="pr-2">
+                     <input type="checkbox" id="chk-pillows" data-price="195" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
+                  </div>
+               </div>
+
+               <!-- Frame -->
+               <div class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
+                  <div class="w-14 h-14 bg-creamDark rounded border border-cardBorder flex items-center justify-center overflow-hidden relative shrink-0">
+                     <img src="img/frame-product.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
+                  </div>
+                  <div class="flex-1">
+                     <h4 class="text-xs font-bold text-brand">the bed frame</h4>
+                     <p class="text-[10px] text-brand/60 mb-1">minimal architecture</p>
+                     <span class="text-xs font-bold text-accent">+$1,195</span>
+                  </div>
+                  <div class="pr-2">
+                     <input type="checkbox" id="chk-frame" data-price="1195" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
+                  </div>
+               </div>
+               
+           </div>
+        </div>
+
+        <!-- Sticky Checkout Panel -->
+        <div class="bg-lightBlue/30 border border-cardBorder rounded-xl p-6 mb-8 mt-4">
+           <div class="flex items-center gap-2 text-xs tracking-wide text-brand mb-5 font-medium">
+             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+             <span id="savings-message">free shipping, compressed in box.</span>
+           </div>
+           
+           <button id="add-to-cart-btn" class="w-full bg-brand hover:bg-brandHover text-bgTheme py-[18px] rounded-sm tracking-[0.05em] font-medium text-[15px] lowercase transition-colors">
+             add to cart — $2,495
+           </button>
+           <p class="text-[11px] text-brand/50 text-center leading-relaxed mt-4 italic">
+              always room for one more.
+           </p>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- TAKE A LOOK UNDER THE COVERS SECTION -->
+    <section id="inside" class="mb-32 mt-16 max-w-5xl mx-auto border-t border-cardBorder pt-20 scroll-mt-24">
+       <div class="text-center mb-16">
+          <p class="eyebrow text-[10px] uppercase tracking-[0.2em] font-medium text-brand/60 mb-4">engineered for sharing</p>
+          <h2 class="font-serif text-4xl lg:text-5xl text-brand tracking-tight">every layer, designed with intention.</h2>
+       </div>
+       
+       <div class="bg-creamDark p-6 lg:p-12 rounded-xl relative overflow-hidden border border-cardBorder">
+          
+          <div class="w-full mx-auto mb-12 rounded-xl overflow-hidden border border-cardBorder">
+             <img src="img/mattress-layers.jpg" alt="mattress layers" class="w-full h-auto object-cover mix-blend-multiply opacity-90">
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full">
+             <div class="bg-bgTheme p-6 rounded-lg border border-cardBorder">
+                <h4 class="font-medium text-brand mb-2 text-sm tracking-wide">three-zone support system</h4>
+                <p class="text-xs text-brand/70 leading-relaxed font-sans">left zone, center zone, right zone. engineered for different bodies and sleep styles sharing the same surface.</p>
+             </div>
+             <div class="bg-bgTheme p-6 rounded-lg border border-cardBorder">
+                <h4 class="font-medium text-brand mb-2 text-sm tracking-wide">advanced motion isolation</h4>
+                <p class="text-xs text-brand/70 leading-relaxed font-sans">individually wrapped coils absorb movement. roll over, get up, or welcome a late-night visitor without disturbing anyone.</p>
+             </div>
+             <div class="bg-bgTheme p-6 rounded-lg border border-cardBorder">
+                <h4 class="font-medium text-brand mb-2 text-sm tracking-wide">cooling technology</h4>
+                <p class="text-xs text-brand/70 leading-relaxed font-sans">multiple sleepers generate more heat. graphite-infused memory foam and breathable cover keep everyone comfortable.</p>
+             </div>
+          </div>
+       </div>
+    </section>
+
+    <!-- COMPARE THIS MATTRESS SECTION -->
+    <section id="compare" class="mb-24 max-w-5xl mx-auto border-t border-cardBorder pt-20 scroll-mt-24">
+       <div class="text-center mb-16">
+           <p class="eyebrow text-[10px] uppercase tracking-[0.2em] font-medium text-brand/60 mb-4">specifications</p>
+           <h2 class="font-serif text-4xl lg:text-5xl text-brand tracking-tight">the details</h2>
+       </div>
+
+       <div class="flex flex-col gap-0 border-y border-cardBorder">
+          
+          <!-- Column Headers -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-0 pb-6 pt-10 px-4 md:px-8">
+             <div class="hidden md:block"></div>
+             <div class="text-center">
+                <h3 class="font-serif text-2xl font-normal text-brand mb-1">the mattress</h3>
+                <p class="text-sm font-medium text-brand/50 lowercase">one more size</p>
+             </div>
+             <div class="text-center">
+                <h3 class="font-serif text-2xl font-normal text-brand mb-1 opacity-50">standard king</h3>
+                <p class="text-sm font-medium text-brand/50 lowercase">industry spec</p>
+             </div>
+          </div>
+
+          <!-- Rows -->
+          <div class="grid grid-cols-2 md:grid-cols-3 divide-x divide-transparent md:divide-cardBorder border-t border-cardBorder group hover:bg-creamDark/30 transition-colors">
+             <div class="col-span-2 md:col-span-1 py-4 md:py-8 px-4 md:px-8 flex items-center md:items-start border-b border-cardBorder md:border-none">
+                 <span class="text-xs tracking-widest uppercase font-medium text-brand/60">dimensions</span>
+             </div>
+             <div class="py-6 px-4 text-center flex flex-col items-center justify-center">
+                <p class="font-sans text-brand text-[15px] font-medium">84" W × 80" L × 12" H</p>
+             </div>
+             <div class="py-6 px-4 text-center flex flex-col items-center justify-center">
+                <p class="font-sans text-brand/50 text-[15px] font-medium">76" W × 80" L × 12" H</p>
+             </div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-3 divide-x divide-transparent md:divide-cardBorder border-t border-cardBorder group hover:bg-creamDark/30 transition-colors">
+             <div class="col-span-2 md:col-span-1 py-4 md:py-8 px-4 md:px-8 flex items-center md:items-start border-b border-cardBorder md:border-none">
+                 <span class="text-xs tracking-widest uppercase font-medium text-brand/60">usable space</span>
+             </div>
+             <div class="py-6 px-4 text-center flex flex-col items-center justify-center">
+                <p class="font-sans text-brand text-[15px] font-medium">+20% more surface area</p>
+             </div>
+             <div class="py-6 px-4 text-center flex flex-col items-center justify-center">
+                <p class="font-sans text-brand/50 text-[15px] font-medium">standard</p>
+             </div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-3 divide-x divide-transparent md:divide-cardBorder border-t border-cardBorder group hover:bg-creamDark/30 transition-colors">
+             <div class="col-span-2 md:col-span-1 py-4 md:py-8 px-4 md:px-8 flex items-center md:items-start border-b border-cardBorder md:border-none">
+                 <span class="text-xs tracking-widest uppercase font-medium text-brand/60">edge support</span>
+             </div>
+             <div class="py-6 px-4 text-center flex flex-col items-center justify-center">
+                <p class="font-sans text-brand text-[15px] font-medium">reinforced high-density perimeter</p>
+             </div>
+             <div class="py-6 px-4 text-center flex flex-col items-center justify-center">
+                <p class="font-sans text-brand/50 text-[15px] font-medium">basic foam encasement</p>
+             </div>
+          </div>
+
+       </div>
+    </section>
+
+    <!-- THE COLLECTION SECTION -->
+    <section class="max-w-7xl mx-auto border-t border-cardBorder pt-24 mb-12">
+       <div class="text-center mb-16 px-4">
+          <p class="eyebrow text-[10px] uppercase tracking-[0.2em] font-medium text-brand/60 mb-4">the collection</p>
+          <h2 class="font-serif text-4xl lg:text-5xl text-brand tracking-tight">a complete sleep system.</h2>
+       </div>
+
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 pb-12">
+          <!-- Mattress -->
+          <a href="shop.html#mattress" class="group flex flex-col items-center text-center">
+             <div class="w-full aspect-[4/5] sm:aspect-square bg-lightBlue rounded-xl overflow-hidden mb-6 border border-cardBorder transition-all duration-500 group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                <img src="img/mattress-overhead.jpg" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700">
+             </div>
+             <h3 class="font-serif text-2xl text-brand mb-1">the mattress</h3>
+             <p class="text-[13px] font-bold text-brand mb-3">$2,495</p>
+             <p class="text-[13px] text-brand/70 leading-relaxed max-w-[200px]">wider than king. smarter than the rest.</p>
+          </a>
+
+          <!-- Sheets -->
+          <a href="shop.html#sheets" class="group flex flex-col items-center text-center">
+             <div class="w-full aspect-[4/5] sm:aspect-square bg-creamDark rounded-xl overflow-hidden mb-6 border border-cardBorder transition-all duration-500 group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                <img src="img/sheets-product.jpg" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700">
+             </div>
+             <h3 class="font-serif text-2xl text-brand mb-1">the sheets</h3>
+             <p class="text-[13px] font-bold text-brand mb-3">$295</p>
+             <p class="text-[13px] text-brand/70 leading-relaxed max-w-[200px]">custom-fit for extra room. breathable linen.</p>
+          </a>
+
+          <!-- Pillows -->
+          <a href="shop.html#pillows" class="group flex flex-col items-center text-center">
+             <div class="w-full aspect-[4/5] sm:aspect-square bg-lightBlue rounded-xl overflow-hidden mb-6 border border-cardBorder transition-all duration-500 group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                <img src="img/pillows-product.jpg" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700">
+             </div>
+             <h3 class="font-serif text-2xl text-brand mb-1">the pillows</h3>
+             <p class="text-[13px] font-bold text-brand mb-3">$195</p>
+             <p class="text-[13px] text-brand/70 leading-relaxed max-w-[200px]">set of 3. because math.</p>
+          </a>
+
+          <!-- Frame -->
+          <a href="shop.html#frame" class="group flex flex-col items-center text-center">
+             <div class="w-full aspect-[4/5] sm:aspect-square bg-creamDark rounded-xl overflow-hidden mb-6 border border-cardBorder transition-all duration-500 group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                <img src="img/frame-product.jpg" class="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700">
+             </div>
+             <h3 class="font-serif text-2xl text-brand mb-1">the bed frame</h3>
+             <p class="text-[13px] font-bold text-brand mb-3">$1,195</p>
+             <p class="text-[13px] text-brand/70 leading-relaxed max-w-[250px]">minimal. modular. built to anchor a wider bed.</p>
+          </a>
+       </div>
+
+       <div class="text-center mt-6">
+          <a href="shop.html" class="inline-flex items-center justify-center border border-brand text-brand hover:bg-brand hover:text-bgTheme transition-colors text-[11px] font-bold uppercase tracking-wider rounded-full px-10 py-4">view all products</a>
+       </div>
+       </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ============================================== -->
+    <!-- RATINGS & REVIEWS SECTION -->
+    <!-- ============================================== -->
+    <section id="reviews" class="max-w-5xl mx-auto pt-24 pb-32 border-t border-cardBorder px-4 scroll-mt-24">
+       <!-- Header Tabs -->
+       <div class="flex justify-center border-b border-cardBorder mb-16 gap-8">
+          <button id="tab-btn-reviews" class="pb-3 text-brand font-bold uppercase tracking-widest text-[13px] border-b-2 border-brand transition-colors">Reviews (420)</button>
+          <button id="tab-btn-questions" class="pb-3 text-brand/50 font-bold uppercase tracking-widest text-[13px] border-b-2 border-transparent hover:text-brand transition-colors">Questions (12)</button>
+       </div>
+
+       <!-- REVIEWS TAB CONTENT -->
+       <div id="tab-content-reviews" class="block">
+           <!-- Summary Block -->
+           <div class="flex flex-col md:flex-row items-center justify-between gap-12 mb-16">
+              <div class="text-center md:text-left flex flex-col items-center md:items-start">
+                 <div class="flex items-center gap-3 mb-2">
+                    <span class="font-sans text-5xl font-medium text-brand">4.9</span>
+                    <div class="text-brand text-xl tracking-tighter">★★★★★</div>
+                 </div>
+                 <p class="text-[13px] text-brand/60 mb-4">Based on 420 reviews</p>
+                 <button class="bg-brand hover:bg-brandHover text-bgTheme text-xs font-bold rounded-full px-6 py-2.5 flex items-center gap-2 transition-colors">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    Write a review
+                 </button>
+              </div>
+              
+              <div class="flex flex-col gap-2 w-full max-w-[240px]">
+                 <!-- 5 stars -->
+                 <div class="flex items-center gap-3 text-xs text-brand/70 font-medium">
+                    <span>5 ★</span>
+                    <div class="flex-1 h-1.5 bg-cardBorder rounded-full overflow-hidden">
+                       <div class="bg-brand h-full w-[85%] rounded-full"></div>
+                    </div>
+                    <span class="w-6 text-right">357</span>
+                 </div>
+                 <!-- 4 stars -->
+                 <div class="flex items-center gap-3 text-xs text-brand/70 font-medium">
+                    <span>4 ★</span>
+                    <div class="flex-1 h-1.5 bg-cardBorder rounded-full overflow-hidden">
+                       <div class="bg-brand h-full w-[10%] rounded-full"></div>
+                    </div>
+                    <span class="w-6 text-right">42</span>
+                 </div>
+                 <!-- 3 stars -->
+                 <div class="flex items-center gap-3 text-xs text-brand/70 font-medium">
+                    <span>3 ★</span>
+                    <div class="flex-1 h-1.5 bg-cardBorder rounded-full overflow-hidden">
+                       <div class="bg-brand h-full w-[4%] rounded-full"></div>
+                    </div>
+                    <span class="w-6 text-right">17</span>
+                 </div>
+                 <!-- 2 stars -->
+                 <div class="flex items-center gap-3 text-xs text-brand/70 font-medium">
+                    <span>2 ★</span>
+                    <div class="flex-1 h-1.5 bg-cardBorder rounded-full overflow-hidden">
+                       <div class="bg-brand h-full w-[1%] rounded-full"></div>
+                    </div>
+                    <span class="w-6 text-right">4</span>
+                 </div>
+                 <!-- 1 star -->
+                 <div class="flex items-center gap-3 text-xs text-brand/70 font-medium">
+                    <span>1 ★</span>
+                    <div class="flex-1 h-1.5 bg-cardBorder rounded-full overflow-hidden">
+                       <div class="bg-brand h-full w-[0%] rounded-full"></div>
+                    </div>
+                    <span class="w-6 text-right">0</span>
+                 </div>
+              </div>
+           </div>
+
+           <!-- Filters & Search -->
+           <div class="flex flex-col md:flex-row justify-center gap-4 mb-8">
+              <div class="relative w-full md:w-64">
+                 <input type="text" placeholder="Search reviews" class="w-full bg-white border border-cardBorder rounded-full px-4 py-2 text-[13px] text-brand focus:outline-none focus:border-brand">
+                 <svg class="w-4 h-4 text-brand/40 absolute right-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+              <button class="bg-white border border-cardBorder rounded-full px-4 py-2 text-[13px] text-brand font-medium flex items-center justify-between gap-10 hover:border-brand w-full md:w-auto">
+                 Rating <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </button>
+              <button class="bg-white border border-cardBorder rounded-full px-4 py-2 text-[13px] text-brand font-medium flex items-center justify-between gap-2 hover:border-brand w-full md:w-auto">
+                 With media <div class="w-4 h-4 rounded-full border border-cardBorder ml-4"></div>
+              </button>
+           </div>
+
+           <div class="flex flex-col items-center mb-8 border-b border-cardBorder pb-8">
+              <p class="text-[11px] uppercase tracking-wider text-brand/50 mb-3 font-bold">Popular topics</p>
+              <div class="flex flex-wrap justify-center gap-2 max-w-2xl">
+                 <span class="bg-brand/5 text-brand/80 text-[11px] font-bold px-3 py-1.5 rounded-full cursor-pointer hover:bg-brand/10">motion isolation</span>
+                 <span class="bg-brand/5 text-brand/80 text-[11px] font-bold px-3 py-1.5 rounded-full cursor-pointer hover:bg-brand/10">room for the dog</span>
+                 <span class="bg-brand/5 text-brand/80 text-[11px] font-bold px-3 py-1.5 rounded-full cursor-pointer hover:bg-brand/10">edge support</span>
+                 <span class="bg-brand/5 text-brand/80 text-[11px] font-bold px-3 py-1.5 rounded-full cursor-pointer hover:bg-brand/10">cooling</span>
+                 <span class="bg-brand/5 text-brand/80 text-[11px] font-bold px-3 py-1.5 rounded-full cursor-pointer hover:bg-brand/10">families</span>
+                 <span class="bg-brand/5 text-brand/80 text-[11px] font-bold px-3 py-1.5 rounded-full cursor-pointer hover:bg-brand/10">throuple</span>
+              </div>
+              <button class="text-xs text-brand font-bold underline mt-4 hover:text-brandHover">Show more</button>
+           </div>
+
+           <div class="flex justify-end mb-8">
+              <span class="text-xs text-brand/60">Sort by: <strong class="text-brand cursor-pointer">Highest rating <svg class="w-3 h-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></strong></span>
+           </div>
+
+           <!-- Reviews List -->
+           <div id="reviews-list" class="flex flex-col gap-12">
+              
+              <!-- Review 1 -->
+              <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-cardBorder pb-8">
+                 <div class="md:col-span-3">
+                    <p class="text-[13px] font-bold text-brand mb-1">Mark S.</p>
+                    <p class="text-[11px] text-brand/50 mb-3">Oct 12, 2025</p>
+                    <div class="text-[9px] font-bold text-accent uppercase tracking-wider mb-2 border border-accent/20 bg-accent/5 inline-block px-2 py-1 rounded">
+                       ✓ Verified App User
+                    </div>
+                    <p class="text-[11px] font-bold text-brand/80">Sleep Score: <span class="text-brand">+14 pts</span></p>
+                 </div>
+                 
+                 <div class="md:col-span-6">
+                    <div class="flex items-center gap-2 mb-2">
+                       <div class="text-brand text-[10px]">★★★★★</div>
+                       <h4 class="font-bold text-sm text-brand">Finally room for the dog.</h4>
+                    </div>
+                    <p class="text-[13px] text-brand/80 leading-relaxed mb-6">
+                       We were so tired of falling off the edge while our golden retriever slept horizontally in the middle. King size wasn't cutting it. The extra 8 inches on 'one more size' literally changed our relationship. Highly recommend.
+                    </p>
+                    <div class="flex items-center gap-3 text-[11px] text-brand/60">
+                       <span>Helpful?</span>
+                       <button class="flex items-center gap-1 hover:text-brand">👍 24</button>
+                       <button class="flex items-center gap-1 hover:text-brand">👎 1</button>
+                    </div>
+                 </div>
+
+                 <!-- Ratings Sliders -->
+                 <div class="md:col-span-3 border-l border-cardBorder pl-6 hidden md:block">
+                    <div class="mb-4">
+                       <p class="text-[10px] font-bold text-brand mb-2">Firmness</p>
+                       <div class="flex justify-between text-[9px] text-brand/50 mb-1"><span>Soft</span><span>Ideal</span><span>Firm</span></div>
+                       <div class="h-1 bg-cardBorder rounded relative"><div class="absolute h-3 w-1 bg-brand left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded"></div></div>
+                    </div>
+                    <div class="mb-4">
+                       <p class="text-[10px] font-bold text-brand mb-2">Cooling</p>
+                       <div class="flex justify-between text-[9px] text-brand/50 mb-1"><span>Poor</span><span>Avg</span><span>Great</span></div>
+                       <div class="h-1 bg-cardBorder rounded relative"><div class="absolute h-3 w-1 bg-brand right-2 top-1/2 -translate-y-1/2 rounded"></div></div>
+                    </div>
+                 </div>
+              </div>
+
+              <!-- Review 2 -->
+              <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-cardBorder pb-8">
+                 <div class="md:col-span-3">
+                    <p class="text-[13px] font-bold text-brand mb-1">Elena & Tariq</p>
+                    <p class="text-[11px] text-brand/50 mb-3">Sep 28, 2025</p>
+                    <div class="text-[9px] font-bold text-accent uppercase tracking-wider mb-2 border border-accent/20 bg-accent/5 inline-block px-2 py-1 rounded">
+                       ✓ Verified App User
+                    </div>
+                    <p class="text-[11px] font-bold text-brand/80">Sleep Score: <span class="text-brand">+22 pts</span></p>
+                 </div>
+                 <div class="md:col-span-6">
+                    <div class="flex items-center gap-2 mb-2">
+                       <div class="text-brand text-[10px]">★★★★★</div>
+                       <h4 class="font-bold text-sm text-brand">I don't feel him get up at 5am anymore.</h4>
+                    </div>
+                    <p class="text-[13px] text-brand/80 leading-relaxed mb-6">
+                       Tariq goes to the gym at 5am and I like to sleep until 8. The motion isolation on this is unreal. Plus the zoned support means we both get what we need even though we have totally different sleep styles. Best purchase we've ever made.
+                    </p>
+                    <div class="flex items-center gap-3 text-[11px] text-brand/60">
+                       <span>Helpful?</span>
+                       <button class="flex items-center gap-1 hover:text-brand">👍 18</button>
+                       <button class="flex items-center gap-1 hover:text-brand">👎 0</button>
+                    </div>
+                 </div>
+
+                 <!-- Ratings Sliders -->
+                 <div class="md:col-span-3 border-l border-cardBorder pl-6 hidden md:block">
+                    <div class="mb-4">
+                       <p class="text-[10px] font-bold text-brand mb-2">Motion Isolation</p>
+                       <div class="flex justify-between text-[9px] text-brand/50 mb-1"><span>Poor</span><span>Avg</span><span>Great</span></div>
+                       <div class="h-1 bg-cardBorder rounded relative"><div class="absolute h-3 w-1 bg-brand right-1 top-1/2 -translate-y-1/2 rounded"></div></div>
+                    </div>
+                 </div>
+              </div>
+
+              <!-- Review 3 -->
+              <div class="grid grid-cols-1 md:grid-cols-12 gap-6 pb-4">
+                 <div class="md:col-span-3">
+                    <p class="text-[13px] font-bold text-brand mb-1">J.D.</p>
+                    <p class="text-[11px] text-brand/50 mb-3">Aug 14, 2025</p>
+                    <div class="text-[9px] font-bold text-accent uppercase tracking-wider mb-2 border border-accent/20 bg-accent/5 inline-block px-2 py-1 rounded">
+                       ✓ Verified App User
+                    </div>
+                    <p class="text-[11px] font-bold text-brand/80">Sleep Score: <span class="text-brand">+18 pts</span></p>
+                 </div>
+                 <div class="md:col-span-6">
+                    <div class="flex items-center gap-2 mb-2">
+                       <div class="text-brand text-[10px]">★★★★★</div>
+                       <h4 class="font-bold text-sm text-brand">A game changer for our throuple.</h4>
+                    </div>
+                    <p class="text-[13px] text-brand/80 leading-relaxed mb-6">
+                       King size was a squeeze. This is the first mattress we've found that actually feels built for three people. It sleeps super cool—which is critical—and there are zero pressure points no matter where you end up. The custom sheets are fantastic too.
+                    </p>
+                    <div class="flex items-center gap-3 text-[11px] text-brand/60">
+                       <span>Helpful?</span>
+                       <button class="flex items-center gap-1 hover:text-brand">👍 67</button>
+                       <button class="flex items-center gap-1 hover:text-brand">👎 2</button>
+                    </div>
+                 </div>
+
+                 <!-- Ratings Sliders -->
+                 <div class="md:col-span-3 border-l border-cardBorder pl-6 hidden md:block">
+                    <div class="mb-4">
+                       <p class="text-[10px] font-bold text-brand mb-2">Roominess</p>
+                       <div class="flex justify-between text-[9px] text-brand/50 mb-1"><span>Tight</span><span>Good</span><span>Massive</span></div>
+                       <div class="h-1 bg-cardBorder rounded relative"><div class="absolute h-3 w-1 bg-brand right-0 top-1/2 -translate-y-1/2 rounded"></div></div>
+                    </div>
+                    <div class="mb-4">
+                       <p class="text-[10px] font-bold text-brand mb-2">Cooling</p>
+                       <div class="flex justify-between text-[9px] text-brand/50 mb-1"><span>Poor</span><span>Avg</span><span>Great</span></div>
+                       <div class="h-1 bg-cardBorder rounded relative"><div class="absolute h-3 w-1 bg-brand right-3 top-1/2 -translate-y-1/2 rounded"></div></div>
+                    </div>
+                 </div>
+              </div>
+              </div>
+
+           </div>
+           
+           <!-- Load More Button -->
+           <div class="flex justify-center mt-12 mb-4 hidden" id="load-more-container">
+              <button id="load-more-btn" class="border border-brand text-brand hover:bg-brand hover:text-bgTheme text-[11px] font-bold uppercase tracking-widest rounded-full px-12 py-4 transition-colors">
+                 Load More Reviews
+              </button>
+           </div>
+       </div>
+
+
+       <!-- QUESTIONS TAB CONTENT -->
+       <div id="tab-content-questions" class="hidden">
+           <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 bg-lightBlue/30 p-8 rounded-xl border border-cardBorder">
+              <div>
+                 <h3 class="font-serif text-2xl text-brand mb-2">Have a question?</h3>
+                 <p class="text-[13px] text-brand/60">Find answers in product info, Q&As, and reviews.</p>
+              </div>
+              <button id="ask-question-btn" class="bg-transparent border border-brand text-brand hover:bg-brand hover:text-bgTheme text-[11px] uppercase tracking-wider font-bold rounded-sm px-8 py-3 transition-colors">
+                 Ask a Question
+              </button>
+           </div>
+
+           <!-- Search Questions -->
+           <div class="relative w-full mb-12">
+              <input type="text" placeholder="Search questions" class="w-full bg-white border border-cardBorder rounded-full px-5 py-3 text-[13px] text-brand focus:outline-none focus:border-brand">
+              <svg class="w-4 h-4 text-brand/40 absolute right-4 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+           </div>
+
+           <!-- Questions List -->
+           <div class="flex flex-col gap-8">
+              
+              <!-- Question 1 -->
+              <div class="border border-cardBorder bg-white rounded-xl p-6">
+                 <div class="flex gap-4">
+                    <div class="font-bold text-brand uppercase tracking-wider text-[11px] pt-1">Q:</div>
+                    <div>
+                       <h4 class="font-bold text-[14px] text-brand mb-1">Are standard King sheets going to fit this?</h4>
+                       <p class="text-[11px] text-brand/50 mb-4">Asked by Taylor on Oct 01, 2025</p>
+                    </div>
+                 </div>
+                 <div class="flex gap-4 border-t border-cardBorder pt-4 text-brand bg-bgTheme/50 -mx-6 -mb-6 p-6 rounded-b-xl inline-block w-full border-t">
+                    <div class="font-bold text-accent uppercase tracking-wider text-[11px]">A:</div>
+                    <div>
+                       <p class="text-[13px] leading-relaxed mb-1">Great question, Taylor! Since "one more size" is 84" x 80" (8 inches wider than a standard King), standard King sheets will not fit. But don't worry, we developed custom organic cotton percale sheets specifically tailored to this new footprint. You can add them as a bundle above!</p>
+                       <p class="text-[11px] font-bold text-brand/50 mb-2">— One More Sleep Expert</p>
+                       <button class="text-[10px] text-brand/50 hover:text-brand border border-cardBorder rounded-full px-3 py-1">Helpful (42)</button>
+                    </div>
+                 </div>
+              </div>
+
+              <!-- Question 2 -->
+              <div class="border border-cardBorder bg-white rounded-xl p-6">
+                 <div class="flex gap-4">
+                    <div class="font-bold text-brand uppercase tracking-wider text-[11px] pt-1">Q:</div>
+                    <div>
+                       <h4 class="font-bold text-[14px] text-brand mb-1">How does the sleep score app sync with the mattress? Do I need a plug?</h4>
+                       <p class="text-[11px] text-brand/50 mb-4">Asked by Mark D. on Sep 14, 2025</p>
+                    </div>
+                 </div>
+                 <div class="flex gap-4 border-t border-cardBorder pt-4 text-brand bg-bgTheme/50 -mx-6 -mb-6 p-6 rounded-b-xl inline-block w-full border-t">
+                    <div class="font-bold text-accent uppercase tracking-wider text-[11px]">A:</div>
+                    <div>
+                       <p class="text-[13px] leading-relaxed mb-1">Hi Mark! The mattress has completely wireless, invisible passive sensors woven beneath the top comfort layer. They run on a watch battery that lasts for 5 years. It syncs via Bluetooth to the One More App on your phone seamlessly—no wall plugs required, zero EMF emission risks.</p>
+                       <p class="text-[11px] font-bold text-brand/50 mb-2">— One More Tech Team</p>
+                       <button class="text-[10px] text-brand/50 hover:text-brand border border-cardBorder rounded-full px-3 py-1">Helpful (89)</button>
+                    </div>
+                 </div>
+              </div>
+
+           </div>
+       </div>
+
+    </section>
+
+  </main>
+
+  <!-- ============================================== -->
+  <!-- CART DRAWER MODAL -->
+  <!-- ============================================== -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 bg-brand/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-bgTheme z-[100] shadow-2xl translate-x-full transition-transform duration-300 flex flex-col border-l border-cardBorder">
+     <div class="p-6 border-b border-cardBorder flex justify-between items-center">
+        <h2 class="font-serif text-2xl text-brand">your cart</h2>
+        <button id="close-cart-btn" class="text-brand/60 hover:text-brand">
+           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+     </div>
+     <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+        <!-- Rendered Dynamically -->
+     </div>
+     <div class="p-6 border-t border-cardBorder bg-lightBlue/10">
+        <div id="cart-discount-row" class="flex justify-between items-center mb-1 text-brand/60 hidden">
+           <span class="text-xs">bundle savings (15%)</span>
+           <span id="cart-discount" class="text-xs font-bold text-accent">-$0</span>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+           <span class="text-sm font-bold text-brand uppercase tracking-widest">subtotal</span>
+           <span id="cart-total" class="text-xl font-bold text-brand">$2,495</span>
+        </div>
+        <button class="w-full bg-brand hover:bg-brandHover text-bgTheme py-4 rounded-sm tracking-[0.05em] font-medium text-[15px] lowercase transition-colors">
+           checkout
+        </button>
+     </div>
+  </div>
+
+  <!-- ASK A QUESTION MODAL (BIRDY GREY STYLE) -->
+  <div id="question-modal-overlay" class="fixed inset-0 bg-brand/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm flex items-center justify-center p-4">
+     <div id="question-modal" class="bg-white rounded-md shadow-2xl w-full max-w-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col md:flex-row overflow-hidden max-h-[90vh]">
+        <!-- Left Image -->
+        <div class="hidden md:block md:w-1/3 bg-lightBlue">
+           <img src="img/mattress-overhead.jpg" class="w-full h-full object-cover mix-blend-multiply">
+        </div>
+        <!-- Right Form -->
+        <div class="p-8 md:w-2/3 flex flex-col relative w-full overflow-y-auto">
+           <button id="close-question-btn" class="absolute top-4 right-4 text-brand/60 hover:text-brand">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+           </button>
+           <h2 class="font-serif text-2xl text-brand mb-1 pr-8">Ask a Question</h2>
+           <h3 class="font-bold text-[13px] text-brand mb-6">the one more mattress</h3>
+           
+           <form class="flex flex-col gap-5">
+              <div>
+                 <label class="block text-[10px] font-bold uppercase tracking-wider text-brand mb-2 flex justify-between">
+                    Question <span class="text-brand/40 font-normal normal-case tracking-normal">0 / 256 characters</span>
+                 </label>
+                 <textarea rows="4" placeholder="Example: Is this mattress good for hot sleepers?" class="w-full bg-white border border-cardBorder rounded focus:outline-none focus:border-brand p-3 text-[13px] text-brand resize-none"></textarea>
+              </div>
+              
+              <div>
+                 <label class="block text-[10px] font-bold uppercase tracking-wider text-brand mb-2">Your Name</label>
+                 <input type="text" placeholder="Enter Your Name" class="w-full bg-white border border-cardBorder rounded focus:outline-none focus:border-brand p-3 text-[13px] text-brand">
+              </div>
+
+              <div>
+                 <label class="block text-[10px] font-bold uppercase tracking-wider text-brand mb-2">Email Address</label>
+                 <input type="email" placeholder="Enter Email Address" class="w-full bg-white border border-cardBorder rounded focus:outline-none focus:border-brand p-3 text-[13px] text-brand">
+                 <p class="text-[11px] text-brand/60 mt-2">You'll receive an email notification when someone answers your question.</p>
+              </div>
+
+              <button type="button" class="w-full bg-brand hover:bg-brandHover text-bgTheme uppercase tracking-widest font-bold text-[12px] py-4 rounded-sm transition-colors mt-2">
+                 Submit Question
+              </button>
+           </form>
+        </div>
+     </div>
+  </div>
+
+  <!-- SIZE GUIDE MODAL -->
+  <div id="sizeguide-modal-overlay" class="fixed inset-0 bg-brand/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm flex items-center justify-center p-4">
+     <div id="sizeguide-modal" class="bg-white rounded-md shadow-2xl w-full max-w-lg transform scale-95 opacity-0 transition-all duration-300 overflow-hidden relative">
+        <button id="close-sizeguide-btn" class="absolute top-4 right-4 text-brand/60 hover:text-brand z-10">
+           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <div class="p-8 pb-0 text-center">
+           <h2 class="font-serif text-3xl text-brand mb-2">Size Guide</h2>
+           <p class="text-[13px] text-brand/60">Why 'one more size' makes all the difference.</p>
+        </div>
+
+        <div class="p-8 flex items-end gap-6 justify-center">
+           <!-- Standard King -->
+           <div class="flex flex-col items-center mt-8">
+              <div class="w-28 h-40 border border-brand/20 bg-bgTheme rounded flex items-center justify-center p-2 mb-4 relative shadow-sm">
+                 <div class="absolute -top-3 bg-brand/10 text-brand text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Standard King</div>
+                 <div class="w-full h-full flex flex-row items-center justify-center gap-1 opacity-80">
+                    <!-- 3 people squeezed -->
+                    <div class="w-3 h-20 bg-brand/40 rounded-full"></div>
+                    <div class="w-3 h-20 bg-brand/40 rounded-full"></div>
+                    <div class="w-3 h-20 bg-brand/40 rounded-full"></div>
+                 </div>
+              </div>
+              <p class="text-[11px] font-bold text-brand text-center">76" x 80"</p>
+              <p class="text-[10px] text-brand/60 text-center uppercase tracking-wider mt-1">3 adults (crowded)</p>
+           </div>
+
+           <div class="text-brand/30 font-serif text-2xl font-bold mb-10">VS</div>
+
+           <!-- One More Size -->
+           <div class="flex flex-col items-center mt-8">
+              <div class="w-36 h-40 border-2 border-brand bg-brand/5 rounded flex items-center justify-center p-2 mb-4 relative shadow-md">
+                 <div class="absolute -top-3 bg-accent text-bgTheme text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">One More Size</div>
+                 <div class="w-full h-full flex flex-row items-center justify-center gap-2 opacity-90 relative">
+                    <!-- 2 bodies + Large Dog -->
+                    <div class="w-4 h-24 bg-brand rounded-full"></div>
+                    <!-- Horizontally sleeping large dog -->
+                    <div class="w-12 h-6 bg-brand pl-2 rounded-full mt-auto mb-6 flex justify-end gap-1 items-center before:content-[''] before:w-2 before:h-2 before:rounded-full before:bg-bgTheme after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-bgTheme"></div>
+                    <div class="w-4 h-24 bg-brand rounded-full"></div>
+                 </div>
+              </div>
+              <p class="text-[11px] font-bold text-brand text-center">84" x 80"</p>
+              <p class="text-[10px] text-brand/60 text-center uppercase tracking-wider mt-1">2 adults + 1 large dog</p>
+           </div>
+        </div>
+        <div class="bg-lightBlue/30 p-6 border-t border-cardBorder text-center pt-8">
+           <p class="text-[12px] font-medium text-brand">We gained 8 extra inches of width so nobody has to compromise. <br>The perfect anchor for your expansive sleep.</p>
+        </div>
+     </div>
+  </div>
+
+
+  <script>
+    // JS Logic for Drawers
+    document.addEventListener("DOMContentLoaded", () => {
+       
+       // Cart elements
+       const cartBtn = document.getElementById("add-to-cart-btn");
+       const closeCartBtn = document.getElementById("close-cart-btn");
+       const cartDrawer = document.getElementById("cart-drawer");
+       const cartOverlay = document.getElementById("cart-drawer-overlay");
+
+       function toggleDrawer(drawer, overlay) {
+          drawer.classList.toggle("translate-x-full");
+          overlay.classList.toggle("opacity-0");
+          overlay.classList.toggle("pointer-events-none");
+       }
+
+       // Cart Event Listeners
+       if(closeCartBtn) {
+          closeCartBtn.addEventListener("click", () => toggleDrawer(cartDrawer, cartOverlay));
+       }
+       if(cartOverlay) {
+          cartOverlay.addEventListener("click", () => toggleDrawer(cartDrawer, cartOverlay));
+       }
+
+       // Size Guide Logic
+       const sizeBtn = document.getElementById("size-chart-trigger");
+       const closeSizeBtn = document.getElementById("close-sizeguide-btn");
+       const sizeOverlay = document.getElementById("sizeguide-modal-overlay");
+       const sizeModal = document.getElementById("sizeguide-modal");
+
+       function toggleSizeModal() {
+          if (sizeOverlay.classList.contains("opacity-0")) {
+             sizeOverlay.classList.remove("opacity-0", "pointer-events-none");
+             sizeModal.classList.remove("scale-95", "opacity-0");
+             sizeModal.classList.add("scale-100", "opacity-100");
+          } else {
+             sizeOverlay.classList.add("opacity-0", "pointer-events-none");
+             sizeModal.classList.remove("scale-100", "opacity-100");
+             sizeModal.classList.add("scale-95", "opacity-0");
+          }
+       }
+
+       if (sizeBtn) sizeBtn.addEventListener("click", toggleSizeModal);
+       if (closeSizeBtn) closeSizeBtn.addEventListener("click", toggleSizeModal);
+       if (sizeOverlay) {
+          sizeOverlay.addEventListener("click", (e) => {
+             if(e.target === sizeOverlay) toggleSizeModal();
+          });
+       }
+
+       // Cart Dynamic Render Logic
+       const productData = {
+           mattress: { name: "the one more mattress", desc: "size: one more size", price: 2495, img: "mattress-overhead.jpg", bg: "bg-lightBlue" },
+           sheets: { name: "the one more sheets", desc: "cotton percale", price: 295, img: "sheets-product.jpg", bg: "bg-creamDark" },
+           pillows: { name: "the one more pillows", desc: "set of 3", price: 195, img: "pillows-product.jpg", bg: "bg-lightBlue" },
+           frame: { name: "the bed frame", desc: "minimal architecture", price: 1195, img: "frame-product.jpg", bg: "bg-creamDark" }
+       };
+
+       const chkSheets = document.getElementById("chk-sheets");
+       const chkPillows = document.getElementById("chk-pillows");
+       const chkFrame = document.getElementById("chk-frame");
+       const addToCartBtn = document.getElementById("add-to-cart-btn");
+       const savingsMessage = document.getElementById("savings-message");
+
+       const cartItemsContainer = document.getElementById("cart-items-container");
+       const cartDiscountRow = document.getElementById("cart-discount-row");
+       const cartDiscount = document.getElementById("cart-discount");
+       const cartTotal = document.getElementById("cart-total");
+
+       const formatPrice = (num) => "$" + num.toLocaleString();
+
+       function renderCart() {
+          let items = ['mattress'];
+          let subtotal = productData.mattress.price;
+          let addonTotal = 0;
+
+          if (chkSheets?.checked) { items.push('sheets'); addonTotal += productData.sheets.price; }
+          if (chkPillows?.checked) { items.push('pillows'); addonTotal += productData.pillows.price; }
+          if (chkFrame?.checked) { items.push('frame'); addonTotal += productData.frame.price; }
+
+          subtotal += addonTotal;
+
+          // 15% discount on addons if they buy at least 1 addon
+          let discountStr = "";
+          let discountAmt = 0;
+          if (addonTotal > 0) {
+              discountAmt = Math.floor(addonTotal * 0.15);
+              subtotal -= discountAmt;
+              savingsMessage.innerHTML = `<span class="text-accent font-bold">bundled!</span> saving ${formatPrice(discountAmt)}.`;
+              cartDiscountRow.classList.remove("hidden");
+              cartDiscount.innerText = `-${formatPrice(discountAmt)}`;
+          } else {
+              savingsMessage.innerText = "free shipping, compressed in box.";
+              cartDiscountRow.classList.add("hidden");
+          }
+
+          // Update Button
+          if (addToCartBtn) {
+             addToCartBtn.innerText = `add to cart — ${formatPrice(subtotal)}`;
+          }
+
+          // Render Drawer Items
+          if(cartItemsContainer) {
+              cartItemsContainer.innerHTML = items.map(key => {
+                 const item = productData[key];
+                 return `
+                 <div class="flex gap-4">
+                    <div class="w-20 h-20 ${item.bg} rounded-md border border-cardBorder overflow-hidden">
+                       <img src="img/${item.img}" class="w-full h-full object-cover mix-blend-multiply">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center relative">
+                       <h4 class="font-bold text-sm text-brand">${item.name}</h4>
+                       <p class="text-[10px] uppercase tracking-wider text-brand/50 mb-1">${item.desc}</p>
+                       <span class="text-sm font-bold text-brand">${formatPrice(item.price)}</span>
+                    </div>
+                 </div>`;
+              }).join('');
+              
+              cartTotal.innerText = formatPrice(subtotal);
+          }
+       }
+
+       // Initial Render & Event Listeners
+       renderCart();
+       document.querySelectorAll('.bundle-chk').forEach(chk => {
+           chk.addEventListener('change', renderCart);
+       });
+
+       if (cartBtn) {
+           cartBtn.addEventListener("click", () => {
+               renderCart(); 
+               toggleDrawer(cartDrawer, cartOverlay);
+           });
+       }
+
+    });
+
+    // Handle Review vs Question Tabs
+    document.addEventListener("DOMContentLoaded", () => {
+       const btnReviews = document.getElementById("tab-btn-reviews");
+       const btnQuestions = document.getElementById("tab-btn-questions");
+       const contentReviews = document.getElementById("tab-content-reviews");
+       const contentQuestions = document.getElementById("tab-content-questions");
+
+       if(btnReviews && btnQuestions) {
+          btnReviews.addEventListener("click", () => {
+             btnReviews.className = "pb-3 text-brand font-bold uppercase tracking-widest text-[13px] border-b-2 border-brand transition-colors";
+             btnQuestions.className = "pb-3 text-brand/50 font-bold uppercase tracking-widest text-[13px] border-b-2 border-transparent hover:text-brand transition-colors";
+             contentReviews.classList.remove("hidden");
+             contentReviews.classList.add("block");
+             contentQuestions.classList.add("hidden");
+             contentQuestions.classList.remove("block");
+          });
+
+          btnQuestions.addEventListener("click", () => {
+             btnQuestions.className = "pb-3 text-brand font-bold uppercase tracking-widest text-[13px] border-b-2 border-brand transition-colors";
+             btnReviews.className = "pb-3 text-brand/50 font-bold uppercase tracking-widest text-[13px] border-b-2 border-transparent hover:text-brand transition-colors";
+             contentQuestions.classList.remove("hidden");
+             contentQuestions.classList.add("block");
+             contentReviews.classList.add("hidden");
+             contentReviews.classList.remove("block");
+          });
+       }
+
+       // Question Modal Logic
+       const askBtn = document.getElementById("ask-question-btn");
+       const closeAskBtn = document.getElementById("close-question-btn");
+       const questionOverlay = document.getElementById("question-modal-overlay");
+       const questionModal = document.getElementById("question-modal");
+
+       function toggleQuestionModal() {
+          if (questionOverlay.classList.contains("opacity-0")) {
+             questionOverlay.classList.remove("opacity-0", "pointer-events-none");
+             questionModal.classList.remove("scale-95", "opacity-0");
+             questionModal.classList.add("scale-100", "opacity-100");
+          } else {
+             questionOverlay.classList.add("opacity-0", "pointer-events-none");
+             questionModal.classList.remove("scale-100", "opacity-100");
+             questionModal.classList.add("scale-95", "opacity-0");
+          }
+       }
+
+       if (askBtn) askBtn.addEventListener("click", toggleQuestionModal);
+       if (closeAskBtn) closeAskBtn.addEventListener("click", toggleQuestionModal);
+       if (questionOverlay) {
+          questionOverlay.addEventListener("click", (e) => {
+             if(e.target === questionOverlay) toggleQuestionModal();
+          });
+       }
+
+       // Generate 417 additional fake reviews for infinite scroll / load more
+       const generateFakeReviews = () => {
+           const names = ["Sarah M.", "David P.", "Jessica L.", "Andrew & Mia", "Chris T.", "The Smith Family", "Rachel H.", "Tom & Jerry", "Sam W.", "Alex G.", "Brittany S.", "Jordan K.", "Olivia R.", "Casey & Morgan", "Taylor V."];
+           const titles = ["Finally sleep through the night", "Dog doesn't wake me up", "Unreal cooling", "Wider is always better", "Zero motion transfer", "Worth every penny", "Never going back to King", "Best investment for our relationship", "Perfect firmness", "Solved our sleeping issues", "Like sleeping on a cool cloud"];
+           const bodies = [
+               "I didn't realize how much we needed the extra 8 inches until we slept on it. My husband runs hot and tosses around all night. I haven't felt him move once and the cooling cover is a lifesaver.",
+               "Our two pitbulls always crowded us on our old King mattress. The 'One More Size' gives everyone their own zipcode. The edge support is phenomenal, you can literally sleep on the seam.",
+               "It's a huge mattress but it came out of the box so easily. The zones are perfect - I'm a side sleeper and he's a back sleeper and we both feel supported.",
+               "The app tracking has been eye-opening. My sleep score went from the 60s to high 80s in a week. I wake up actually feeling rested for the first time in years.",
+               "We're a throuple and trying to fit three adults on a standard King was a nightmare of elbows and overheating. This is massive. It stays frozen cold all night.",
+               "Initially skeptical of the price, but the motion isolation alone makes it worth it. Plus the custom sheets fit like a glove and feel like absolute luxury."
+           ];
+           const ratings = ["★★★★★", "★★★★☆"]; // Heavily skewed positive for 4.9 average
+
+           const reviewsList = document.getElementById("reviews-list");
+           const loadMoreContainer = document.getElementById("load-more-container");
+           const loadMoreBtn = document.getElementById("load-more-btn");
+           
+           if(!reviewsList || !loadMoreContainer) return;
+
+           loadMoreContainer.classList.remove("hidden");
+
+           let currentLoaded = 3;
+           let totalToLoad = 420;
+           let renderedHTML = [];
+
+           for(let i = 0; i < (totalToLoad - 3); i++) {
+               const name = names[Math.floor(Math.random() * names.length)];
+               const title = titles[Math.floor(Math.random() * titles.length)];
+               const body = bodies[Math.floor(Math.random() * bodies.length)];
+               const rating = Math.random() > 0.1 ? ratings[0] : ratings[1];
+               const score = Math.floor(Math.random() * 20) + 5;
+               const helpful = Math.floor(Math.random() * 50);
+               const isAppUser = Math.random() > 0.3;
+               
+               // Generate random month/day in 2025
+               const month = String(Math.floor(Math.random() * 8) + 1).padStart(2, '0');
+               const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+               const dateStr = `${month}/${day}/25`;
+
+               const html = `
+               <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-cardBorder pb-8 hidden dynamically-loaded">
+                 <div class="md:col-span-3">
+                    <p class="text-[13px] font-bold text-brand mb-1">${name}</p>
+                    <p class="text-[11px] text-brand/50 mb-3">${dateStr}</p>
+                    ${isAppUser ? `
+                    <div class="text-[9px] font-bold text-accent uppercase tracking-wider mb-2 border border-accent/20 bg-accent/5 inline-block px-2 py-1 rounded">
+                       ✓ Verified App User
+                    </div>
+                    <p class="text-[11px] font-bold text-brand/80">Sleep Score: <span class="text-brand">+${score} pts</span></p>
+                    ` : ''}
+                 </div>
+                 <div class="md:col-span-6">
+                    <div class="flex items-center gap-2 mb-2">
+                       <div class="text-brand text-[10px]">${rating}</div>
+                       <h4 class="font-bold text-sm text-brand">${title}</h4>
+                    </div>
+                    <p class="text-[13px] text-brand/80 leading-relaxed mb-6">${body}</p>
+                    <div class="flex items-center gap-3 text-[11px] text-brand/60">
+                       <span>Helpful?</span>
+                       <button class="flex items-center gap-1 hover:text-brand">👍 ${helpful}</button>
+                       <button class="flex items-center gap-1 hover:text-brand">👎 ${Math.floor(Math.random() * 3)}</button>
+                    </div>
+                 </div>
+                 <div class="md:col-span-3 border-l border-cardBorder pl-6 hidden md:block">
+                    <div class="mb-4">
+                       <p class="text-[10px] font-bold text-brand mb-2">Cooling</p>
+                       <div class="flex justify-between text-[9px] text-brand/50 mb-1"><span>Poor</span><span>Avg</span><span>Great</span></div>
+                       <div class="h-1 bg-cardBorder rounded relative"><div class="absolute h-3 w-1 bg-brand right-${Math.floor(Math.random()*4)} top-1/2 -translate-y-1/2 rounded"></div></div>
+                    </div>
+                 </div>
+              </div>`;
+              renderedHTML.push(html);
+           }
+
+           // Inject all but hidden
+           reviewsList.insertAdjacentHTML('beforeend', renderedHTML.join(''));
+
+           // Load More logic
+           const dynamicNodes = document.querySelectorAll('.dynamically-loaded');
+           
+           loadMoreBtn.addEventListener("click", () => {
+               const loadCount = 10;
+               let loaded = 0;
+               for(let i = 0; i < dynamicNodes.length; i++) {
+                   if(dynamicNodes[i].classList.contains("hidden")) {
+                       dynamicNodes[i].classList.remove("hidden");
+                       loaded++;
+                       if(loaded >= loadCount) break;
+                   }
+               }
+               
+               // Check if all are loaded
+               const remainingHidden = document.querySelectorAll('.dynamically-loaded.hidden').length;
+               if(remainingHidden === 0) {
+                   loadMoreContainer.classList.add("hidden");
+               }
+           });
+       };
+
+       generateFakeReviews();
+
+       // Scroll Spy for Secondary Nav
+       const sections = document.querySelectorAll("section[id]");
+       const navLinks = document.querySelectorAll(".sec-nav-link");
+       
+       const activeClasses = ["text-brand", "bg-cardBorder/50", "border-cardBorder"];
+       const inactiveClasses = ["text-brand/60", "hover:text-brand", "border-transparent"];
+
+       const observerOptions = {
+          root: null,
+          rootMargin: "0px 0px -60% 0px", // triggers when section is in top 40% of viewport
+          threshold: 0
+       };
+
+       const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+             if (entry.isIntersecting) {
+                const currentId = entry.target.getAttribute("id");
+                
+                navLinks.forEach(link => {
+                   const href = link.getAttribute("href").substring(1);
+                   if (href === currentId) {
+                      link.classList.remove(...inactiveClasses);
+                      link.classList.add(...activeClasses);
+                   } else {
+                      link.classList.remove(...activeClasses);
+                      link.classList.add(...inactiveClasses);
+                   }
+                });
+             }
+          });
+       }, observerOptions);
+
+       sections.forEach(section => {
+          // only observe sections that are in the nav
+          if(["shop", "inside", "compare", "reviews"].includes(section.id)) {
+              observer.observe(section);
+          }
+       });
+
+    });
+  </script>
+</body>
+</html>
