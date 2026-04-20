@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Engine | onemoreathome-alytics</title>
+    <script>if(!localStorage.getItem('om_admin_auth')) window.location.href='admin-login.html';</script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --background: hsl(40 30% 97%);
+            --foreground: hsl(30 10% 15%);
+            --card: hsl(40 25% 98%);
+            --muted: hsl(35 12% 90%);
+            --muted-foreground: hsl(30 8% 45%);
+            --primary: hsl(30 10% 15%);
+            --primary-foreground: hsl(40 30% 97%);
+            --secondary: hsl(35 15% 88%);
+            --border: hsl(35 15% 85%);
+            --accent: hsl(25 40% 50%); 
+            
+            --font-sans: 'DM Sans', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            
+            --radius-lg: 0.5rem;
+            --radius-md: 0.25rem;
+            --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--foreground);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        header {
+            padding: 1.5rem 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background: var(--background);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-actions .btn { margin-left: 1rem; }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--foreground);
+            color: var(--foreground);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            transition: var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: lowercase;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover { background: var(--primary); color: var(--primary-foreground); }
+        .btn-primary { background: var(--primary); color: var(--primary-foreground); border: 1px solid var(--primary); }
+        .btn-primary:hover { opacity: 0.9; }
+
+        main {
+            padding: 2rem 4%;
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .header-title { margin-bottom: 2rem; }
+        .header-title h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .header-title p { color: var(--muted-foreground); font-size: 1.1rem; }
+
+        .tabs-nav {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+
+        .tab-btn {
+            background: none; border: none;
+            padding: 1rem 1.5rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--muted-foreground);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab-btn:hover { color: var(--foreground); }
+        .tab-btn.active { color: var(--foreground); }
+        .tab-btn.active::after {
+            content: ''; position: absolute;
+            bottom: -2px; left: 0; width: 100%; height: 2px;
+            background: var(--foreground);
+        }
+
+        .tab-pane { display: none; animation: fadeIn 0.4s; }
+        .tab-pane.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .editable { outline: none; border-radius: 4px; transition: background 0.2s; padding: 0.2rem; }
+        .editable[contenteditable="true"] { background: var(--secondary); border: 1px dashed var(--muted-foreground); }
+
+        /* 3A: PERSONAS */
+        .persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2rem; }
+
+        .persona-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02); position: relative;
+        }
+
+        .persona-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+        }
+
+        .persona-name { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 600; color: var(--foreground); }
+        .persona-desc { color: var(--muted-foreground); margin-top: 0.5rem; font-size: 0.95rem; line-height: 1.4; }
+        
+        .readiness-badge {
+            background: var(--secondary); padding: 0.5rem 1rem; border-radius: 20px;
+            font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 0.4rem;
+        }
+        .score-high { color: #166534; background: #dcfce7; }
+        .score-med { color: #9a3412; background: #ffedd5; }
+
+        .persona-section-title { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-foreground); margin: 1.5rem 0 0.8rem 0; }
+        
+        .trigger-list, .phrase-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .trigger-list li::before { content: '⚡'; margin-right: 0.5rem; font-size: 0.9rem; }
+        .phrase-list li { font-style: italic; background: var(--background); padding: 0.8rem; border-left: 2px solid var(--border); border-radius: 0 var(--radius-md) var(--radius-md) 0;}
+        .phrase-list li::before { content: '"'; font-family: var(--font-serif); color: var(--muted-foreground); margin-right: 0.2rem;}
+        .phrase-list li::after { content: '"'; font-family: var(--font-serif); color: var(--muted-foreground); }
+
+        /* 3B: LANDING PAGE GENERATOR */
+        .lp-generator { display: grid; grid-template-columns: 350px 1fr; gap: 2rem; min-height: 700px; }
+
+        .lp-sidebar { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-weight: 600; font-size: 0.9rem; }
+        select, input, textarea { padding: 0.8rem; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: inherit; font-size: 0.95rem; background: var(--background); }
+        select:focus, input:focus, textarea:focus { outline: none; border-color: var(--foreground); }
+
+        .lp-preview-container { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--secondary); display: flex; flex-direction: column; overflow: hidden; }
+
+        .lp-device-bar { background: var(--background); padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 1rem; }
+        .device-btn { background: none; border: none; color: var(--muted-foreground); font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
+        .device-btn.active { color: var(--foreground); }
+
+        .lp-canvas-wrapper { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding: 2rem; overflow-y: auto; }
+        .lp-canvas { background: #fff; width: 100%; min-height: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: width 0.3s; padding: 0; overflow: hidden; }
+        .lp-canvas.mobile { width: 375px; height: 812px; min-height: 812px; border: 10px solid #222; border-radius: 30px; }
+
+        .canvas-edit-overlay { position: relative; }
+        .canvas-edit-overlay:hover::after { content: 'Click text to edit'; position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; font-size: 0.7rem; padding: 0.3rem 0.6rem; border-radius: 4px; pointer-events: none; }
+
+        /* 3C: META AD GENERATOR */
+        .ad-generator { display: flex; flex-direction: column; gap: 2rem; }
+        .ad-controls { display: flex; justify-content: space-between; align-items: flex-end; background: var(--card); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+        .ad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .ad-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .ad-header { background: #f0f2f5; padding: 0.8rem 1rem; font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid #e4e6eb; display: flex; justify-content: space-between; }
+        .ad-mockup { padding: 1rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        .ad-author { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; font-size: 0.9rem; font-weight: 600; }
+        .ad-avatar { width: 32px; height: 32px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 700;}
+        .ad-primary-text { font-size: 0.9rem; line-height: 1.4; color: #050505; margin-bottom: 1rem; }
+        .ad-creative { background: var(--background); height: 200px; display: flex; align-items: center; justify-content: center; border-radius: 4px; margin-bottom: 1rem; border: 1px solid #e4e6eb; position: relative; overflow: hidden;}
+        .ad-creative-text { text-align: center; padding: 1rem; font-family: var(--font-serif); font-size: 1.2rem; line-height: 1.4; position: relative; z-index: 2;}
+        .ad-bottom { background: #f0f2f5; padding: 0.5rem; display: flex; justify-content: space-between; align-items: center;}
+        .ad-headline { font-weight: 600; font-size: 0.9rem; color: #050505;}
+        .ad-cta { background: #e4e6eb; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;}
+
+        /* Launch Modal Styles */
+        .loader-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(48, 26, 21, 0.4); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .loader-overlay.active { opacity: 1; pointer-events: all; }
+        .launch-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; width: 90%; max-width: 600px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .copy-details { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem; max-height: 400px; overflow-y: auto; text-align: left; font-size: 0.95rem; display: flex; flex-direction: column; gap: 1rem; }
+        .copy-item span.label { font-weight: 600; font-family: var(--font-serif); color: var(--muted-foreground); display: block; margin-bottom: 0.2rem;}
+        .copy-item span.value { color: var(--foreground); line-height: 1.4; display: block; }
+
+        @media (max-width: 1024px) {
+            .lp-generator { grid-template-columns: 1fr; }
+            .ad-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-layer-group" style="color: var(--muted-foreground); font-size: 1.2rem;"></i> onemoreathome-alytics
+        </div>
+        <div class="header-actions">
+            <button class="btn"><i class="fas fa-arrow-left"></i> back to insights</button>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> save project</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="header-title">
+            <h1>Campaign & Conversion Engine</h1>
+            <p>Turn compiled audience insights logically into actionable personas, landing pages, and Meta ads.</p>
+        </div>
+
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-target="tab-personas">3A. Personas</button>
+            <button class="tab-btn" data-target="tab-landing">3B. Landing Pages</button>
+            <button class="tab-btn" data-target="tab-ads">3C. Meta Ads</button>
+        </div>
+
+        <!-- 3A: PERSONAS -->
+        <div id="tab-personas" class="tab-pane active">
+            <div class="header-title" style="margin-bottom: 1.5rem;">
+                <h3 style="font-family: var(--font-sans); font-size: 1.2rem;">Generated Audience Personas</h3>
+                <p style="font-size: 0.9rem;">Click any text section to inline edit.</p>
+            </div>
+            
+            <div class="persona-grid">
+                
+                <!-- Persona 1 -->
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div>
+                            <div class="persona-name editable" contenteditable="true">The Expandable Family</div>
+                            <div class="persona-desc editable" contenteditable="true">Their bed is a revolving door of kids, multiple partners, or pets. The strict confines of a standard bed lead to physical frustration.</div>
+                        </div>
+                        <div class="readiness-badge score-high"><i class="fas fa-fire"></i> High Intent</div>
+                    </div>
+                    
+                    <div class="persona-section-title">Common Triggers</div>
+                    <ul class="trigger-list editable" contenteditable="true">
+                        <li>Waking up pushed to the absolute edge</li>
+                        <li>Feeling restricted from moving at night</li>
+                        <li>Golden retriever stretching out fully</li>
+                    </ul>
+
+                    <div class="persona-section-title">Power Phrases (Use in Copy)</div>
+                    <ul class="phrase-list editable" contenteditable="true">
+                        <li>The boundaries have expanded</li>
+                        <li>Optimized for throuples and pets</li>
+                        <li>We make room for everyone</li>
+                    </ul>
+                </div>
+
+                <!-- Persona 2 -->
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div>
+                            <div class="persona-name editable" contenteditable="true">The Unapologetic Starfisher</div>
+                            <div class="persona-desc editable" contenteditable="true">They fiercely value their uninterrupted space. Whether sleeping alone or with a partner, they do not want to sacrifice real estate.</div>
+                        </div>
+                        <div class="readiness-badge score-med"><i class="fas fa-thermometer-half"></i> Med Intent</div>
+                    </div>
+                    
+                    <div class="persona-section-title">Common Triggers</div>
+                    <ul class="trigger-list editable" contenteditable="true">
+                        <li>Elbowing someone in the night</li>
+                        <li>Feeling claustrophobic horizontally</li>
+                        <li>Resenting traditional bed sizing</li>
+                    </ul>
+
+                    <div class="persona-section-title">Power Phrases (Use in Copy)</div>
+                    <ul class="phrase-list editable" contenteditable="true">
+                        <li>I just really, really like to starfish</li>
+                        <li>Uncompromised physical room</li>
+                        <li>No more space negotiations</li>
+                    </ul>
+                </div>
+
+                <!-- Persona 3 -->
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div>
+                            <div class="persona-name editable" contenteditable="true">The 1950s Rejector</div>
+                            <div class="persona-desc editable" contenteditable="true">Frustrated by consumer products built around outdated "nuclear family" assumptions. They seek inclusive, thoughtful design.</div>
+                        </div>
+                        <div class="readiness-badge score-high"><i class="fas fa-fire"></i> High Intent</div>
+                    </div>
+                    
+                    <div class="persona-section-title">Common Triggers</div>
+                    <ul class="trigger-list editable" contenteditable="true">
+                        <li>Realizing a California King is just longer</li>
+                        <li>Needing emotional and physical room</li>
+                        <li>Poly or non-traditional living arrangements</li>
+                    </ul>
+
+                    <div class="persona-section-title">Power Phrases (Use in Copy)</div>
+                    <ul class="phrase-list editable" contenteditable="true">
+                        <li>Sleep has changed. Beds haven't.</li>
+                        <li>Zero assumptions about who you love</li>
+                        <li>Engineered for the reality of multiple bodies</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 3B: LANDING PAGE -->
+        <div id="tab-landing" class="tab-pane">
+            <div class="lp-generator">
+                
+                <!-- LP Logic Sidebar -->
+                <div class="lp-sidebar">
+                    <h3 style="font-family: var(--font-serif); font-size: 1.4rem;">Generator Configuration</h3>
+                    
+                    <div class="form-group">
+                        <label>Target Persona</label>
+                        <select id="lp-persona-select" onchange="updateLPPreview()">
+                            <option value="family">The Expandable Family</option>
+                            <option value="starfish">The Unapologetic Starfisher</option>
+                            <option value="rejector">The 1950s Rejector</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Brand Voice</label>
+                        <select>
+                            <option>Inclusive & Expansive (Default)</option>
+                            <option>Direct & Practical</option>
+                            <option>Warm & Rebellious</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Forbidden Words (Comma separated)</label>
+                        <textarea rows="2">insomnia, traditional, normal, standard</textarea>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid var(--border); margin: 0.5rem 0;">
+
+                    <button class="btn btn-primary" style="justify-content: center;" onclick="launchPage()">
+                        <i class="fas fa-rocket"></i> Launch Page
+                    </button>
+                    <button class="btn" style="justify-content: center;" onclick="openPreview()">
+                        <i class="fas fa-external-link-alt"></i> Open Live Preview
+                    </button>
+                    <button class="btn" style="justify-content: center;" onclick="generateHTMLCode()">
+                        <i class="fas fa-download"></i> Download HTML
+                    </button>
+                </div>
+
+                <!-- LP Preview Window -->
+                <div class="lp-preview-container">
+                    <div class="lp-device-bar">
+                        <button class="device-btn active" data-device="desktop"><i class="fas fa-desktop"></i></button>
+                        <button class="device-btn" data-device="mobile"><i class="fas fa-mobile-alt"></i></button>
+                    </div>
+                    
+                    <div class="lp-canvas-wrapper">
+                        <iframe id="lp-canvas" class="lp-canvas" style="border:none; background: #fff;" frameborder="0"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 3C: META ADS -->
+        <div id="tab-ads" class="tab-pane">
+            <div class="ad-generator">
+                
+                <div class="ad-controls">
+                    <div>
+                        <h3 style="font-family: var(--font-sans); font-size: 1.2rem; margin-bottom: 0.5rem;">Meta Ads Combinations</h3>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <select id="ad-persona-select" style="padding: 0.5rem; border-radius: 4px; border: 1px solid var(--border); font-family: inherit;">
+                                <option>Persona: The Expandable Family</option>
+                                <option>Persona: The Unapologetic Starfisher</option>
+                                <option>Persona: The 1950s Rejector</option>
+                            </select>
+                            <span style="font-size: 0.85rem; color: var(--muted-foreground);">Generated 3 variants. Formatted for Feed/Story limits.</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="exportToCSV()">
+                        <i class="fas fa-file-csv"></i> Download Bulk Upload CSV
+                    </button>
+                </div>
+
+                <div class="ad-grid">
+                    
+                    <!-- Ad 1: Pain Led -->
+                    <div class="ad-card">
+                        <div class="ad-header"><span>Angle: Pain-Led</span> <span>(Feed)</span></div>
+                        <div class="ad-mockup">
+                            <div class="ad-author">
+                                <div class="ad-avatar">O</div>
+                                <span>One More</span>
+                            </div>
+                            <div class="ad-primary-text editable" contenteditable="true">
+                                King size was designed in the 1950s for a nuclear family that mostly no longer exists. A California King just adds length, not width. The industry optimized for retail floors, not modern relationships.
+                            </div>
+                            <div class="ad-creative">
+                                <img src="/img/hero-bed.jpg" style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
+                                <span class="ad-creative-text editable" contenteditable="true">Stop compromising.<br>Make room.</span>
+                            </div>
+                            <div class="ad-bottom">
+                                <div>
+                                    <div style="font-size: 0.7rem; color: #65676B; text-transform: uppercase;">onemoresleep.com</div>
+                                    <div class="ad-headline editable" contenteditable="true">20% wider than a King.</div>
+                                </div>
+                                <div class="ad-cta">Shop Now</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ad 2: Aspiration Led -->
+                    <div class="ad-card">
+                        <div class="ad-header"><span>Angle: Aspiration-Led</span> <span>(Story/Reel)</span></div>
+                        <div class="ad-mockup">
+                            <div class="ad-author">
+                                <div class="ad-avatar">O</div>
+                                <span>One More</span>
+                            </div>
+                            <div class="ad-primary-text editable" contenteditable="true">
+                                Some with a single partner. Some with two. Some with a rotating cast of humans and animals. Sleep has changed, and finally, there's a bed that handles it.
+                            </div>
+                            <div class="ad-creative" style="background: hsl(30 15% 90%);">
+                                <span class="ad-creative-text editable" contenteditable="true">Zero assumptions about who you love.<br>Just space.</span>
+                            </div>
+                            <div class="ad-bottom">
+                                <div>
+                                    <div style="font-size: 0.7rem; color: #65676B; text-transform: uppercase;">onemoresleep.com</div>
+                                    <div class="ad-headline editable" contenteditable="true">Always room for one more.</div>
+                                </div>
+                                <div class="ad-cta">Learn More</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ad 3: Social Proof Led -->
+                    <div class="ad-card">
+                        <div class="ad-header"><span>Angle: Social Proof</span> <span>(Feed)</span></div>
+                        <div class="ad-mockup">
+                            <div class="ad-author">
+                                <div class="ad-avatar">O</div>
+                                <span>One More</span>
+                            </div>
+                            <div class="ad-primary-text editable" contenteditable="true">
+                                "We honestly thought we were going to need separate bedrooms because we both move so much. Turns out we just needed a bed 20% wider than a California King." - The H. Family
+                            </div>
+                            <div class="ad-creative" style="background: hsl(35 20% 85%);">
+                                <span class="ad-creative-text editable" contenteditable="true">⭐⭐⭐⭐⭐<br>I can finally starfish.</span>
+                            </div>
+                            <div class="ad-bottom">
+                                <div>
+                                    <div style="font-size: 0.7rem; color: #65676B; text-transform: uppercase;">onemoresleep.com</div>
+                                    <div class="ad-headline editable" contenteditable="true">Designed for how you sleep.</div>
+                                </div>
+                                <div class="ad-cta">Shop Now</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Launch Modal -->
+    <div class="loader-overlay" id="launch-modal">
+        <div class="launch-card">
+            <h2 style="font-family: var(--font-serif); margin-bottom: 0.5rem; font-size: 2.2rem; display:flex; align-items:center; gap:0.5rem;">
+                <i class="fas fa-check-circle" style="color: #166534; font-size:1.5rem;"></i> Deployment Successful
+            </h2>
+            <p style="color: var(--muted-foreground); margin-bottom: 1.5rem;">The following copy variant has been written to the production database.</p>
+            
+            <div class="copy-details" id="copy-details">
+                <!-- Data goes here -->
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;" onclick="document.getElementById('launch-modal').classList.remove('active')">Acknowledge & Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.target).classList.add('active');
+            });
+        });
+
+        // Device Toggle for Landing Page preview
+        const deviceBtns = document.querySelectorAll('.device-btn');
+        const lpCanvas = document.getElementById('lp-canvas');
+
+        deviceBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                deviceBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                if(btn.dataset.device === 'mobile') {
+                    lpCanvas.classList.add('mobile');
+                } else {
+                    lpCanvas.classList.remove('mobile');
+                }
+            });
+        });
+
+        // Unified Content & Generator Logic via iFrame rendering
+        const personaCopy = {
+            family: {
+                title: "Sleep has changed. The beds haven't.",
+                sub: "The rhythms of our nights have evolved. Kids climb in. Pets claim their spot. Partners have different schedules, different needs. We made a bed 20% wider than a king to finally fit how people actually live."
+            },
+            starfish: {
+                title: "Never negotiate for space again.",
+                sub: "You shouldn't have to apologize for how you sleep. Protect your personal space with a mattress that is aggressively wide and uncompromising."
+            },
+            rejector: {
+                title: "One More makes room.",
+                sub: "King size was designed in the 1950s for a nuclear family that mostly no longer exists. It's time for a bed built without assumptions about who you love or how you sleep."
+            }
+        };
+
+        function getBoilerplate(personaKey) {
+            const copy = personaCopy[personaKey] || personaCopy.family;
+            
+            const canvasCode = `
+                            <!-- HERO SECTION -->
+                            <section class="section-padding bg-background w-full">
+                                <div class="container-padding">
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                        <div class="max-w-xl text-left">
+                                            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6 editable" contenteditable="true" id="lp-hero-title">${copy.title}</h1>
+                                            <p class="text-xl text-muted-foreground mb-8 leading-relaxed editable" contenteditable="true" id="lp-hero-sub">${copy.sub}</p>
+                                            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+                                                <button class="btn-primary editable w-full sm:w-auto" contenteditable="true">Explore the Collection</button>
+                                                <p class="text-sm text-muted-foreground italic mt-2">Always room for one more.</p>
+                                            </div>
+                                        </div>
+                                        <div class="w-full relative aspect-[4/3] rounded-sm overflow-hidden shadow-lg border border-border">
+                                            <img src="/img/hero-bed.jpg" alt="Family Bed" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <!-- EDUCATION -->
+                            <section class="section-padding bg-cream-dark border-t border-border w-full">
+                                <div class="container-padding grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+                                    <div>
+                                        <p class="eyebrow editable block mb-4" contenteditable="true">Re-thinking Rest</p>
+                                        <h2 class="font-serif text-3xl md:text-4xl text-foreground mb-8 leading-tight editable" contenteditable="true">One More makes room.</h2>
+                                        <div class="space-y-8 mt-10">
+                                            <div class="flex gap-6 items-start">
+                                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-secondary text-sm font-medium">1</div>
+                                                <div>
+                                                    <h4 class="text-foreground font-medium text-lg editable" contenteditable="true">Physical Room</h4>
+                                                    <p class="text-muted-foreground mt-2 leading-relaxed editable" contenteditable="true">20% wider than a standard king. Enough pure horizontal space for everyone who belongs there—however many that is.</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex gap-6 items-start">
+                                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-secondary text-sm font-medium">2</div>
+                                                <div>
+                                                    <h4 class="text-foreground font-medium text-lg editable" contenteditable="true">Emotional Room</h4>
+                                                    <p class="text-muted-foreground mt-2 leading-relaxed editable" contenteditable="true">Designed without assumptions about who you are, who you love, how many people you love, or how you all sleep.</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex gap-6 items-start">
+                                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-secondary text-sm font-medium">3</div>
+                                                <div>
+                                                    <h4 class="text-foreground font-medium text-lg editable" contenteditable="true">Practical Room</h4>
+                                                    <p class="text-muted-foreground mt-2 leading-relaxed editable" contenteditable="true">Engineered for the reality of multiple bodies, different schedules, and nights that don't follow anyone's script but yours.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-8">
+                                        <div class="w-full aspect-[4/3] rounded-sm overflow-hidden shadow-md border border-border">
+                                            <img src="/img/mattress-layers.jpg" alt="Mattress Width" class="w-full h-full object-cover" style="object-position: center bottom;">
+                                        </div>
+                                        <div class="bg-background p-10 border border-border flex flex-col items-center text-center shadow-sm rounded-sm">
+                                            <h3 class="font-serif text-2xl text-foreground mb-4 editable" contenteditable="true" style="line-height:1.4;">"We didn't set out to make a bigger mattress. We set out to make a mattress that fits how people actually live."</h3>
+                                            <p class="text-muted-foreground mb-0 leading-relaxed editable text-sm" contenteditable="true">— The One More Team</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+            `;
+            
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing | one more</title>
+  <base href="${window.location.origin}/" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- Mustache.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"><\/script>
+  <!-- Data store -->
+  <script src="/content.js"><\/script>
+  <style>
+    /* Inline Editing Styles inside Iframe */
+    .editable { outline: none; border-radius: 4px; transition: background 0.2s; }
+    [contenteditable="true"]:hover { background: rgba(0,0,0,0.02); outline: 1px dashed var(--muted-foreground); cursor: text; }
+  </style>
+</head>
+<body data-page="home">
+
+  <!-- HEADER rendered by Mustache -->
+  <div id="header-mount"></div>
+  <script type="text/x-mustache" data-target="header-mount">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-background border-b border-border">
+  <nav class="container-padding">
+    <div class="flex items-center justify-between h-20 lg:h-24 w-full">
+      <a href="/index.html" class="font-serif text-xl lg:text-2xl tracking-tight text-foreground hover:opacity-70 transition-opacity mr-10">{{site.brand}}</a>
+      <div class="hidden lg:flex items-center gap-10 lg:gap-14 ml-auto">
+        {{#nav.links}}
+        <a href="{{href}}" class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground">{{label}}</a>
+        {{/nav.links}}
+        <button class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground cart-btn-desktop" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
+      </div>
+      <!-- Mobile menu button -->
+      <div class="lg:hidden flex items-center gap-4">
+        <button class="nav-link text-sm tracking-wide text-foreground cart-btn-mobile" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
+        <button id="mobile-menu-btn" class="flex flex-col gap-1.5 p-2" aria-label="menu">
+          <span class="w-6 h-px bg-foreground block transition-all"></span>
+          <span class="w-6 h-px bg-foreground block transition-all"></span>
+          <span class="w-4 h-px bg-foreground block transition-all"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+  <\/script>
+
+  <!-- PAGE CONTENT -->
+  <main style="padding-top: 6rem; min-height: 100vh;">
+      ${canvasCode}
+  </main>
+
+  <!-- FOOTER rendered by Mustache -->
+  <div id="footer-mount"></div>
+  <script type="text/x-mustache" data-target="footer-mount">
+<footer class="bg-cream-dark border-t border-border">
+  <div class="container-padding section-padding text-center">
+    <a href="/index.html" class="font-serif text-2xl tracking-tight text-foreground">{{site.brand}}</a>
+    <p class="mt-4 text-xs text-muted-foreground">{{footer.copyright}}</p>
+  </div>
+</footer>
+  <\/script>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"><\/script>
+</body>
+</html>`;
+        }
+
+        function updateLPPreview() {
+            const persona = document.getElementById('lp-persona-select').value;
+            const iframe = document.getElementById('lp-canvas');
+            iframe.srcdoc = getBoilerplate(persona);
+        }
+
+        // Initialize preview on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLPPreview();
+        });
+
+        // Open live preview in a new tab immediately
+        function openPreview() {
+            const iframe = document.getElementById('lp-canvas');
+            const html = iframe.contentWindow.document.documentElement.outerHTML;
+            const win = window.open("", "_blank");
+            win.document.open();
+            win.document.write("<!DOCTYPE html>\\n" + html);
+            win.document.close();
+        }
+
+        // Launch Page implementation reading iframe DOM
+        function launchPage() {
+            const iframe = document.getElementById('lp-canvas').contentWindow.document;
+            const heroTitle = iframe.getElementById('lp-hero-title').innerText;
+            const heroSub = iframe.getElementById('lp-hero-sub').innerText;
+            
+            const h4s = iframe.querySelectorAll('h4');
+            const ps = iframe.querySelectorAll('h4 + p');
+            
+            let html = `
+                <div class="copy-item"><span class="label">Hero Headline</span><span class="value">${heroTitle}</span></div>
+                <div class="copy-item"><span class="label">Hero Subcopy</span><span class="value">${heroSub}</span></div>
+                <hr style="border:none; border-top:1px solid var(--border); margin: 0.5rem 0;">
+            `;
+            
+            h4s.forEach((h4, i) => {
+                html += `<div class="copy-item">
+                    <span class="label">Section ${i+1}: ${h4.innerText}</span>
+                    <span class="value">${ps[i].innerText}</span>
+                </div>`;
+            });
+
+            document.getElementById('copy-details').innerHTML = html;
+            document.getElementById('launch-modal').classList.add('active');
+        }
+
+        // Export HTML function retaining any inline edits
+        function generateHTMLCode() {
+            const iframe = document.getElementById('lp-canvas');
+            const html = iframe.contentWindow.document.documentElement.outerHTML;
+            const blob = new Blob(["<!DOCTYPE html>\\n" + html], {type: "text/html"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "onemore-landing-page.html";
+            a.click();
+        }
+
+        // Export Meta CSV function
+        function exportToCSV() {
+            // Very simplified CSV generation for Meta Ads bulk uploader
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Campaign Name,Ad Set Name,Ad Name,Primary Text,Headline,Link Description,Call To Action\n";
+            
+            // Mock data extraction from UI 
+            csvContent += `Growth Campaign,Family,Pain 1,"King size was designed in the 1950s...","20% wider than a King.","",SHOP_NOW\n`;
+            csvContent += `Growth Campaign,Poly,Aspire 1,"Some with a single partner. Some with two...","Always room for one more.","",LEARN_MORE\n`;
+            csvContent += `Growth Campaign,Starfish,Social 1,"We honestly thought we were going to need separate...","Designed for how you sleep.","",SHOP_NOW\n`;
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "meta_ads_bulk_upload_onemore.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

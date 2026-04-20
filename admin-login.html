@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | onemoreathome-alytics</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* One More Brand Colors */
+            --background: hsl(40 30% 97%);
+            --foreground: hsl(30 10% 15%);
+            --card: hsl(40 25% 99%);
+            --muted: hsl(35 12% 90%);
+            --muted-foreground: hsl(30 8% 45%);
+            --primary: hsl(30 10% 15%);
+            --primary-foreground: hsl(40 30% 97%);
+            --secondary: hsl(35 15% 88%);
+            --border: hsl(35 15% 85%);
+            
+            --font-sans: 'DM Sans', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            
+            --radius-md: 0.25rem;
+            --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--foreground);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(circle at top right, rgba(0,0,0,0.02), transparent 40%);
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+            padding: 2rem;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+        }
+
+        .logo-text {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--foreground);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-sub {
+            font-size: 0.95rem;
+            color: var(--muted-foreground);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .login-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--background);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--foreground);
+            transition: var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(48, 26, 21, 0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 2.6rem;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: none;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .meta-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .meta-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .meta-links a:hover {
+            color: var(--foreground);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Error Shake Animation */
+        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <div class="logo-container">
+            <i class="fas fa-layer-group logo-icon"></i>
+            <div class="logo-text">onemoreathome-alytics</div>
+            <div class="logo-sub">Internal Admin Portal</div>
+        </div>
+
+        <div class="login-card" id="loginCard">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Admin Email</label>
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" id="email" class="form-control" placeholder="name@onemoreathome.com" required value="andrew@onemoreathome.com">
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span id="btnText">Continue with Email</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+            </form>
+
+            <div class="meta-links">
+                <a href="#">Forgot password?</a>
+                <a href="#">Contact IT Support</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btnText = document.getElementById('btnText');
+            const spinner = document.getElementById('spinner');
+            const submitBtn = document.getElementById('submitBtn');
+            const card = document.getElementById('loginCard');
+
+            // 1. UI Loading State
+            btnText.innerText = "Authenticating...";
+            spinner.style.display = "block";
+            submitBtn.style.opacity = "0.8";
+            submitBtn.style.pointerEvents = "none";
+            
+            // 2. Simulate network delay (1.2 seconds) to make it feel real
+            setTimeout(() => {
+                
+                const email = document.getElementById('email').value;
+                if(!email.includes('@onemoreathome.com')) {
+                    // Reset UI
+                    btnText.innerText = "Domain not recognized";
+                    spinner.style.display = "none";
+                    submitBtn.style.opacity = "1";
+                    submitBtn.style.pointerEvents = "auto";
+                    card.classList.add('shake');
+                    setTimeout(() => {
+                        card.classList.remove('shake');
+                        btnText.innerText = "Continue with Email";
+                    }, 1500);
+                    return;
+                }
+
+                // 3. Success -> Set Auth token and Redirect
+                localStorage.setItem('om_admin_auth', 'true');
+                btnText.innerText = "Access Granted";
+                spinner.style.display = "none";
+                submitBtn.style.backgroundColor = "#166534"; // green hue
+                submitBtn.style.borderColor = "#166534";
+                
+                setTimeout(() => {
+                    window.location.href = "campaign-generator.html";
+                }, 400);
+
+            }, 1200);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraper Config | onemoreathome-alytics</title>
+    <script>if(!localStorage.getItem('om_admin_auth')) window.location.href='admin-login.html';</script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(22, 27, 40, 0.6);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --primary: #ff4500; /* Reddit orange */
+            --primary-glow: rgba(255, 69, 0, 0.4);
+            --secondary: #6366f1;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --input-bg: rgba(15, 23, 42, 0.8);
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255, 69, 0, 0.15) 0%, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 2rem 5%;
+            text-align: center;
+            border-bottom: 1px solid var(--panel-border);
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #ff4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem 5%;
+            flex: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Glassmorphism Panel */
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 1rem;
+        }
+
+        .panel-heading i {
+            color: var(--primary);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-md);
+            padding: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            cursor: pointer;
+            border-radius: calc(var(--radius-md) - 2px);
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        /* Form Controls */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.15);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Checkboxes */
+        .checkbox-group-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--panel-border);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .checkbox-label input {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--panel-border);
+            border-radius: 4px;
+            background: var(--input-bg);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-label input:checked {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox-label input:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Button */
+        .btn {
+            background: linear-gradient(135deg, #ff4500, #ff7b00);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Code Preview */
+        .code-container {
+            background: #0d1117;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--panel-border);
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #161b22;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .code-title {
+            color: #8b949e;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .copy-btn:hover {
+            background: #30363d;
+            color: white;
+        }
+
+        .code-block {
+            padding: 1rem;
+            margin: 0;
+            overflow-y: auto;
+            color: #e6edf3;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            tab-size: 4;
+            flex: 1;
+        }
+
+        /* AI Input magic glow */
+        .ai-input-wrap {
+            position: relative;
+        }
+
+        .ai-input-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff4500, #6366f1, #00d2ff);
+            z-index: 1;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            opacity: 0.5;
+        }
+
+        .section-manual, .section-plain-english {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .section-active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        /* Highlight classes */
+        .kw { color: #ff7b72; } /* Keywords */
+        .str { color: #a5d6ff; } /* Strings */
+        .com { color: #8b949e; } /* Comments */
+        .fnc { color: #d2a8ff; } /* Functions */
+        .num { color: #79c0ff; } /* Numbers */
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fab fa-reddit"></i> Scrapelytics</h1>
+        <p>Design your Reddit data extraction script in seconds. Generate ready-to-run Python code powered by PRAW.</p>
+    </header>
+
+    <main>
+        <!-- Config Panel -->
+        <div class="panel">
+            <div class="panel-heading">
+                <i class="fas fa-sliders-h"></i> Configuration
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-target="manual">Manual Setup</div>
+                <div class="tab" data-target="ai">Plain English <i class="fas fa-sparkles" style="color: #6366f1;"></i></div>
+            </div>
+
+            <!-- Plain English Section -->
+            <div class="section-plain-english" id="ai">
+                <div class="form-group ai-input-wrap">
+                    <label for="plainEnglishInput">Describe what you want to scrape</label>
+                    <textarea id="plainEnglishInput" placeholder="e.g. Scrape the top 100 posts from this month in r/MachineLearning. I want to save it as JSONL and include post info, all comments, author details, and ensure posts have at least 50 upvotes."></textarea>
+                </div>
+                <button class="btn" id="parseAiBtn" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                    <i class="fas fa-magic"></i> Auto-Configure Forms
+                </button>
+            </div>
+
+            <!-- Manual Config Section -->
+            <div class="section-manual section-active" id="manual">
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="subreddit">Subreddit Name (without r/)</label>
+                        <input type="text" id="subreddit" value="python" placeholder="python">
+                    </div>
+                    <div class="form-group">
+                        <label for="limit">Post Limit (1-1000)</label>
+                        <input type="number" id="limit" min="1" max="1000" value="100">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="sort">Sort Method</label>
+                        <select id="sort">
+                            <option value="hot">Hot</option>
+                            <option value="top" selected>Top</option>
+                            <option value="new">New</option>
+                            <option value="rising">Rising</option>
+                            <option value="controversial">Controversial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Time Filter</label>
+                        <select id="time">
+                            <option value="all" selected>All Time</option>
+                            <option value="year">Past Year</option>
+                            <option value="month">Past Month</option>
+                            <option value="week">Past Week</option>
+                            <option value="day">Past 24 Hours</option>
+                        </select>
+                        <div class="hint">Only applies to Top/Controversial</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Fields to Collect</label>
+                    <div class="checkbox-group-grid">
+                        <label class="checkbox-label"><input type="checkbox" id="field_post_info" checked> Post Info</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_scores" checked> Scores/Votes</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_author" checked> Author Details</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_comments" checked> All Comments</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_media"> Media URLs</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_awards"> Awards</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_timestamps" checked> Timestamps</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_crossposts"> Crossposts</label>
+                        <label class="checkbox-label"><input type="checkbox" id="field_flairs" checked> Flairs</label>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label for="min_score">Min Score</label>
+                        <input type="number" id="min_score" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="min_comments">Min Comments</label>
+                        <input type="number" id="min_comments" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="output_format">Output Format</label>
+                        <select id="output_format">
+                            <option value="json">JSON</option>
+                            <option value="jsonl">JSONL</option>
+                            <option value="csv">CSV</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="keyword_match">Keyword Match (Optional)</label>
+                    <input type="text" id="keyword_match" placeholder="e.g. tutorial, guide">
+                    <div class="hint">Comma-separated case-insensitive keywords</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="panel">
+            <div class="panel-heading">
+                <i class="fas fa-file-code"></i> Generated Python Script
+            </div>
+            
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-title"><i class="fab fa-python"></i> scraper.py</div>
+                    <button class="copy-btn" id="copyBtn"><i class="far fa-copy"></i> Copy Script</button>
+                </div>
+                <pre class="code-block" id="codeOutput"># Python script will appear here</pre>
+            </div>
+            
+            <div class="hint" style="text-align: center; margin-top: 0.5rem;">
+                Requires: <code>pip install praw</code>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // DOM Elements
+        const tabs = document.querySelectorAll('.tab');
+        const sections = {
+            manual: document.getElementById('manual'),
+            ai: document.getElementById('ai')
+        };
+        const inputs = document.querySelectorAll('input, select');
+        const codeOutput = document.getElementById('codeOutput');
+        const copyBtn = document.getElementById('copyBtn');
+        const parseAiBtn = document.getElementById('parseAiBtn');
+        const plainEnglishInput = document.getElementById('plainEnglishInput');
+
+        // Tab Switching Logic
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                Object.values(sections).forEach(s => s.classList.remove('section-active'));
+                sections[tab.dataset.target].classList.add('section-active');
+            });
+        });
+
+        // AI Parsing Logic (Basic regex heuristic simulation)
+        parseAiBtn.addEventListener('click', () => {
+            const text = plainEnglishInput.value.toLowerCase();
+            if (!text) return;
+
+            // Subreddit extraction (e.g., r/MachineLearning -> machinelearning)
+            const subMatch = text.match(/r\/([a-zA-Z0-9_]+)/);
+            if (subMatch) document.getElementById('subreddit').value = subMatch[1];
+
+            // Limit extraction (e.g., 50 posts)
+            const limitMatch = text.match(/(\d+)\s+posts?/);
+            if (limitMatch) document.getElementById('limit').value = limitMatch[1];
+
+            // Sort extraction
+            if (text.includes('top')) document.getElementById('sort').value = 'top';
+            else if (text.includes('new')) document.getElementById('sort').value = 'new';
+            else if (text.includes('hot')) document.getElementById('sort').value = 'hot';
+
+            // Time extraction
+            if (text.includes('year')) document.getElementById('time').value = 'year';
+            else if (text.includes('month')) document.getElementById('time').value = 'month';
+            else if (text.includes('week')) document.getElementById('time').value = 'week';
+            else if (text.includes('day') || text.includes('24 hours')) document.getElementById('time').value = 'day';
+
+            // Min score/comments wrapper
+            const minScoreMatch = text.match(/(?:at least|min|minimum)\s+(\d+)\s+(?:upvotes|votes|score)/);
+            if (minScoreMatch) document.getElementById('min_score').value = minScoreMatch[1];
+
+            // Output format
+            if (text.includes('csv')) document.getElementById('output_format').value = 'csv';
+            else if (text.includes('jsonl')) document.getElementById('output_format').value = 'jsonl';
+            else if (text.includes('json')) document.getElementById('output_format').value = 'json';
+
+            // Checkboxes
+            document.getElementById('field_comments').checked = text.includes('comment');
+            document.getElementById('field_media').checked = text.includes('media') || text.includes('image');
+            document.getElementById('field_author').checked = text.includes('author');
+
+            // Switch back to manual tab to show changes
+            tabs[0].click();
+            generateScript();
+        });
+
+        // Syntax Highlighting simple implementation
+        function highlightPython(code) {
+            code = code.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            // Highlight Strings
+            code = code.replace(/(['"])(.*?)\1/g, "<span class='str'>$&</span>");
+            // Highlight Comments
+            code = code.replace(/(#.*)/g, "<span class='com'>$1</span>");
+            // Highlight Keywords
+            const keywords = ['import', 'from', 'for', 'in', 'if', 'else', 'elif', 'def', 'class', 'try', 'except', 'pass', 'continue', 'break', 'return', 'True', 'False', 'None', 'as', 'with'];
+            const kwRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
+            code = code.replace(kwRegex, "<span class='kw'>$1</span>");
+            // Highlight Functions
+            code = code.replace(/(\w+)(?=\()/g, "<span class='fnc'>$1</span>");
+            // Highlight Numbers
+            code = code.replace(/\b(\d+)\b/g, "<span class='num'>$1</span>");
+            return code;
+        }
+
+        // Script Generation Logic
+        function generateScript() {
+            const ctx = {
+                subreddit: document.getElementById('subreddit').value || 'python',
+                limit: parseInt(document.getElementById('limit').value) || 100,
+                sort: document.getElementById('sort').value,
+                time: document.getElementById('time').value,
+                minScore: parseInt(document.getElementById('min_score').value) || 0,
+                minComments: parseInt(document.getElementById('min_comments').value) || 0,
+                format: document.getElementById('output_format').value,
+                keywords: document.getElementById('keyword_match').value.split(',').map(k => k.trim().toLowerCase()).filter(k => k),
+                
+                f_post: document.getElementById('field_post_info').checked,
+                f_scores: document.getElementById('field_scores').checked,
+                f_auth: document.getElementById('field_author').checked,
+                f_com: document.getElementById('field_comments').checked,
+                f_media: document.getElementById('field_media').checked,
+                f_award: document.getElementById('field_awards').checked,
+                f_time: document.getElementById('field_timestamps').checked,
+                f_cross: document.getElementById('field_crossposts').checked,
+                f_flair: document.getElementById('field_flairs').checked,
+            };
+
+            const requiresJson = ctx.format === 'json' || ctx.format === 'jsonl';
+            const requiresCsv = ctx.format === 'csv';
+
+            let s = `import praw\nimport time\n`;
+            if (requiresJson) s += `import json\n`;
+            if (requiresCsv) s += `import csv\n`;
+            if (ctx.f_time) s += `from datetime import datetime\n`;
+            
+            s += `
+# API Credentials setup
+# NOTE: For modern Reddit bot and app development hosted directly on Reddit,
+# consider using their new developer platform: https://developers.reddit.com/docs/guides/tools/devvit_cli
+#
+# For standalone local Python scripts using PRAW (like this one):
+# 1. Go to https://www.reddit.com/prefs/apps
+# 2. Click "Create App" or "Create Another App"
+# 3. Select "script", fill in name and redirect uri (http://localhost:8080)
+# 4. Copy the client_id, client_secret, and set a user_agent
+CLIENT_ID = 'YOUR_CLIENT_ID'
+CLIENT_SECRET = 'YOUR_CLIENT_SECRET'
+USER_AGENT = 'scrapelytics:v1.0 (by u/YOUR_USERNAME)'
+
+print(f"Connecting to Reddit API...")
+try:
+    reddit = praw.Reddit(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        user_agent=USER_AGENT
+    )
+    # Check if credentials are valid
+    reddit.user.me()
+except Exception as e:
+    print(f"Authentication Error: {e}")
+    print("Please verify your CLIENT_ID, CLIENT_SECRET, and USER_AGENT.")
+    exit(1)
+
+subreddit_name = "${ctx.subreddit}"
+print(f"Accessing r/{subreddit_name}...")
+subreddit = reddit.subreddit(subreddit_name)
+
+posts_data = []
+success_count = 0
+request_count = 0
+
+# Configured Fetch Query
+print("Fetching posts based on your configuration...")
+`;
+
+            // Subreddit Query
+            if (ctx.sort === 'hot') {
+                s += `query = subreddit.hot(limit=${ctx.limit})\n`;
+            } else if (ctx.sort === 'new') {
+                s += `query = subreddit.new(limit=${ctx.limit})\n`;
+            } else if (ctx.sort === 'rising') {
+                s += `query = subreddit.rising(limit=${ctx.limit})\n`;
+            } else if (ctx.sort === 'top') {
+                s += `query = subreddit.top(time_filter="${ctx.time}", limit=${ctx.limit})\n`;
+            } else if (ctx.sort === 'controversial') {
+                s += `query = subreddit.controversial(time_filter="${ctx.time}", limit=${ctx.limit})\n`;
+            }
+
+            // Keyword match list
+            if (ctx.keywords.length > 0) {
+                s += `target_keywords = ${JSON.stringify(ctx.keywords)}\n`;
+            }
+
+            // Main Loop
+            s += `
+for submission in query:
+    try:
+        # Rate Limiting & Progress
+        request_count += 1
+        if request_count % 10 == 0:
+            print(f"Processed {request_count} items. Pausing to respect API limits...")
+            time.sleep(1)
+
+        # Filters Configuration
+        if submission.score < ${ctx.minScore}:
+            continue
+        if submission.num_comments < ${ctx.minComments}:
+            continue
+`;
+
+            if (ctx.keywords.length > 0) {
+                s += `
+        text_content = (submission.title + " " + submission.selftext).lower()
+        if not any(kw in text_content for kw in target_keywords):
+            continue
+`;
+            }
+
+            s += `
+        # Data Extraction
+        post_dict = {}
+`;
+
+            if (ctx.f_post) {
+                s += `        post_dict['id'] = submission.id\n`;
+                s += `        post_dict['title'] = submission.title\n`;
+                s += `        post_dict['selftext'] = submission.selftext\n`;
+                s += `        post_dict['url'] = submission.url\n`;
+                s += `        post_dict['permalink'] = f"https://www.reddit.com{submission.permalink}"\n`;
+            }
+            if (ctx.f_scores) {
+                s += `        post_dict['score'] = submission.score\n`;
+                s += `        post_dict['upvote_ratio'] = getattr(submission, 'upvote_ratio', None)\n`;
+            }
+            if (ctx.f_auth) {
+                s += `        post_dict['author'] = submission.author.name if submission.author else '[deleted]'\n`;
+            }
+            if (ctx.f_time) {
+                s += `        post_dict['created_utc'] = submission.created_utc\n`;
+                s += `        post_dict['created_date'] = datetime.utcfromtimestamp(submission.created_utc).strftime('%Y-%m-%d %H:%M:%S')\n`;
+            }
+            if (ctx.f_flair) {
+                s += `        post_dict['link_flair_text'] = submission.link_flair_text\n`;
+            }
+            if (ctx.f_media) {
+                s += `        post_dict['is_video'] = submission.is_video\n`;
+                s += `        if hasattr(submission, 'preview') and 'images' in submission.preview:\n`;
+                s += `            post_dict['image_url'] = submission.preview['images'][0]['source']['url']\n`;
+            }
+            if (ctx.f_award) {
+                s += `        post_dict['total_awards_received'] = getattr(submission, 'total_awards_received', 0)\n`;
+            }
+            if (ctx.f_cross) {
+                s += `        post_dict['num_crossposts'] = getattr(submission, 'num_crossposts', 0)\n`;
+            }
+            
+            if (ctx.f_com) {
+                s += `        
+        # Comments Extraction
+        submission.comments.replace_more(limit=0) # Flatten tree
+        comments = []
+        for top_level_comment in submission.comments.list():
+            try:
+                comments.append({
+                    'id': top_level_comment.id,
+                    'author': top_level_comment.author.name if top_level_comment.author else '[deleted]',
+                    'body': top_level_comment.body,
+                    'score': top_level_comment.score,
+                    'parent_id': top_level_comment.parent_id
+                })
+            except Exception:
+                continue
+        post_dict['comments'] = comments
+        post_dict['num_comments'] = len(comments)
+`;
+            }
+
+            s += `        
+        posts_data.append(post_dict)
+        success_count += 1
+
+    except Exception as e:
+        print(f"Error processing post {submission.id}: {e}")
+        continue
+
+print(f"Successfully scraped {success_count} posts from r/{subreddit_name}.")
+
+# Saving Output
+output_file = f"reddit_{subreddit_name}_posts.${ctx.format}"
+
+try:
+`;
+            if (ctx.format === 'json') {
+                s += `
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(posts_data, f, indent=4, ensure_ascii=False)
+`;
+            } else if (ctx.format === 'jsonl') {
+                s += `
+    with open(output_file, 'w', encoding='utf-8') as f:
+        for item in posts_data:
+            f.write(json.dumps(item, ensure_ascii=False) + "\\n")
+`;
+            } else if (ctx.format === 'csv') {
+                s += `
+    if posts_data:
+        keys = posts_data[0].keys()
+        with open(output_file, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=keys)
+            writer.writeheader()
+            for row in posts_data:
+                # Stringify lists (like comments) for CSV
+                csv_row = {k: (json.dumps(v) if isinstance(v, list) else v) for k, v in row.items()}
+                writer.writerow(csv_row)
+`;
+            }
+
+            s += `
+    print(f"Data successfully saved to {output_file}")
+except Exception as e:
+    print(f"Error saving to file: {e}")
+`;
+
+            codeOutput.innerHTML = highlightPython(s.trim());
+        }
+
+        // Event Listeners
+        inputs.forEach(input => {
+            input.addEventListener('input', generateScript);
+            input.addEventListener('change', generateScript);
+        });
+
+        // Copy button
+        copyBtn.addEventListener('click', () => {
+            const temp = document.createElement('textarea');
+            temp.value = codeOutput.innerText;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+            }, 2000);
+        });
+
+        // Initial Generation
+        generateScript();
+    </script>
+</body>
+</html>
