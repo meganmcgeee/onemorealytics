@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>the mattress | one more</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css?v=3" />
+  <!-- Mustache.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+  <!-- Data store -->
+  <script src="/content.js"></script>
+</head>
+
+<body data-page="mattress">
+
+  <!-- HEADER rendered by Mustache -->
+  <div id="header-mount"></div>
+  <script type="text/x-mustache" data-target="header-mount">
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent">
+  <nav class="container-padding">
+    <div class="flex items-center justify-between h-20 lg:h-24 w-full">
+      <a href="/index.html" class="font-serif text-xl lg:text-2xl tracking-tight text-foreground hover:opacity-70 transition-opacity mr-10">{{site.brand}}</a>
+      <div class="hidden lg:flex items-center gap-10 lg:gap-14 ml-auto">
+        {{#nav.links}}
+        <a href="{{href}}" class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground">{{label}}</a>
+                {{/nav.links}}
+        <button class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground cart-btn-desktop" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
+      </div>
+      <!-- Mobile menu button -->
+      <div class="lg:hidden flex items-center gap-4">
+        <button class="nav-link text-sm tracking-wide text-foreground cart-btn-mobile" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
+        <button id="mobile-menu-btn" class="flex flex-col gap-1.5 p-2" aria-label="menu">
+          <span class="w-6 h-px bg-foreground block transition-all"></span>
+          <span class="w-6 h-px bg-foreground block transition-all"></span>
+          <span class="w-4 h-px bg-foreground block transition-all"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-background border-t border-border">
+    <div class="container-padding py-6 flex flex-col gap-4">
+      {{#nav.links}}
+      <a href="{{href}}" class="nav-link text-sm tracking-wide text-foreground hover:opacity-60 transition-opacity">{{label}}</a>
+              {{/nav.links}}
+        <button class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground cart-btn-desktop" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
+      </div>
+  </div>
+</header>
+  </script>
+
+  <!-- PAGE CONTENT -->
+  <main>
+    <div id="page-content"></div>
+    <script type="text/x-mustache" data-target="page-content">
+
+    <!-- HERO -->
+    <section class="pt-32 pb-16 lg:pt-40 lg:pb-24 bg-background">
+      <div class="container-padding">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div class="aspect-[4/3] overflow-hidden bg-secondary">
+            <img src="{{pageData.hero.img}}" alt="{{pageData.hero.imgAlt}}" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <p class="eyebrow">{{pageData.hero.eyebrow}}</p>
+            <h1 class="font-serif text-4xl md:text-5xl text-foreground mb-6">{{pageData.hero.headline}}</h1>
+            <p class="text-muted-foreground leading-relaxed mb-10">{{pageData.hero.body}}</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="{{pageData.hero.cta1Href}}" class="btn-primary">{{pageData.hero.cta1Text}}</a>
+              <a href="{{pageData.hero.cta2Href}}" class="btn-outline">{{pageData.hero.cta2Text}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section-padding bg-background" id="features">
+      <div class="container-padding">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <div class="relative">
+            <img src="{{pageData.features.img}}" alt="{{pageData.features.imgAlt}}" class="w-full h-auto rounded-sm" />
+          </div>
+          <div class="flex flex-col justify-center">
+            <p class="eyebrow">{{pageData.features.eyebrow}}</p>
+            <h2 class="font-serif text-3xl md:text-4xl text-foreground mb-12">{{pageData.features.headline}}</h2>
+            <div class="space-y-8">
+              {{#pageData.features.items}}
+              <div class="border-l-2 border-border pl-6">
+                <h4 class="text-foreground font-medium mb-2">{{title}}</h4>
+                <p class="text-sm text-muted-foreground leading-relaxed">{{desc}}</p>
+              </div>
+              {{/pageData.features.items}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECS -->
+    <section class="section-padding bg-cream-dark">
+      <div class="container-padding">
+        <div class="max-w-3xl mx-auto">
+          <p class="eyebrow text-center mb-4">{{pageData.specs.eyebrow}}</p>
+          <h2 class="font-serif text-3xl md:text-4xl text-foreground mb-12 text-center">{{pageData.specs.headline}}</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+            {{#pageData.specs.items}}
+            <div class="text-center">
+              <p class="text-xs uppercase tracking-wider text-muted-foreground mb-2">{{label}}</p>
+              <p class="text-foreground font-medium">{{value}}</p>
+            </div>
+            {{/pageData.specs.items}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative">
+      <div class="absolute inset-0 z-0">
+        <img src="{{pageData.cta.img}}" alt="{{pageData.cta.imgAlt}}" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-foreground/60"></div>
+      </div>
+      <div class="relative z-10 container-padding section-padding text-center">
+        <h2 class="font-serif text-3xl md:text-5xl text-primary-foreground mb-4">{{pageData.cta.headline}}</h2>
+        <p class="text-primary-foreground/80 mb-10 text-lg">{{pageData.cta.subline}}</p>
+        <a href="{{pageData.cta.ctaHref}}" class="btn-primary-inverted">{{pageData.cta.ctaText}}</a>
+      </div>
+    </section>
+
+    </script>
+  </main>
+
+  <!-- FOOTER rendered by Mustache -->
+  <div id="footer-mount"></div>
+  <script type="text/x-mustache" data-target="footer-mount">
+
+<footer class="bg-cream-dark border-t border-border">
+  <div class="container-padding section-padding">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <div class="lg:col-span-1">
+        <a href="/index.html" class="font-serif text-2xl tracking-tight text-foreground">{{site.brand}}</a>
+        <p class="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
+          {{footer.tagline1}}<br>{{footer.tagline2}}
+        </p>
+      </div>
+      <div>
+        <h4 class="text-sm font-medium text-foreground mb-4">shop</h4>
+        <ul class="space-y-3">
+          {{#footer.shopLinks}}<li><a href="{{href}}" class="text-sm text-muted-foreground hover:text-foreground transition-colors">{{label}}</a></li>{{/footer.shopLinks}}
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-medium text-foreground mb-4">company</h4>
+        <ul class="space-y-3">
+          {{#footer.companyLinks}}<li><a href="{{href}}" class="text-sm text-muted-foreground hover:text-foreground transition-colors">{{label}}</a></li>{{/footer.companyLinks}}
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-medium text-foreground mb-4">legal</h4>
+        <ul class="space-y-3">
+          {{#footer.legalLinks}}<li><a href="{{href}}" class="text-sm text-muted-foreground hover:text-foreground transition-colors">{{label}}</a></li>{{/footer.legalLinks}}
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full max-w-[100%] overflow-hidden">
+      <p class="text-xs text-muted-foreground">{{footer.copyright}}</p>
+      <p class="text-xs text-muted-foreground italic">always room for one more.</p>
+    </div>
+  </div>
+</footer>
+  </script>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+
+  <script>
+    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+</html>
