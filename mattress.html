@@ -132,9 +132,27 @@
       <div class="relative z-10 container-padding section-padding text-center">
         <h2 class="font-serif text-3xl md:text-5xl text-primary-foreground mb-4">{{pageData.cta.headline}}</h2>
         <p class="text-primary-foreground/80 mb-10 text-lg">{{pageData.cta.subline}}</p>
-        <a href="{{pageData.cta.ctaHref}}" class="btn-primary-inverted">{{pageData.cta.ctaText}}</a>
+        <div class="flex flex-col items-center gap-4">
+          <a href="{{pageData.cta.ctaHref}}" class="btn-primary-inverted">{{pageData.cta.ctaText}}</a>
+          <div class="klarna-placement text-sm text-primary-foreground/90 mt-2 flex items-center gap-2">
+            <span>or 4 interest-free payments of <strong>$150</strong> with</span>
+            <span class="font-bold bg-white text-black px-1.5 py-0.5 rounded text-xs">Klarna.</span>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- Shoplift-Inspired Floating Variant Control -->
+    <div id="shoplift-preview-control" class="fixed bottom-5 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-[332px] h-[56px] bg-[#141414] rounded-lg shadow-[0_13px_22px_7px_rgba(0,0,0,0.0),0_9px_14px_7px_rgba(0,0,0,0.03),0_5px_8px_6px_rgba(0,0,0,0.08)] z-[9999] flex items-center justify-between px-4 transition-all duration-400">
+      <div class="flex flex-1 items-center gap-2 h-full cursor-pointer hover:bg-white/5 transition-colors border-x border-[#333] px-2 -mx-2">
+        <div class="w-6 h-6 flex items-center justify-center rounded-full bg-blue-600 text-white text-xs font-semibold shrink-0">B</div>
+        <span class="text-white text-[16px] font-normal truncate tracking-tight">Variant prices</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="ml-auto shrink-0"><path d="M9.96 7.9c-.095 0-.19-.035-.265-.11L6.435 4.53c-.24-.24-.63-.24-.87 0L2.305 7.79c-.145.145-.385.145-.53 0-.145-.145-.145-.385 0-.53l3.26-3.26c.53-.53 1.395-.53 1.93 0l3.26 3.26c.145.145.145.385 0 .53-.075.07-.17.11-.265.11z" fill="white"/></svg>
+      </div>
+      <button class="ml-3 px-2 py-1.5 text-white bg-transparent hover:bg-[#333] rounded text-[16px] font-medium transition-colors border-none outline-none cursor-pointer">
+        Exit
+      </button>
+    </div>
 
     </script>
   </main>
