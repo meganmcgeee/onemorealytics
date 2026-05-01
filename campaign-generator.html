@@ -233,8 +233,11 @@
 
     <main>
         <div class="header-title">
-            <h1>Campaign & Conversion Engine</h1>
+            <h1 style="display:flex; align-items:center; gap:1rem;">Campaign & Conversion Engine 
+                <span id="import-badge" style="display:none; font-size: 0.9rem; font-weight: normal; background: var(--secondary); color: var(--foreground); padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid var(--border);"><i class="fas fa-link"></i> Linked</span>
+            </h1>
             <p>Turn compiled audience insights logically into actionable personas, landing pages, and Meta ads.</p>
+            <p id="import-details" style="display:none; color: var(--accent); font-size: 0.9rem; font-weight: 500; margin-top: 0.5rem;"></p>
         </div>
 
         <div class="tabs-nav">
@@ -328,6 +331,15 @@
                 </div>
 
             </div>
+            
+            <!-- NEXT STEP CTA -->
+            <div style="margin-top: 3rem; text-align: center; padding: 3rem 2rem; background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius-lg); box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+                <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 1rem; color: var(--foreground);">Ready to activate these personas?</h3>
+                <p style="color: var(--muted-foreground); margin-bottom: 2rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Move to the next step to turn these insights into conversion-optimized landing pages tailored for each audience.</p>
+                <button class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem; border-radius: 30px; display: inline-flex; align-items: center; gap: 0.8rem;" onclick="document.querySelector('[data-target=\'tab-landing\']').click(); window.scrollTo({top: 0, behavior: 'smooth'});">
+                    <i class="fas fa-layer-group"></i> Next Step: Generate Landing Pages <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
 
         <!-- 3B: LANDING PAGE -->
@@ -349,10 +361,10 @@
 
                     <div class="form-group">
                         <label>Brand Voice</label>
-                        <select>
-                            <option>Inclusive & Expansive (Default)</option>
-                            <option>Direct & Practical</option>
-                            <option>Warm & Rebellious</option>
+                        <select id="lp-tone-select" onchange="updateLPPreview()">
+                            <option value="inclusive">Inclusive & Expansive (Default)</option>
+                            <option value="direct">Direct & Practical</option>
+                            <option value="warm">Warm & Rebellious</option>
                         </select>
                     </div>
 
@@ -555,8 +567,17 @@
             }
         };
 
-        function getBoilerplate(personaKey) {
+        const toneModifiers = {
+            inclusive: { title: "", cta: "Explore the Collection" },
+            direct: { title: "Stop compromising. ", cta: "Buy Now" },
+            warm: { title: "Finally, a place for everyone. ", cta: "Experience It" }
+        };
+
+        function getBoilerplate(personaKey, toneKey) {
             const copy = personaCopy[personaKey] || personaCopy.family;
+            const tone = toneModifiers[toneKey] || toneModifiers.inclusive;
+            
+            const finalTitle = tone.title ? tone.title + copy.title : copy.title;
             
             const canvasCode = `
                             <!-- HERO SECTION -->
@@ -564,10 +585,10 @@
                                 <div class="container-padding">
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                                         <div class="max-w-xl text-left">
-                                            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6 editable" contenteditable="true" id="lp-hero-title">${copy.title}</h1>
+                                            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6 editable" contenteditable="true" id="lp-hero-title">${finalTitle}</h1>
                                             <p class="text-xl text-muted-foreground mb-8 leading-relaxed editable" contenteditable="true" id="lp-hero-sub">${copy.sub}</p>
                                             <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
-                                                <button class="btn-primary editable w-full sm:w-auto" contenteditable="true">Explore the Collection</button>
+                                                <button class="btn-primary editable w-full sm:w-auto" contenteditable="true">${tone.cta}</button>
                                                 <p class="text-sm text-muted-foreground italic mt-2">Always room for one more.</p>
                                             </div>
                                         </div>
@@ -696,12 +717,21 @@
 
         function updateLPPreview() {
             const persona = document.getElementById('lp-persona-select').value;
+            const tone = document.getElementById('lp-tone-select').value;
             const iframe = document.getElementById('lp-canvas');
-            iframe.srcdoc = getBoilerplate(persona);
+            iframe.srcdoc = getBoilerplate(persona, tone);
         }
 
-        // Initialize preview on page load
+        // Initialize preview and import data on page load
         document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.has('sources')) {
+                const sources = urlParams.get('sources');
+                document.getElementById('import-badge').style.display = 'inline-block';
+                const details = document.getElementById('import-details');
+                details.style.display = 'block';
+                details.innerHTML = `<i class="fas fa-database" style="margin-right: 0.3rem;"></i> <b>Data Synced:</b> Extracted base narrative constraints from ${sources}.`;
+            }
             updateLPPreview();
         });
 

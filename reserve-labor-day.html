@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Your Labor Day Sale - One More Mattress</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --text-color: #ffffff;
+            --accent-color: #8c73ff;
+            --accent-hover: #7b61ff;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --font-sans: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Background Gradient */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(140, 115, 255, 0.1) 0%, rgba(0, 0, 0, 0) 50%);
+            z-index: -1;
+            animation: pulseBg 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseBg {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(2%, 2%); }
+        }
+
+        /* Navbar */
+        nav {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .content-side {
+            max-width: 500px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(140, 115, 255, 0.15);
+            border: 1px solid rgba(140, 115, 255, 0.3);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 span {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+        }
+
+        .benefits {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .benefits li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .benefits i {
+            color: var(--accent-color);
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Reservation Card */
+        .reservation-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glow effect on card */
+        .reservation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 3px rgba(140, 115, 255, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(140, 115, 255, 0.3);
+        }
+
+        /* Success State */
+        #success-state {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(140, 115, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+        }
+
+        /* Phone Preview */
+        .phone-mockup {
+            margin-top: 2rem;
+            background: #1c1c1e;
+            border-radius: 20px;
+            padding: 1rem;
+            border: 4px solid #333;
+            text-align: left;
+            position: relative;
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 15px;
+            background: #333;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .imessage {
+            background: #26252a;
+            border-radius: 18px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .imessage-bubble {
+            background: #3b3a3e;
+            color: #fff;
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            font-size: 0.9rem;
+            display: inline-block;
+            max-width: 90%;
+            margin-bottom: 0.5rem;
+        }
+
+        .imessage-link {
+            display: flex;
+            align-items: center;
+            background: #47464b;
+            padding: 0.8rem;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+            gap: 1rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .imessage-link i {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">One More.</a>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="content-side">
+                <span class="badge">Labor Day Exclusive</span>
+                <h1>Skip the rush. <br><span>Reserve yours.</span></h1>
+                <p class="subtitle">Why wait for the email blast to launch? Reserve your preferred mattress size today for $0 down. We'll secure your inventory and text you a 1-click checkout link when the 40% OFF Labor Day Sale officially begins.</p>
+                
+                <ul class="benefits">
+                    <li><i class="fas fa-check-circle"></i> <span><strong>Guaranteed Inventory:</strong> We sell out fast. Reserving guarantees your size is held for you.</span></li>
+                    <li><i class="fas fa-bolt"></i> <span><strong>1-Click Checkout:</strong> Skip the cart. You'll get a text with a pre-filled cart link.</span></li>
+                    <li><i class="fas fa-tag"></i> <span><strong>Lock in 40% Off:</strong> Reserving guarantees our maximum holiday discount.</span></li>
+                </ul>
+            </div>
+
+            <div class="form-side">
+                <div class="reservation-card" id="card-container">
+                    
+                    <!-- Form State -->
+                    <form id="reservation-form">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.5rem;">Secure your reservation</h3>
+                        <p style="color: rgba(255,255,255,0.6); margin-bottom: 2rem; font-size: 0.95rem;">No credit card required. Free to reserve.</p>
+
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Jane Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Mobile Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="(555) 000-0000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">Mattress Size</label>
+                            <select id="size" class="form-control" required style="appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 1rem top 50%; background-size: 0.65rem auto;">
+                                <option value="" disabled selected>Select your size to hold...</option>
+                                <option value="twin">Twin</option>
+                                <option value="full">Full</option>
+                                <option value="queen">Queen</option>
+                                <option value="king">King</option>
+                                <option value="cal-king">California King</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submit-btn">
+                            Reserve for $0
+                        </button>
+                    </form>
+
+                    <!-- Success State -->
+                    <div id="success-state">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.5rem;">You're on the list!</h3>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;">We've reserved your inventory. Look out for a text on Labor Day morning.</p>
+
+                        <div class="phone-mockup">
+                            <div style="text-align: center; font-size: 0.8rem; color: #888; margin-top: 10px;">Messages • Now</div>
+                            <div class="imessage">
+                                <div class="imessage-bubble">
+                                    The One More Labor Day Sale is live! Your cart with your reserved <strong id="dynamic-size">Queen</strong> mattress is waiting.
+                                </div>
+                                <a href="#" class="imessage-link" onclick="event.preventDefault()">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 0.9rem;">1-Click Checkout</div>
+                                        <div style="font-size: 0.75rem; color: #aaa;">40% Off Applied Automatically</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submit-btn');
+            const size = document.getElementById('size');
+            const selectedSizeText = size.options[size.selectedIndex].text;
+            
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Reserving...';
+            btn.style.opacity = '0.8';
+            
+            // Simulate API Call
+            setTimeout(() => {
+                document.getElementById('reservation-form').style.display = 'none';
+                document.getElementById('success-state').style.display = 'block';
+                document.getElementById('dynamic-size').innerText = selectedSizeText;
+            }, 1200);
+        });
+    </script>
+</body>
+</html>

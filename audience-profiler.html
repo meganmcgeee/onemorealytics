@@ -334,21 +334,44 @@
         </div>
         <div class="header-actions">
             <button class="btn"><i class="fas fa-download"></i> export pdf</button>
-            <button class="btn"><i class="fas fa-database"></i> view raw data</button>
+            <button class="btn btn-primary" id="launchLpGenBtn" style="background: var(--foreground); color: var(--background); border-color: var(--foreground);"><i class="fas fa-layer-group"></i> Build Landing Page</button>
         </div>
     </header>
 
     <main>
-        <div class="dashboard-header">
-            <div class="title-group">
+        <div class="dashboard-header" style="flex-wrap: wrap; gap: 2rem;">
+            <div class="title-group" style="flex: 1 1 100%;">
                 <h1>Audience Profile Board</h1>
-                <p>AI-synthesized analysis generated from community interactions.</p>
-                <div class="source-tag"><i class="fab fa-reddit"></i> r/sleep • Analysis: "The Physical Space Constraint"</div>
+                <p>Choose your behavioral data sources to synthesize a new persona profile.</p>
             </div>
-            <div class="actions">
-                <button class="btn btn-primary" id="regenerateBtn">
-                    <i class="fas fa-sparkles"></i> regenerate analysis
-                </button>
+            
+            <div class="data-sources-container flex-1 w-full" style="flex: 1 1 100%; border-bottom: 1px solid var(--border); padding-bottom: 2rem;">
+                <div class="source-pills" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <button class="source-pill active" data-source="reddit" data-icon="fab fa-reddit" data-name="r/sleep" style="background: var(--primary); color: var(--primary-foreground); border: 1px solid var(--primary); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
+                       <i class="fab fa-reddit"></i> r/sleep Subreddit
+                    </button>
+                    <button class="source-pill" data-source="instagram" data-icon="fab fa-instagram" data-name="Instagram" style="background: transparent; color: var(--muted-foreground); border: 1px dashed var(--muted-foreground); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
+                       <i class="fab fa-instagram"></i> Instagram Comments
+                    </button>
+                    <button class="source-pill" data-source="facebook" data-icon="fab fa-facebook" data-name="Facebook" style="background: transparent; color: var(--muted-foreground); border: 1px dashed var(--muted-foreground); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
+                       <i class="fab fa-facebook"></i> Facebook Groups
+                    </button>
+                    <button class="source-pill" data-source="reviews" data-icon="fas fa-star" data-name="Verified Reviews" style="background: transparent; color: var(--muted-foreground); border: 1px dashed var(--muted-foreground); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
+                       <i class="fas fa-star"></i> Store Reviews
+                    </button>
+                    <button class="source-pill" data-source="tiktok" data-icon="fab fa-tiktok" data-name="TikTok" style="background: transparent; color: var(--muted-foreground); border: 1px dashed var(--muted-foreground); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
+                       <i class="fab fa-tiktok"></i> TikTok Mentions
+                    </button>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                   <div class="source-tag" id="current-active-sources" style="margin-top: 0;">
+                      <i class="fab fa-reddit"></i> r/sleep • Analysis Active
+                   </div>
+                   <button class="btn btn-primary" id="regenerateBtn" style="padding: 0.8rem 1.5rem; border-radius: 30px;">
+                       <i class="fas fa-sparkles"></i> synthesize analysis
+                   </button>
+                </div>
             </div>
         </div>
 
@@ -518,6 +541,19 @@
             </div>
 
         </div>
+        
+        <!-- NEXT STEP CTA -->
+        <div style="margin-top: 3rem; text-align: center; padding: 4rem 2rem; background: var(--card); border: 1px dashed var(--border); border-radius: var(--radius-lg); box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--secondary); color: var(--foreground); font-size: 1.5rem; margin-bottom: 1.5rem;">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1rem; color: var(--foreground); letter-spacing: -0.02em;">Profile Synthesized & Ready</h3>
+            <p style="color: var(--muted-foreground); margin-bottom: 2rem; font-size: 1.15rem; max-width: 600px; margin-left: auto; margin-right: auto;">The audience analysis is complete. Move to the Campaign Engine to generate actionable personas and build your first landing pages.</p>
+            <button class="btn btn-primary" id="launchLpGenBtnBottom" style="font-size: 1.15rem; padding: 1.2rem 3rem; border-radius: 30px; display: inline-flex; align-items: center; gap: 0.8rem; background: var(--foreground); color: var(--background); border-color: var(--foreground);">
+                <i class="fas fa-layer-group"></i> Next Step: Generate Landing Pages <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
     </main>
 
     <!-- Overlay Loader -->
@@ -525,6 +561,17 @@
         <div class="spinner"></div>
         <h2 style="font-family: var(--font-serif); margin-bottom: 0.5rem; color: var(--foreground); font-size: 2rem;">Re-analyzing Data...</h2>
         <p style="color: var(--muted-foreground); font-size: 1rem;">Extracting new behavioral signals from 100 posts.</p>
+    </div>
+
+    <!-- Generator Overlay -->
+    <div class="loader-overlay" id="lpGenerator">
+        <div class="spinner" style="border-top-color: var(--primary);"></div>
+        <h2 style="font-family: var(--font-serif); margin-bottom: 0.5rem; color: var(--foreground); font-size: 2rem;">Exporting to Campaign Engine...</h2>
+        <p id="lp-gen-step" style="color: var(--muted-foreground); font-size: 1rem; margin-bottom: 2rem;">Packaging persona variables...</p>
+        
+        <div style="width: 300px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;">
+           <div id="lp-gen-progress" style="width: 0%; height: 100%; background: var(--foreground); transition: width 0.5s ease-out;"></div>
+        </div>
     </div>
 
     <script>
@@ -542,16 +589,146 @@
             }
         }
 
+        // Data Source Selection Logic
+        const pills = document.querySelectorAll('.source-pill');
+        const sourceTag = document.getElementById('current-active-sources');
+        const loaderDescription = document.getElementById('loader-desc');
+        
+        let activeSources = [{ id: 'reddit', name: 'r/sleep', icon: 'fab fa-reddit' }];
+
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const sourceId = pill.dataset.source;
+                const sourceName = pill.dataset.name;
+                const sourceIcon = pill.dataset.icon;
+
+                const isActive = pill.classList.contains('active');
+                
+                if (isActive && activeSources.length > 1) {
+                    // Deselect
+                    pill.classList.remove('active');
+                    pill.style.background = 'transparent';
+                    pill.style.color = 'var(--muted-foreground)';
+                    pill.style.border = '1px dashed var(--muted-foreground)';
+                    activeSources = activeSources.filter(s => s.id !== sourceId);
+                } else if (!isActive) {
+                    // Select
+                    pill.classList.add('active');
+                    pill.style.background = 'var(--primary)';
+                    pill.style.color = 'var(--primary-foreground)';
+                    pill.style.border = '1px solid var(--primary)';
+                    activeSources.push({ id: sourceId, name: sourceName, icon: sourceIcon });
+                }
+            });
+        });
+
         // Handle Regenerate button simulation
         document.getElementById('regenerateBtn').addEventListener('click', () => {
             const loader = document.getElementById('loader');
+            const loaderDesc = document.querySelector('#loader p');
+            
+            const sourceNames = activeSources.map(s => s.name).join(', ');
+            loaderDesc.innerText = `Scraping new data and synthesizing via AI... This may take up to 10 seconds.`;
+            
             loader.classList.add('active');
             
-            setTimeout(() => {
-                loader.classList.remove('active');
-                alert("Profile successfully regenerated based on new parameters!");
-            }, 2500);
+            const sourceIds = activeSources.map(s => s.id);
+            
+            // Ping server to trigger python scripts asynchronously
+            fetch('/api/synthesize', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sources: sourceIds })
+            })
+            .then(res => res.json())
+            .then(serverData => {
+                if (serverData.error) throw new Error(serverData.error);
+                
+                // Start polling status
+                const pollInterval = setInterval(() => {
+                    fetch('/api/status')
+                        .then(r => r.json())
+                        .then(statusData => {
+                            loaderDesc.innerText = statusData.status;
+                            
+                            if (statusData.status === "Complete" || statusData.status.startsWith("Error")) {
+                                clearInterval(pollInterval);
+                                
+                                if (statusData.status === "Complete") {
+                                    // Fetch the newly generated JSON
+                                    fetch('ai_synthesized_profile.json?t=' + Date.now())
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        // Update active tags UI
+                                        sourceTag.innerHTML = activeSources.map(s => `<i class="${s.icon}"></i> ${s.name}`).join(' + ') + ' • Analysis Active';
+                                        
+                                        document.getElementById("summary-content").innerText = data.core_problem;
+                                        document.querySelector(".summary-card .card-title").innerHTML = `<i class="fas fa-brain"></i> ${data.persona}`;
+                                        
+                                        const painList = document.getElementById("pain-content");
+                                        painList.innerHTML = data.pain_points.map((p, i) => `<li class="ranked-item"><span class="ranked-item-idx">#${i+1}</span><div class="ranked-item-content">${p}</div></li>`).join('');
+                                        
+                                        const desiresList = document.getElementById("desires-content");
+                                        desiresList.innerHTML = data.desired_outcomes.map((d, i) => `<li class="ranked-item"><span class="ranked-item-idx">#${i+1}</span><div class="ranked-item-content">${d}</div></li>`).join('');
+                                        
+                                        const phrasesList = document.getElementById("phrases-content");
+                                        phrasesList.innerHTML = data.power_phrases.map(p => `<div class="quote-block"><span>"${p}"</span></div>`).join('');
+                                        
+                                        const demoContent = document.getElementById("demo-content");
+                                        demoContent.innerHTML = `<div style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.75rem;">Demographics & Lifestyle:</div><div class="tag-group"><span class="tag">Age: ${data.demographics.age_range}</span><span class="tag" style="line-height: 1.5; text-align: left;">${data.demographics.lifestyle}</span></div>`;
+                                        
+                                        const objList = document.getElementById("obj-content");
+                                        objList.innerHTML = `<li class="ranked-item"><span class="ranked-item-idx"><i class="fas fa-bullseye"></i></span><div class="ranked-item-content"><b>Brand Angle:</b> ${data.brand_angle || "Focus on the One More trial."}</div></li>`;
+                                        
+                                        loader.classList.remove('active');
+                                    })
+                                    .catch(err => {
+                                        console.error(err);
+                                        loaderDesc.innerText = "Error loading profile.";
+                                        setTimeout(() => loader.classList.remove('active'), 2000);
+                                    });
+                                } else {
+                                    // It errored
+                                    setTimeout(() => loader.classList.remove('active'), 3000);
+                                }
+                            }
+                        })
+                        .catch(err => console.error("Poll error:", err));
+                }, 1000);
+            })
+            .catch(err => {
+                console.error("Error starting pipeline:", err);
+                loaderDesc.innerText = "Error: Could not start pipeline. Check terminal.";
+                setTimeout(() => loader.classList.remove('active'), 3000);
+            });
         });
+
+        // Launch Landing Page Generation Logic
+        const launchBtn = document.getElementById("launchLpGenBtn");
+        const launchBtnBottom = document.getElementById("launchLpGenBtnBottom");
+        const lpGen = document.getElementById("lpGenerator");
+        const lpStep = document.getElementById("lp-gen-step");
+        const lpProgress = document.getElementById("lp-gen-progress");
+
+        function triggerLaunchLpGen() {
+            lpGen.classList.add("active");
+            
+            // Simulate AI Generation
+            setTimeout(() => { lpStep.innerText = "Structuring personas based on selections..."; lpProgress.style.width = "33%"; }, 800);
+            setTimeout(() => { lpStep.innerText = "Initializing Campaign Engine..."; lpProgress.style.width = "66%"; }, 1800);
+            setTimeout(() => { lpStep.innerText = "Compiling templates..."; lpProgress.style.width = "90%"; }, 2800);
+            
+            setTimeout(() => {
+                lpProgress.style.width = "100%";
+                lpStep.innerText = "Complete! Redirecting to Campaign Engine...";
+                setTimeout(() => {
+                    window.location.href = "campaign-generator.html";
+                }, 800);
+            }, 3800);
+        }
+
+        if (launchBtn) launchBtn.addEventListener("click", triggerLaunchLpGen);
+        if (launchBtnBottom) launchBtnBottom.addEventListener("click", triggerLaunchLpGen);
 
         document.querySelectorAll('.editable-content').forEach(el => {
             el.addEventListener('blur', () => {
