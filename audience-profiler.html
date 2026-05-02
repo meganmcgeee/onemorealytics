@@ -755,9 +755,9 @@
     </div>
 
     <script>
-        // Load latest synthesized data on page load
+        // Start in empty state on page load
         window.addEventListener('DOMContentLoaded', () => {
-            loadDashboardData();
+            // Data will only load after user clicks Synthesize
         });
 
         function loadDashboardData() {
@@ -1048,14 +1048,11 @@
         }
     </script>
     <script>
-        // Show onboarding automatically on first visit
+        // Show onboarding automatically on every visit to establish context
         document.addEventListener('DOMContentLoaded', () => {
-            if (!localStorage.getItem('onboardingSeen')) {
-                setTimeout(() => {
-                    document.getElementById('onboarding').classList.add('active');
-                    localStorage.setItem('onboardingSeen', 'true');
-                }, 500);
-            }
+            setTimeout(() => {
+                document.getElementById('onboarding').classList.add('active');
+            }, 500);
         });
     </script>
 </body>
