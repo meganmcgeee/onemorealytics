@@ -441,6 +441,7 @@
                         <select id="lp-type-select" onchange="updateLPPreview()">
                             <option value="sales">Sales Landing Page / Hero Page</option>
                             <option value="squeeze">Squeeze Page / Lead Capture</option>
+                            <option value="reservation">Pre-Sale Reservation Flow</option>
                             <option value="clickthrough">Click-Through Landing Page</option>
                             <option value="launch">Product Launch Page</option>
                             <option value="advertorial">Advertorial Landing Page</option>
@@ -703,7 +704,38 @@
             
             let canvasCode = '';
 
-            if (pageType === 'squeeze') {
+            if (pageType === 'reservation') {
+                canvasCode = `
+                    <section class="bg-background w-full text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
+                        <div class="max-w-2xl px-4 mx-auto">
+                            <span class="inline-block py-1 px-3 rounded-full bg-accent text-primary-foreground text-xs font-bold uppercase tracking-widest mb-6 editable" contenteditable="true">Upcoming Holiday Sale</span>
+                            <h1 class="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-4 editable" contenteditable="true" id="lp-hero-title">Reserve Your Mattress for Labor Day.</h1>
+                            <p class="text-xl text-muted-foreground mb-8 leading-relaxed editable" contenteditable="true" id="lp-hero-sub">Beat the rush. Lock in your exact size today, and get a 1-click purchase link via email or SMS the moment our biggest sale of the year goes live.</p>
+                            
+                            <div class="mt-8 max-w-md mx-auto text-left">
+                                <div class="flex flex-col gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-foreground mb-1">Which size do you need?</label>
+                                        <select class="w-full border border-border rounded-sm bg-background text-foreground" style="padding: 1rem 1.25rem; font-size: 1.1rem;">
+                                            <option>Queen</option>
+                                            <option>King</option>
+                                            <option>California King</option>
+                                            <option>Full</option>
+                                            <option>Twin XL</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-foreground mb-1">Where should we send your invite?</label>
+                                        <input type="text" placeholder="Email or Mobile Number">
+                                    </div>
+                                    <button class="btn-primary w-full py-4 text-lg editable mt-2" contenteditable="true">Hold My Mattress</button>
+                                </div>
+                                <p class="text-xs text-muted-foreground mt-4 text-center italic">No charge today. Guaranteed inventory for 24 hours when the sale starts.</p>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            } else if (pageType === 'squeeze') {
                 canvasCode = `
                     <section class="bg-background w-full text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
                         <div class="max-w-2xl px-4 mx-auto">
@@ -930,8 +962,8 @@
     .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
     .rounded-lg { border-radius: 0.5rem; }
     .rounded-sm { border-radius: 0.25rem; }
-    input[type="email"] { width: 100%; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 0.25rem; background: var(--background); font-family: inherit; font-size: 1.1rem; color: var(--foreground); box-sizing: border-box; }
-    input[type="email"]:focus { outline: none; border-color: var(--foreground); }
+    input[type="email"], input[type="text"], select { width: 100%; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 0.25rem; background: var(--background); font-family: inherit; font-size: 1.1rem; color: var(--foreground); box-sizing: border-box; }
+    input[type="email"]:focus, input[type="text"]:focus, select:focus { outline: none; border-color: var(--foreground); }
   </style>
 </head>
 <body data-page="home">
