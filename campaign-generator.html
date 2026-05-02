@@ -449,6 +449,11 @@
                             <option value="thankyou">Thank You / Confirmation Page</option>
                         </select>
                     </div>
+                    
+                    <div class="form-group" id="reservation-products-group" style="display: none;">
+                        <label>Pre-Sale Products (Comma separated)</label>
+                        <textarea id="lp-reservation-products" rows="2" onkeyup="updateLPPreview()">The One More Mattress - Queen, The One More Mattress - King</textarea>
+                    </div>
 
                     <div class="form-group">
                         <label>Primary Creative</label>
@@ -692,7 +697,7 @@
             warm: { title: "Finally, a place for everyone. ", cta: "Experience It" }
         };
 
-        function getBoilerplate(personaIndex, toneKey, pageType = 'sales', imageSrc = '/img/hero-bed.jpg') {
+        function getBoilerplate(personaIndex, toneKey, pageType = 'sales', imageSrc = '/img/hero-bed.jpg', resProducts = 'Queen, King') {
             const persona = (window.personasData && window.personasData[personaIndex]) ? window.personasData[personaIndex] : null;
             
             const title = persona ? (persona.marketing_hero_headline || persona.brand_angle) : "Loading...";
@@ -717,11 +722,7 @@
                                     <div>
                                         <label class="block text-sm font-medium text-foreground mb-1">Which size do you need?</label>
                                         <select class="w-full border border-border rounded-sm bg-background text-foreground" style="padding: 1rem 1.25rem; font-size: 1.1rem;">
-                                            <option>Queen</option>
-                                            <option>King</option>
-                                            <option>California King</option>
-                                            <option>Full</option>
-                                            <option>Twin XL</option>
+                                            ${resProducts.split(',').map(p => `<option>${p.trim()}</option>`).join('')}
                                         </select>
                                     </div>
                                     <div>
@@ -1061,8 +1062,15 @@
             const personaIndex = document.getElementById('lp-persona-select').value;
             const tone = document.getElementById('lp-tone-select').value;
             const pageType = document.getElementById('lp-type-select').value;
+            
+            const resGroup = document.getElementById('reservation-products-group');
+            if (resGroup) {
+                resGroup.style.display = (pageType === 'reservation') ? 'block' : 'none';
+            }
+            const resProducts = document.getElementById('lp-reservation-products') ? document.getElementById('lp-reservation-products').value : '';
+
             const iframe = document.getElementById('lp-canvas');
-            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType, currentCreative);
+            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType, currentCreative, resProducts);
         }
 
         function updateAdsPreview() {
