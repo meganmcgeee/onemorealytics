@@ -273,9 +273,11 @@
             .header-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
             .header-actions .btn { justify-content: center; width: 100%; padding: 0.5rem; font-size: 0.85rem;}
             main { padding: 1rem 0.5rem; gap: 1rem; }
-            .tabs-nav { flex-direction: column; align-items: stretch; gap: 0.5rem; margin-bottom: 1.5rem; }
+            .tabs-nav { flex-direction: row; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.5rem; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+            .tabs-nav::-webkit-scrollbar { height: 4px; }
+            .tabs-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
             .tabs-nav::before { display: none; }
-            .tab-btn { flex: 1 1 100%; text-align: left; justify-content: flex-start; padding: 0.6rem 1rem; font-size: 0.9rem; border-radius: 8px;}
+            .tab-btn { flex: 0 0 auto; text-align: center; justify-content: center; padding: 0.6rem 1rem; font-size: 0.85rem; border-radius: 30px; white-space: nowrap; }
             .header-title h1 { font-size: 1.5rem; flex-wrap: wrap; line-height: 1.2;}
             .header-title p { font-size: 0.9rem; }
             .ad-controls { flex-direction: column; align-items: stretch; gap: 1rem; }
