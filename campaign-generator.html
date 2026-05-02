@@ -451,6 +451,13 @@
                         </select>
                     </div>
                     
+                    <div class="form-group" id="reservation-products-group" style="display: none;">
+                        <label>Included Products</label>
+                        <div id="reservation-products-list" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    
                     
 
                     <div class="form-group">
@@ -695,7 +702,7 @@
             warm: { title: "Finally, a place for everyone. ", cta: "Experience It" }
         };
 
-        function getBoilerplate(personaIndex, toneKey, pageType = 'sales', imageSrc = '/img/hero-bed.jpg') {
+        function getBoilerplate(personaIndex, toneKey, pageType = 'sales', imageSrc = '/img/hero-bed.jpg', selectedProductIds = null) {
             const persona = (window.personasData && window.personasData[personaIndex]) ? window.personasData[personaIndex] : null;
             
             const title = persona ? (persona.marketing_hero_headline || persona.brand_angle) : "Loading...";
@@ -720,7 +727,7 @@
                                     <div>
                                         <label class="block text-sm font-medium text-foreground mb-3 text-center sm:text-left">Select Product to Reserve</label>
                                         <div class="res-product-grid">
-                                            ${CONTENT.shop.products.map((p, index) => `
+                                            ${CONTENT.shop.products.filter(p => selectedProductIds === null || selectedProductIds.length === 0 || selectedProductIds.includes(p.id)).map((p, index) => `
                                                 <div class="res-product-card ${index === 0 ? 'selected' : ''}" onclick="document.querySelectorAll('.res-product-card').forEach(c=>c.classList.remove('selected')); this.classList.add('selected');">
                                                     <img src="/${p.img}" alt="${p.imgAlt}" class="res-product-img">
                                                     <div class="res-product-info">
@@ -1079,8 +1086,19 @@
             const personaIndex = document.getElementById('lp-persona-select').value;
             const tone = document.getElementById('lp-tone-select').value;
             const pageType = document.getElementById('lp-type-select').value;
+            
+            const resGroup = document.getElementById('reservation-products-group');
+            if (resGroup) {
+                resGroup.style.display = (pageType === 'reservation') ? 'block' : 'none';
+            }
+            
+            const selectedProductIds = [];
+            document.querySelectorAll('#reservation-products-list input[type="checkbox"]:checked').forEach(cb => {
+                selectedProductIds.push(cb.value);
+            });
+
             const iframe = document.getElementById('lp-canvas');
-            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType, currentCreative);
+            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType, currentCreative, selectedProductIds);
         }
 
         function updateAdsPreview() {
