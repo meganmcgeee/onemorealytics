@@ -260,16 +260,24 @@
         }
         
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 1rem; padding: 1rem; }
-            .header-actions { width: 100%; justify-content: space-between; }
-            main { padding: 1.5rem 1rem; gap: 1rem; }
-            .tabs-nav { flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; }
-            .tabs-nav::after { display: none; }
-            .tab-btn { flex: 1 1 calc(50% - 0.5rem); text-align: center; justify-content: center; padding: 0.5rem; font-size: 0.85rem; }
-            .header-title h1 { font-size: 1.8rem; flex-wrap: wrap; }
-            .ad-controls { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .lp-sidebar { padding: 1.5rem; }
-            .lp-canvas-wrapper { padding: 1rem; }
+            header { flex-direction: column; gap: 0.8rem; padding: 1rem; align-items: stretch;}
+            .header-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+            .header-actions .btn { justify-content: center; width: 100%; padding: 0.5rem; font-size: 0.85rem;}
+            main { padding: 1rem 0.5rem; gap: 1rem; }
+            .tabs-nav { flex-direction: column; align-items: stretch; gap: 0.5rem; margin-bottom: 1.5rem; }
+            .tabs-nav::before { display: none; }
+            .tab-btn { flex: 1 1 100%; text-align: left; justify-content: flex-start; padding: 0.6rem 1rem; font-size: 0.9rem; border-radius: 8px;}
+            .header-title h1 { font-size: 1.5rem; flex-wrap: wrap; line-height: 1.2;}
+            .header-title p { font-size: 0.9rem; }
+            .ad-controls { flex-direction: column; align-items: stretch; gap: 1rem; }
+            .ad-controls .form-group, .ad-controls select { width: 100%; }
+            .lp-sidebar { padding: 1rem; }
+            .lp-canvas-wrapper { padding: 0; overflow-x: auto; }
+            .lp-canvas.mobile { width: 100%; max-width: 375px; min-height: 667px; border-width: 4px; border-radius: 16px; }
+            .persona-card { padding: 1rem; }
+            .persona-name { font-size: 1.4rem; }
+            .persona-header { flex-direction: column; gap: 1rem; align-items: stretch; }
+            .readiness-badge { justify-content: center; width: 100%; }
         }
     </style>
 </head>
