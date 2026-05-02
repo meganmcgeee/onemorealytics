@@ -675,15 +675,15 @@
 
             if (pageType === 'squeeze') {
                 canvasCode = `
-                    <section class="section-padding bg-background w-full min-h-screen flex items-center justify-center text-center">
-                        <div class="max-w-2xl px-4">
-                            <h1 class="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6 editable" contenteditable="true" id="lp-hero-title">${finalTitle}</h1>
+                    <section class="bg-background w-full text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
+                        <div class="max-w-2xl px-4 mx-auto">
+                            <h1 class="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-4 editable" contenteditable="true" id="lp-hero-title">${finalTitle}</h1>
                             <p class="text-xl text-muted-foreground mb-8 leading-relaxed editable" contenteditable="true" id="lp-hero-sub">${sub}</p>
-                            <div class="bg-card p-8 border border-border shadow-lg rounded-lg mt-8">
-                                <h3 class="font-serif text-2xl mb-4 editable" contenteditable="true">Get 10% Off Your First Order</h3>
-                                <div class="flex flex-col sm:flex-row gap-4">
-                                    <input type="email" placeholder="Enter your email address" class="w-full px-4 py-3 border border-border rounded-sm focus:outline-none focus:border-foreground bg-background">
-                                    <button class="btn-primary w-full sm:w-auto whitespace-nowrap editable" contenteditable="true">Claim Discount</button>
+                            <div class="bg-card p-6 sm:p-8 border border-border shadow-lg rounded-lg">
+                                <h3 class="font-serif text-2xl mb-6 editable" contenteditable="true">Get 10% Off Your First Order</h3>
+                                <div class="flex flex-col gap-4">
+                                    <input type="email" placeholder="Enter your email address">
+                                    <button class="btn-primary w-full py-4 text-lg editable" contenteditable="true">Claim Discount</button>
                                 </div>
                                 <p class="text-xs text-muted-foreground mt-4 italic">No spam, just better sleep.</p>
                             </div>
@@ -900,7 +900,7 @@
     .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
     .rounded-lg { border-radius: 0.5rem; }
     .rounded-sm { border-radius: 0.25rem; }
-    input[type="email"] { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 0.25rem; background: var(--background); font-family: inherit; font-size: 1rem; color: var(--foreground); box-sizing: border-box; }
+    input[type="email"] { width: 100%; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 0.25rem; background: var(--background); font-family: inherit; font-size: 1.1rem; color: var(--foreground); box-sizing: border-box; }
     input[type="email"]:focus { outline: none; border-color: var(--foreground); }
   </style>
 </head>
