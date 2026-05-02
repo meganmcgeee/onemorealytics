@@ -450,7 +450,6 @@
         <div class="header-actions">
             <button class="btn btn-onboarding" onclick="document.getElementById('onboarding').classList.add('active')"><i class="fas fa-question-circle"></i> how it works</button>
             <button class="btn" onclick="exportToPDF()"><i class="fas fa-download"></i> export pdf</button>
-            <button class="btn btn-primary" id="launchLpGenBtn" style="background: var(--foreground); color: var(--background); border-color: var(--foreground);"><i class="fas fa-layer-group"></i> Build Landing Page</button>
         </div>
     </header>
 
@@ -1035,16 +1034,41 @@
 
         function exportToPDF() {
             const element = document.querySelector('main');
+            
+            // Apply temporary styles for better PDF formatting
+            const originalMaxWidth = element.style.maxWidth;
+            const originalWidth = element.style.width;
+            
+            element.style.maxWidth = '1000px';
+            element.style.width = '1000px';
+            
+            // Hide UI elements that shouldn't be in the PDF
+            const tabs = document.querySelector('.tabs-nav');
+            const edits = document.querySelectorAll('.edit-toggle');
+            const cta = document.getElementById('next-step-cta');
+            
+            if(tabs) tabs.style.display = 'none';
+            if(cta) cta.style.display = 'none';
+            edits.forEach(e => e.style.display = 'none');
+
             const opt = {
-                margin:       0.5,
+                margin:       [0.5, 0.5, 0.5, 0.5],
                 filename:     'one-more-audience-profile.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
+                html2canvas:  { scale: 2, useCORS: true, windowWidth: 1000 },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
             // Generate the PDF
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Restore styles
+                element.style.maxWidth = originalMaxWidth;
+                element.style.width = originalWidth;
+                
+                if(tabs) tabs.style.display = 'flex';
+                if(cta && cta.style.display !== 'none') cta.style.display = 'block'; // Or original display
+                edits.forEach(e => e.style.display = 'flex');
+            });
         }
     </script>
     <script>
