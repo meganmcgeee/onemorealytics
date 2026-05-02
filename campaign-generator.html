@@ -846,18 +846,7 @@
                         if(dataList[2].power_phrases) document.getElementById('ai-persona-phrases-3').innerHTML = dataList[2].power_phrases.slice(0,3).map(p => `<li>${p}</li>`).join('');
                     }
 
-                    // Populate Select Dropdowns dynamically
-                    const lpSelect = document.getElementById('lp-persona-select');
-                    const adSelect = document.getElementById('ad-persona-select');
-                    
-                    let optionsHTML = '';
-                    dataList.forEach((persona, index) => {
-                        optionsHTML += `<option value="${index}">${persona.persona || 'Audience Segment ' + (index+1)}</option>`;
-                    });
-                    
-                    lpSelect.innerHTML = optionsHTML;
-                    adSelect.innerHTML = optionsHTML;
-                    
+
                     updateLPPreview();
                     updateAdsPreview();
                 })
