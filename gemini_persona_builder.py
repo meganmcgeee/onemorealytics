@@ -49,6 +49,8 @@ def build_personas(input_file="edited_profile.json", output_file="ai_personas.js
         "pain_points": [ "Pain point 1", "Pain point 2", "Pain point 3" ],
         "desired_outcomes": [ "Outcome 1", "Outcome 2" ],
         "brand_angle": "How 'One More' specifically targets THIS persona.",
+        "marketing_hero_headline": "A short, punchy 3-8 word website hero headline speaking DIRECTLY to the customer (e.g. 'Never Negotiate for Space Again.')",
+        "marketing_hero_subtitle": "A persuasive 1-2 sentence website sub-headline speaking DIRECTLY to the customer using 'You', offering them a solution.",
         "power_phrases": [ "Exact quote 1", "Exact quote 2" ],
         "effective_community_solutions": [ "Solution 1" ]
       }}

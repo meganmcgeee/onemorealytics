@@ -601,8 +601,8 @@
         function getBoilerplate(personaIndex, toneKey) {
             const persona = (window.personasData && window.personasData[personaIndex]) ? window.personasData[personaIndex] : null;
             
-            const title = persona ? persona.brand_angle : "Loading...";
-            const sub = persona ? persona.core_problem : "Loading...";
+            const title = persona ? (persona.marketing_hero_headline || persona.brand_angle) : "Loading...";
+            const sub = persona ? (persona.marketing_hero_subtitle || persona.core_problem) : "Loading...";
             
             const tone = toneModifiers[toneKey] || toneModifiers.inclusive;
             
