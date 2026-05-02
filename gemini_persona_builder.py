@@ -51,6 +51,11 @@ def build_personas(input_file="edited_profile.json", output_file="ai_personas.js
         "brand_angle": "How 'One More' specifically targets THIS persona.",
         "marketing_hero_headline": "A short, punchy 3-8 word website hero headline speaking DIRECTLY to the customer (e.g. 'Never Negotiate for Space Again.')",
         "marketing_hero_subtitle": "A persuasive 1-2 sentence website sub-headline speaking DIRECTLY to the customer using 'You', offering them a solution.",
+        "marketing_features": [
+            { "title": "Catchy Feature/Benefit Title 1", "description": "How the 'One More' brand specifically solves their first major pain point." },
+            { "title": "Catchy Feature/Benefit Title 2", "description": "How the 'One More' brand specifically delivers their desired outcome." },
+            { "title": "Catchy Feature/Benefit Title 3", "description": "A feature addressing another core concern or objection." }
+        ],
         "power_phrases": [ "Exact quote 1", "Exact quote 2" ],
         "effective_community_solutions": [ "Solution 1" ]
       }}
