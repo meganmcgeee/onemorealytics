@@ -35,10 +35,7 @@ def build_personas(input_file="edited_profile.json", output_file="ai_personas.js
     I will provide you with a high-level "Audience Profile" that was reviewed and edited by a marketing manager.
     Your task is to take this overarching profile and break it down into exactly 3 distinct, specific "Buyer Personas" in JSON format.
     
-    CRITICAL SEGMENTATION RULE: You MUST split the audience into exactly these 3 segments based on who they share a bed with:
-    1. Pet Owners (sharing a bed with multiple dogs/cats)
-    2. Co-sleeping Parents (sharing a bed with kids)
-    3. Polyamorous/Multi-Partner (sharing a bed with 2+ adult partners)
+    CRITICAL SEGMENTATION RULE: You MUST analyze the provided audience profile and organically split the audience into exactly 3 distinct, specific segments based on their unique demographics, use cases, or pain points found in the data. Do NOT use generic placeholder segments.
     
     Your JSON output MUST exactly match this structure (a single array containing 3 objects):
     [
