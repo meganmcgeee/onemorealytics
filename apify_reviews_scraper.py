@@ -53,4 +53,5 @@ def scrape_amazon_reviews(asin="B012H0K93I", limit=30, output_file="scraped_revi
         return False
 
 if __name__ == "__main__":
-    scrape_amazon_reviews()
+    target = sys.argv[1] if len(sys.argv) > 1 else "B012H0K93I"
+    scrape_amazon_reviews(asin=target)

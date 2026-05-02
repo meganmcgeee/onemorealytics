@@ -37,10 +37,10 @@ def synthesize_audience(input_file="scraped_posts.json", output_file="ai_synthes
     # 3. Construct the prompt for Gemini
     prompt = f"""
     You are an expert audience researcher and marketing strategist for a brand called "One More".
-    "One More" is a premium mattress brand that offers a "120 nights" sleep challenge. They focus on delivering genuinely restorative sleep, acknowledging that people are tired of "mattress research hell" and just want a simple, honest solution that works. Their tagline is "always room for one more."
+    "One More" is a premium lifestyle brand. Their tagline is "always room for one more."
     
-    I will provide you with a JSON array of recent Reddit posts from the r/sleep and r/Mattress communities. 
-    Analyze these posts deeply and synthesize a highly accurate "Audience Persona Profile" in JSON format, specifically tailored to show how "One More" can target these people.
+    I will provide you with a JSON array of recent social media posts, comments, and reviews. 
+    Analyze these posts deeply and synthesize a highly accurate "Audience Persona Profile" in JSON format, specifically tailored to show how "One More" can target these people based exactly on what they are discussing.
     
     Your JSON output MUST exactly match this structure:
     {{
@@ -52,14 +52,27 @@ def synthesize_audience(input_file="scraped_posts.json", output_file="ai_synthes
       "core_problem": "A paragraph explaining their main overarching problem and emotional state",
       "pain_points": [ "Pain point 1", "Pain point 2", "Pain point 3", "Pain point 4", "Pain point 5" ],
       "desired_outcomes": [ "Outcome 1", "Outcome 2", "Outcome 3" ],
-      "brand_angle": "How 'One More' specifically can position itself to solve their problem, referencing the 120-night challenge or the brand ethos.",
+      "brand_angle": "How 'One More' specifically can position itself to solve their problem, referencing the brand ethos.",
       "power_phrases": [ "Exact quote 1 from the data", "Exact quote 2", "Exact quote 3", "Exact quote 4" ],
-      "effective_community_solutions": [ "Solution 1", "Solution 2", "Solution 3" ]
+      "effective_community_solutions": [ "Solution 1", "Solution 2", "Solution 3" ],
+      "action_triggers": [ "Trigger 1", "Trigger 2", "Trigger 3" ],
+      "emotional_state": {{
+        "emotion_1": {{"name": "Emotion Name (e.g. Frustrated)", "percentage": 85}},
+        "emotion_2": {{"name": "Emotion Name", "percentage": 60}},
+        "emotion_3": {{"name": "Emotion Name", "percentage": 40}},
+        "summary": "A 1-sentence summary of their emotional state"
+      }},
+      "data_source_stats": {{
+        "total_analyzed": "Number of posts/comments you analyzed (count the JSON items)",
+        "sources": "Where these likely came from (e.g. 'Reddit communities', 'Facebook groups')",
+        "filtering_criteria": "A brief explanation of what these posts have in common and how they were filtered"
+      }}
     }}
     
     IMPORTANT INSTRUCTIONS: 
     - Output ONLY valid JSON. Do not include markdown formatting like ```json or ```.
     - Ensure the 'power_phrases' are DIRECT QUOTES from the provided posts.
+    - MAKE IT SUCCINCT: Your outputs are injected into Landing Pages. `pain_points` and `desired_outcomes` MUST be extremely short and punchy (3-8 words max per item). `brand_angle` MUST be a single short sentence. `core_problem` MUST be a single sentence.
     
     Here is the data to analyze:
     {json.dumps(posts)}

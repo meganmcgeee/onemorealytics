@@ -199,7 +199,50 @@ function initCartDOM() {
   }, 100);
 }
 
+function initMarketerBar() {
+  if (document.getElementById('marketer-admin-bar')) return;
+  
+  const bar = document.createElement('div');
+  bar.id = 'marketer-admin-bar';
+  bar.style.cssText = `
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1a1a1a;
+    color: #ffffff;
+    z-index: 9999;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-sans, 'DM Sans', sans-serif);
+    font-size: 13px;
+    border-top: 2px solid #8c73ff;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+  `;
+  
+  bar.innerHTML = `
+    <div style="display:flex; align-items:center; gap: 12px;">
+      <span style="background: #8c73ff; color: white; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 12px;">M</span>
+      <strong style="letter-spacing: 0.05em; text-transform: uppercase;">Marketer Admin</strong>
+      <span style="opacity: 0.5;">|</span>
+      <span style="opacity: 0.8;">Data Pipeline Connected</span>
+    </div>
+    <div style="display:flex; gap: 10px;">
+      <a href="/audience-profiler.html" style="color: white; text-decoration: none; padding: 6px 14px; background: rgba(255,255,255,0.1); border-radius: 4px; transition: background 0.2s; font-weight: 500;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">Step 1: Audience Profiler</a>
+      <a href="/campaign-generator.html" style="color: white; text-decoration: none; padding: 6px 14px; background: #8c73ff; border-radius: 4px; transition: opacity 0.2s; font-weight: 500;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Step 2: Campaign Engine</a>
+    </div>
+  `;
+  
+  document.body.appendChild(bar);
+  
+  // Add padding to body so footer content isn't hidden behind the bar
+  document.body.style.paddingBottom = '50px';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   CartState._patchPrices();
   setTimeout(initCartDOM, 50);
+  setTimeout(initMarketerBar, 100);
 });

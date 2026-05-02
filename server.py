@@ -5,7 +5,7 @@ import subprocess
 import threading
 import os
 
-PORT = 3000
+PORT = int(os.environ.get("PORT", 3000))
 
 # Global state for progress tracking
 status_lock = threading.Lock()
@@ -18,6 +18,14 @@ def update_status(msg):
         current_status = msg
         print(f"Status: {msg}")
 
+def run_persona_builder_async():
+    try:
+        update_status("Structuring 3 distinct personas based on your edits...")
+        subprocess.run(['python3', 'gemini_persona_builder.py'], check=True)
+        update_status("Personas Generated!")
+    except Exception as e:
+        update_status(f"Error: {str(e)}")
+
 def run_pipeline_async(sources):
     global is_synthesizing
     try:
@@ -28,13 +36,28 @@ def run_pipeline_async(sources):
             if os.path.exists(file):
                 os.remove(file)
             
+        # Parse source strings or dicts into normalized objects
+        source_objects = []
+        for s in sources:
+            if isinstance(s, dict):
+                source_objects.append(s)
+            elif isinstance(s, str):
+                if ":" in s:
+                    sid, kw = s.split(":", 1)
+                    source_objects.append({"id": sid, "keyword": kw})
+                else:
+                    source_objects.append({"id": s, "keyword": "mattress"})
+                    
+        source_ids = [s.get('id') for s in source_objects]
+        
         # Build dynamic scanning string based on selected sources
         scanning_parts = []
-        if "instagram" in sources: scanning_parts.append("Scanning IG")
-        if "tiktok" in sources: scanning_parts.append("Scanning TikTok")
-        if "facebook" in sources: scanning_parts.append("Scanning Facebook")
-        if "reddit" in sources: scanning_parts.append("Scanning Reddit")
-        if "reviews" in sources: scanning_parts.append("Scanning your customer reviews")
+        if "instagram" in source_ids: scanning_parts.append("Scanning IG")
+        if "tiktok" in source_ids: scanning_parts.append("Scanning TikTok")
+        if "facebook" in source_ids: scanning_parts.append("Scanning Facebook")
+        if "reddit" in source_ids: scanning_parts.append("Scanning Reddit")
+        if "amazon_reviews" in source_ids: scanning_parts.append("Scanning Amazon")
+        if "onemore_reviews" in source_ids: scanning_parts.append("Scanning OneMore Store")
         
         scanning_msg = ", ".join(scanning_parts) + "..."
         update_status(scanning_msg)
@@ -42,25 +65,33 @@ def run_pipeline_async(sources):
         # 1. Start all scrapers in PARALLEL
         processes = []
         
-        if "reddit" in sources:
-            p = subprocess.Popen(['python3', 'live_reddit_scraper.py', 'sleep+Mattress'])
-            processes.append(("Reddit", p))
+        for source_obj in source_objects:
+            sid = source_obj.get('id')
+            kw = source_obj.get('keyword', 'mattress')
             
-        if "instagram" in sources:
-            p = subprocess.Popen(['python3', 'apify_instagram_scraper.py', 'mattress'])
-            processes.append(("Instagram", p))
-            
-        if "tiktok" in sources:
-            p = subprocess.Popen(['python3', 'apify_tiktok_scraper.py', 'mattress'])
-            processes.append(("TikTok", p))
-            
-        if "facebook" in sources:
-            p = subprocess.Popen(['python3', 'apify_facebook_scraper.py', 'mattress'])
-            processes.append(("Facebook", p))
-            
-        if "reviews" in sources:
-            p = subprocess.Popen(['python3', 'apify_reviews_scraper.py'])
-            processes.append(("Store Reviews", p))
+            if sid == "reddit":
+                p = subprocess.Popen(['python3', 'live_reddit_scraper.py', kw])
+                processes.append(("Reddit", p))
+                
+            elif sid == "instagram":
+                p = subprocess.Popen(['python3', 'apify_instagram_scraper.py', kw])
+                processes.append(("Instagram", p))
+                
+            elif sid == "tiktok":
+                p = subprocess.Popen(['python3', 'apify_tiktok_scraper.py', kw])
+                processes.append(("TikTok", p))
+                
+            elif sid == "facebook":
+                p = subprocess.Popen(['python3', 'apify_facebook_scraper.py', kw])
+                processes.append(("Facebook", p))
+                
+            elif sid == "amazon_reviews":
+                p = subprocess.Popen(['python3', 'apify_reviews_scraper.py', kw])
+                processes.append(("Amazon Reviews", p))
+                
+            elif sid == "onemore_reviews":
+                p = subprocess.Popen(['python3', 'onemore_reviews_scraper.py'])
+                processes.append(("OneMore Reviews", p))
             
         # Wait for all to finish
         for name, p in processes:
@@ -143,6 +174,30 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 self.wfile.write(json.dumps({"error": str(e)}).encode())
+                
+        elif self.path == '/api/generate_personas':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length)
+            
+            try:
+                edited_data = json.loads(post_data)
+                with open("edited_profile.json", "w", encoding="utf-8") as f:
+                    json.dump(edited_data, f, indent=4)
+                    
+                threading.Thread(target=run_persona_builder_async).start()
+                
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({"success": True}).encode())
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": str(e)}).encode())
+                
         else:
             self.send_error(404, "Endpoint not found")
 
