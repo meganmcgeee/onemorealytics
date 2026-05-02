@@ -443,6 +443,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Primary Creative</label>
+                        <select id="lp-creative-select" onchange="updateLPPreview()">
+                            <option value="/img/hero-bed.jpg">Hero Bed</option>
+                            <option value="/img/lifestyle-family.jpg">Lifestyle Family</option>
+                            <option value="/img/mattress-layers.jpg">Mattress Layers</option>
+                            <option value="/img/mattress-overhead.jpg">Mattress Overhead</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Forbidden Words (Comma separated)</label>
                         <textarea rows="2">insomnia, traditional, normal, standard</textarea>
                     </div>
@@ -661,7 +671,7 @@
             warm: { title: "Finally, a place for everyone. ", cta: "Experience It" }
         };
 
-        function getBoilerplate(personaIndex, toneKey, pageType = 'sales') {
+        function getBoilerplate(personaIndex, toneKey, pageType = 'sales', imageSrc = '/img/hero-bed.jpg') {
             const persona = (window.personasData && window.personasData[personaIndex]) ? window.personasData[personaIndex] : null;
             
             const title = persona ? (persona.marketing_hero_headline || persona.brand_angle) : "Loading...";
@@ -702,7 +712,7 @@
                     <section class="section-padding bg-background w-full">
                         <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div class="w-full aspect-[4/3] rounded-sm overflow-hidden shadow-md border border-border">
-                                <img src="/img/mattress-layers.jpg" alt="Mattress" class="w-full h-full object-cover">
+                                <img src="${imageSrc}" alt="Mattress" class="w-full h-full object-cover">
                             </div>
                             <div>
                                 <h3 class="font-serif text-2xl text-foreground mb-4 editable" contenteditable="true">Why This Works</h3>
@@ -741,7 +751,7 @@
                             </div>
                             <h1 class="font-serif text-4xl md:text-5xl text-foreground leading-tight mb-6 editable" contenteditable="true" id="lp-hero-title">How One Company Is Rethinking The "King Size" Bed</h1>
                             <div class="w-full aspect-[16/9] mb-8 rounded-sm overflow-hidden shadow-sm">
-                                <img src="/img/hero-bed.jpg" alt="Family Bed" class="w-full h-full object-cover">
+                                <img src="${imageSrc}" alt="Family Bed" class="w-full h-full object-cover">
                             </div>
                             <p class="text-lg text-foreground font-medium mb-6 leading-relaxed editable" contenteditable="true" id="lp-hero-sub">${finalTitle}. ${sub}</p>
                             <p class="text-muted-foreground mb-6 leading-relaxed editable" contenteditable="true">For decades, the standard King size mattress was the pinnacle of luxury. But as modern families evolved, bringing pets, kids, and different sleeping schedules into the mix, the 76-inch standard suddenly felt cramped.</p>
@@ -824,7 +834,7 @@
                                             </div>
                                         </div>
                                         <div class="w-full relative aspect-[4/3] rounded-sm overflow-hidden shadow-lg border border-border">
-                                            <img src="/img/hero-bed.jpg" alt="Family Bed" class="w-full h-full object-cover">
+                                            <img src="${imageSrc}" alt="Family Bed" class="w-full h-full object-cover">
                                         </div>
                                     </div>
                                 </div>
@@ -862,7 +872,7 @@
                                     </div>
                                     <div class="flex flex-col gap-8">
                                         <div class="w-full aspect-[4/3] rounded-sm overflow-hidden shadow-md border border-border">
-                                            <img src="/img/mattress-layers.jpg" alt="Mattress Width" class="w-full h-full object-cover" style="object-position: center bottom;">
+                                            <img src="${imageSrc}" alt="Mattress Width" class="w-full h-full object-cover" style="object-position: center bottom;">
                                         </div>
                                         <div class="bg-background p-10 border border-border flex flex-col items-center text-center shadow-sm rounded-sm">
                                             <h3 class="font-serif text-2xl text-foreground mb-4 editable" contenteditable="true" style="line-height:1.4;">${(persona && persona.power_phrases && persona.power_phrases[1]) ? '"' + persona.power_phrases[1] + '"' : '"We didn\'t set out to make a bigger mattress. We set out to make a mattress that fits how people actually live."'}</h3>
@@ -969,8 +979,9 @@
             const personaIndex = document.getElementById('lp-persona-select').value;
             const tone = document.getElementById('lp-tone-select').value;
             const pageType = document.getElementById('lp-type-select').value;
+            const creative = document.getElementById('lp-creative-select').value;
             const iframe = document.getElementById('lp-canvas');
-            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType);
+            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType, creative);
         }
 
         function updateAdsPreview() {
