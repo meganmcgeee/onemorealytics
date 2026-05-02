@@ -901,18 +901,18 @@
   <!-- HEADER rendered by Mustache -->
   <div id="header-mount"></div>
   <script type="text/x-mustache" data-target="header-mount">
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-background border-b border-border">
-  <nav class="container-padding">
-    <div class="flex items-center justify-between h-20 lg:h-24 w-full">
+<header id="site-header" class="bg-background border-b border-border" style="position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 50; transition: all 0.5s;">
+  <nav class="container-padding" style="width: 100%;">
+    <div class="flex items-center justify-between w-full" style="display: flex; justify-content: space-between; align-items: center; height: 5rem;">
       <a href="/index.html" class="font-serif text-xl lg:text-2xl tracking-tight text-foreground hover:opacity-70 transition-opacity mr-10">{{site.brand}}</a>
-      <div class="hidden lg:flex items-center gap-10 lg:gap-14 ml-auto">
+      <div class="hidden lg:flex items-center gap-10 lg:gap-14 ml-auto" style="display: flex; gap: 2rem; align-items: center;">
         {{#nav.links}}
         <a href="{{href}}" class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground">{{label}}</a>
         {{/nav.links}}
         <button class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground cart-btn-desktop" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
       </div>
       <!-- Mobile menu button -->
-      <div class="lg:hidden flex items-center gap-4">
+      <div class="lg:hidden flex items-center gap-4" style="display: none;">
         <button class="nav-link text-sm tracking-wide text-foreground cart-btn-mobile" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
         <button id="mobile-menu-btn" class="flex flex-col gap-1.5 p-2" aria-label="menu">
           <span class="w-6 h-px bg-foreground block transition-all"></span>
