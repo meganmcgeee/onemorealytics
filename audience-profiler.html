@@ -412,6 +412,31 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
+        /* Onboarding Modal */
+        .onboarding-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(48, 26, 21, 0.6); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .onboarding-overlay.active { opacity: 1; pointer-events: all; }
+        .onboarding-modal {
+            background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg);
+            width: 90%; max-width: 500px; max-height: 85vh; overflow-y: auto; padding: 2.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); position: relative;
+            transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .onboarding-overlay.active .onboarding-modal { transform: translateY(0); }
+        .onboarding-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.2rem; color: var(--muted-foreground); cursor: pointer; }
+        .onboarding-step { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+        .onboarding-icon { width: 40px; height: 40px; flex-shrink: 0; background: var(--secondary); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--foreground); font-size: 1.1rem; }
+        .onboarding-text h4 { margin-bottom: 0.3rem; font-family: var(--font-serif); font-size: 1.2rem; }
+        .onboarding-text p { color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.5; }
+        @media (max-width: 768px) {
+            .onboarding-modal { padding: 1.5rem; width: 95%; }
+            .btn-onboarding { grid-column: span 2; }
+        }
+
     </style>
     <!-- html2pdf.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -423,10 +448,46 @@
             <i class="fas fa-chart-network" style="color: var(--muted-foreground); font-size: 1.2rem;"></i> onemoreathome-alytics
         </div>
         <div class="header-actions">
+            <button class="btn btn-onboarding" onclick="document.getElementById('onboarding').classList.add('active')"><i class="fas fa-question-circle"></i> how it works</button>
             <button class="btn" onclick="exportToPDF()"><i class="fas fa-download"></i> export pdf</button>
             <button class="btn btn-primary" id="launchLpGenBtn" style="background: var(--foreground); color: var(--background); border-color: var(--foreground);"><i class="fas fa-layer-group"></i> Build Landing Page</button>
         </div>
     </header>
+
+    <!-- Onboarding Modal -->
+    <div class="onboarding-overlay" id="onboarding">
+        <div class="onboarding-modal">
+            <button class="onboarding-close" onclick="document.getElementById('onboarding').classList.remove('active')"><i class="fas fa-times"></i></button>
+            <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 0.5rem;">Welcome to the Engine</h2>
+            <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Turn raw social conversations into high-converting campaigns in 3 steps.</p>
+            
+            <div class="onboarding-step">
+                <div class="onboarding-icon"><i class="fas fa-database"></i></div>
+                <div class="onboarding-text">
+                    <h4>1. Gather Intel</h4>
+                    <p>Enter keywords or hashtags into the source pills (Reddit, TikTok, Amazon) and hit <b>Synthesize</b>. The AI will scrape live posts and map out the exact pain points, emotional triggers, and exact quotes of your audience.</p>
+                </div>
+            </div>
+            
+            <div class="onboarding-step">
+                <div class="onboarding-icon"><i class="fas fa-users"></i></div>
+                <div class="onboarding-text">
+                    <h4>2. Generate Personas</h4>
+                    <p>Click <b>Build Landing Page</b> to proceed. The engine will automatically segment the raw data into 3 distinct buyer personas, complete with custom marketing angles.</p>
+                </div>
+            </div>
+            
+            <div class="onboarding-step">
+                <div class="onboarding-icon"><i class="fas fa-layer-group"></i></div>
+                <div class="onboarding-text">
+                    <h4>3. Launch Campaigns</h4>
+                    <p>Use the generated personas to instantly populate a responsive landing page mockup and Meta ad creatives with highly persuasive, customer-centric copy.</p>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 1rem;" onclick="document.getElementById('onboarding').classList.remove('active')">Let's Get Started</button>
+        </div>
+    </div>
 
     <main>
         <div class="tabs-nav">
@@ -985,6 +1046,17 @@
             // Generate the PDF
             html2pdf().set(opt).from(element).save();
         }
+    </script>
+    <script>
+        // Show onboarding automatically on first visit
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('onboardingSeen')) {
+                setTimeout(() => {
+                    document.getElementById('onboarding').classList.add('active');
+                    localStorage.setItem('onboardingSeen', 'true');
+                }, 500);
+            }
+        });
     </script>
 </body>
 </html>
