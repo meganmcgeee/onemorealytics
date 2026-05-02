@@ -453,9 +453,11 @@
                     
                     <div class="form-group" id="reservation-products-group" style="display: none;">
                         <label>Included Products</label>
-                        <div id="reservation-products-list" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                        <div id="reservation-products-list" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
                             <!-- Populated dynamically -->
                         </div>
+                        <label>Discount Badge (Optional)</label>
+                        <input type="text" id="lp-discount-offer" placeholder="e.g. 20% Off" onkeyup="updateLPPreview()" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; background: var(--background); color: var(--foreground); font-family: inherit; margin-top: 0.2rem;">
                     </div>
                     
                     
@@ -702,7 +704,7 @@
             warm: { title: "Finally, a place for everyone. ", cta: "Experience It" }
         };
 
-        function getBoilerplate(personaIndex, toneKey, pageType = 'sales', imageSrc = '/img/hero-bed.jpg', selectedProductIds = null) {
+        function getBoilerplate(personaIndex, toneKey, pageType = 'sales', imageSrc = '/img/hero-bed.jpg', selectedProductIds = null, discountOffer = '') {
             const persona = (window.personasData && window.personasData[personaIndex]) ? window.personasData[personaIndex] : null;
             
             const title = persona ? (persona.marketing_hero_headline || persona.brand_angle) : "Loading...";
@@ -728,10 +730,11 @@
                                         <div class="res-product-grid" style="pointer-events: none;">
                                             ${CONTENT.shop.products.filter(p => selectedProductIds === null || selectedProductIds.length === 0 || selectedProductIds.includes(p.id)).map((p, index) => `
                                                 <div class="res-product-card">
+                                                    ${discountOffer ? `<div style="position: absolute; top: 0.5rem; right: 0.5rem; background: var(--accent); color: var(--primary-foreground); padding: 0.25rem 0.6rem; border-radius: 1rem; font-size: 0.75rem; font-weight: bold; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">${discountOffer}</div>` : ''}
                                                     <img src="/${p.img}" alt="${p.imgAlt}" class="res-product-img">
                                                     <div class="res-product-info">
                                                         <div class="res-product-name">${p.name}</div>
-                                                        <div class="res-product-price">${p.price}</div>
+                                                        <div class="res-product-price">${discountOffer ? `<s>${p.price}</s> <span style="color: var(--accent); font-weight: bold; margin-left: 4px;">Sale</span>` : p.price}</div>
                                                     </div>
                                                 </div>
                                             `).join('')}
@@ -978,9 +981,9 @@
     input[type="email"], input[type="text"], select { width: 100%; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 0.25rem; background: var(--background); font-family: inherit; font-size: 1.1rem; color: var(--foreground); box-sizing: border-box; }
     input[type="email"]:focus, input[type="text"]:focus, select:focus { outline: none; border-color: var(--foreground); }
     /* Reservation Grid Styles */
-    .res-product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-    @media (min-width: 640px) { .res-product-grid { grid-template-columns: repeat(4, 1fr); } }
-    .res-product-card { border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; background: var(--card); opacity: 0.9; }
+    .res-product-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    
+    .res-product-card { border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; background: var(--card); flex: 0 1 240px; max-width: 100%; position: relative; }
     
     
     .res-product-img { width: 100%; aspect-ratio: 1; object-fit: cover; }
@@ -1096,8 +1099,9 @@
                 selectedProductIds.push(cb.value);
             });
 
+            const discountOffer = document.getElementById('lp-discount-offer') ? document.getElementById('lp-discount-offer').value : '';
             const iframe = document.getElementById('lp-canvas');
-            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType, currentCreative, selectedProductIds);
+            iframe.srcdoc = getBoilerplate(personaIndex, tone, pageType, currentCreative, selectedProductIds, discountOffer);
         }
 
         function updateAdsPreview() {
