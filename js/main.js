@@ -212,37 +212,313 @@ function initMarketerBar() {
     background: #1a1a1a;
     color: #ffffff;
     z-index: 9999;
-    padding: 12px 24px;
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: var(--font-sans, 'DM Sans', sans-serif);
-    font-size: 13px;
+    font-size: 12px;
     border-top: 2px solid #8c73ff;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
   `;
   
   bar.innerHTML = `
-    <div style="display:flex; align-items:center; gap: 12px;">
-      <span style="background: #8c73ff; color: white; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 12px;">M</span>
-      <strong style="letter-spacing: 0.05em; text-transform: uppercase;">Marketer Admin</strong>
-      <span style="opacity: 0.5;">|</span>
-      <span style="opacity: 0.8;">Data Pipeline Connected</span>
+    <div style="display:flex; align-items:center; gap: 8px;">
+      <span style="background: #8c73ff; color: white; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 10px;">M</span>
+      <strong style="letter-spacing: 0.05em; text-transform: uppercase;">Admin</strong>
     </div>
-    <div style="display:flex; gap: 10px;">
-      <a href="/audience-profiler.html" style="color: white; text-decoration: none; padding: 6px 14px; background: rgba(255,255,255,0.1); border-radius: 4px; transition: background 0.2s; font-weight: 500;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">Step 1: Audience Profiler</a>
-      <a href="/campaign-generator.html" style="color: white; text-decoration: none; padding: 6px 14px; background: #8c73ff; border-radius: 4px; transition: opacity 0.2s; font-weight: 500;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Step 2: Campaign Engine</a>
+    <div style="display:flex; gap: 8px;">
+      <a href="/audience-profiler.html" style="color: white; text-decoration: none; padding: 4px 10px; background: rgba(255,255,255,0.1); border-radius: 4px; transition: background 0.2s; font-weight: 500;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">Profiler</a>
+      <a href="/campaign-generator.html" style="color: white; text-decoration: none; padding: 4px 10px; background: #8c73ff; border-radius: 4px; transition: opacity 0.2s; font-weight: 500;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Campaigns</a>
     </div>
   `;
-  
   document.body.appendChild(bar);
   
   // Add padding to body so footer content isn't hidden behind the bar
   document.body.style.paddingBottom = '50px';
 }
 
+/* ── ONBOARDING MODAL ────────────────────────────────────────────── */
+function initOnboardingModal() {
+  if (sessionStorage.getItem('onboarding_seen')) return;
+  
+  const overlay = document.createElement('div');
+  overlay.className = 'onboarding-overlay';
+  
+  overlay.innerHTML = `
+    <div class="onboarding-modal">
+      <button class="onboarding-close" aria-label="Close">✕</button>
+      
+      <!-- Step 1 -->
+      <div class="onboarding-step active" data-step="0">
+        <p class="eyebrow mb-2">Welcome to One More</p>
+        <h3 class="font-serif text-2xl md:text-3xl text-foreground mb-4">A Premium Ecosystem</h3>
+        <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
+          We've completely rebuilt the storefront architecture. It's now lightning-fast, fully SEO optimized, and features buttery-smooth animations for a true luxury experience.
+        </p>
+        <button class="btn-primary w-full next-step-btn">Next: Full Product Line</button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="onboarding-step" data-step="1">
+        <p class="eyebrow mb-2">Expanded Catalog</p>
+        <h3 class="font-serif text-2xl md:text-3xl text-foreground mb-4">Dedicated PDPs</h3>
+        <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
+          The single landing page is gone. We've built out dedicated, SEO-friendly Product Detail Pages for the Mattress, Sheets, Pillows, and Bed Frame to enable highly targeted ad routing.
+        </p>
+        <button class="btn-primary w-full next-step-btn">Next: Marketing Tools</button>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="onboarding-step" data-step="2">
+        <p class="eyebrow mb-2">The Back-End</p>
+        <h3 class="font-serif text-2xl md:text-3xl text-foreground mb-4">Marketing Powerhouse</h3>
+        <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
+          Meet your new tools: The <strong>Audience Profiler</strong> synthesizes precise customer personas, and the <strong>Campaign Generator</strong> instantly outputs multi-channel ad copy based on those personas.
+        </p>
+        <button class="btn-primary w-full next-step-btn">Next: Mobile Ecosystem</button>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="onboarding-step" data-step="3">
+        <p class="eyebrow mb-2">Post-Purchase</p>
+        <h3 class="font-serif text-2xl md:text-3xl text-foreground mb-4">iOS Sleep Tracker</h3>
+        <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
+          To build long-term retention, we initiated development of a companion <strong>iOS Sleep Tracker</strong> app. It allows users to log their habits and sync sleep data, turning a one-time mattress purchase into a daily digital touchpoint.
+        </p>
+        <button class="btn-primary w-full close-onboarding-btn">Explore The Site</button>
+      </div>
+
+      <div class="onboarding-progress">
+        <div class="onboarding-dot active" data-dot="0"></div>
+        <div class="onboarding-dot" data-dot="1"></div>
+        <div class="onboarding-dot" data-dot="2"></div>
+        <div class="onboarding-dot" data-dot="3"></div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const steps = overlay.querySelectorAll('.onboarding-step');
+  const dots = overlay.querySelectorAll('.onboarding-dot');
+  let currentStep = 0;
+
+  function showStep(index) {
+    steps.forEach((s, i) => s.classList.toggle('active', i === index));
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  overlay.querySelectorAll('.next-step-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    });
+  });
+
+  const closeBtn = overlay.querySelector('.onboarding-close');
+  const closeCTA = overlay.querySelector('.close-onboarding-btn');
+  
+  const closeModal = () => {
+    overlay.classList.remove('active');
+    sessionStorage.setItem('onboarding_seen', 'true');
+    setTimeout(() => overlay.remove(), 500);
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  closeCTA.addEventListener('click', closeModal);
+
+  setTimeout(() => {
+    overlay.classList.add('active');
+  }, 600);
+}
+
+/* ── VARIANT SELECTORS ────────────────────────────────────────────── */
+function initVariantSelectors() {
+  const modelRadios = document.querySelectorAll('input[name="model"]');
+  if (modelRadios.length === 0) return;
+
+  const chkSheets = document.getElementById("chk-sheets");
+  const chkPillows = document.getElementById("chk-pillows");
+  const chkFrame = document.getElementById("chk-frame");
+  const checkboxes = [chkSheets, chkPillows, chkFrame].filter(Boolean);
+
+  modelRadios.forEach((radio, index) => {
+    radio.addEventListener('change', (e) => {
+      // Toggle visual styles for labels
+      modelRadios.forEach(r => {
+        const label = r.closest('label');
+        if (r.checked) {
+          label.classList.add('border-brand', 'border-[1.5px]', 'bg-lightBlue/30');
+          label.classList.remove('border-cardBorder', 'bg-bgTheme');
+        } else {
+          label.classList.remove('border-brand', 'border-[1.5px]', 'bg-lightBlue/30');
+          label.classList.add('border-cardBorder', 'bg-bgTheme');
+        }
+      });
+
+      // Handle Bundle Selection (Index 1 is bundle, Index 0 is solo)
+      const isBundle = index === 1;
+      let changed = false;
+      checkboxes.forEach(chk => {
+        if (chk.checked !== isBundle) {
+          chk.checked = isBundle;
+          changed = true;
+        }
+      });
+      
+      // Trigger renderCart by dispatching change on the first available checkbox
+      if (changed && checkboxes.length > 0) {
+        checkboxes[0].dispatchEvent(new Event('change'));
+      }
+    });
+  });
+
+  // Sync back from checkboxes to radio
+  checkboxes.forEach(chk => {
+    chk.addEventListener('change', () => {
+      const allChecked = checkboxes.every(c => c.checked);
+      if (allChecked) {
+         if (!modelRadios[1].checked) {
+            modelRadios[1].checked = true;
+            modelRadios[1].dispatchEvent(new Event('change'));
+         }
+      } else {
+         if (!modelRadios[0].checked) {
+            modelRadios[0].checked = true;
+            modelRadios[0].dispatchEvent(new Event('change'));
+         }
+      }
+    });
+  });
+}
+
+/* ── DETAILED FEATURE TOUR ────────────────────────────────────────────── */
+function initFeatureTour() {
+   const insideSection = document.getElementById('inside');
+   const addToCartBtn = document.getElementById('add-to-cart-btn');
+   if (!insideSection || !addToCartBtn) return;
+
+   // 1. Create a "Start Tour" button and inject it below the Add to Cart block
+   const btn = document.createElement('button');
+   btn.className = 'w-full btn-outline border-brand/20 text-brand mt-4 text-sm';
+   btn.innerHTML = 'Take a Detailed Tour';
+   
+   // Insert it after the checkout panel
+   const checkoutPanel = addToCartBtn.closest('.bg-lightBlue\\/30');
+   if (checkoutPanel) {
+      checkoutPanel.parentNode.insertBefore(btn, checkoutPanel.nextSibling);
+      btn.addEventListener('click', startTour);
+   }
+
+   function startTour() {
+      insideSection.scrollIntoView({ behavior: 'smooth' });
+      
+      const featureCards = insideSection.querySelectorAll('.grid > div');
+      if (!featureCards.length) return;
+
+      let step = 0;
+      
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black/80 z-[100] transition-opacity duration-500 opacity-0';
+      document.body.appendChild(overlay);
+
+      const tooltip = document.createElement('div');
+      tooltip.className = 'fixed z-[101] bg-white text-black p-6 rounded-lg shadow-2xl max-w-sm w-[90%] transition-all duration-500 opacity-0 transform translate-y-4';
+      document.body.appendChild(tooltip);
+
+      setTimeout(() => {
+         overlay.classList.remove('opacity-0');
+         showTourStep();
+      }, 500);
+
+      function showTourStep() {
+         if (step >= featureCards.length) {
+            endTour();
+            return;
+         }
+         
+         featureCards.forEach(c => {
+            c.style.position = 'relative';
+            c.style.zIndex = '1';
+            c.classList.remove('ring-4', 'ring-brand', 'scale-105');
+            c.classList.add('transition-all', 'duration-500');
+         });
+
+         const card = featureCards[step];
+         card.style.zIndex = '101';
+         card.classList.add('ring-4', 'ring-brand', 'scale-105');
+
+         const rect = card.getBoundingClientRect();
+         const title = card.querySelector('h4').innerText;
+         const desc = card.querySelector('p').innerText;
+
+         tooltip.innerHTML = `
+            <p class="text-[10px] uppercase tracking-widest text-brand/50 mb-2">Feature ${step + 1} of ${featureCards.length}</p>
+            <h3 class="font-serif text-2xl text-brand mb-2">${title}</h3>
+            <p class="text-sm text-brand/80 mb-6 leading-relaxed">${desc}</p>
+            <div class="flex justify-between items-center">
+               <button class="text-xs text-brand/50 hover:text-brand underline tour-skip">Skip Tour</button>
+               <button class="btn-primary py-2 px-6 text-xs tour-next">${step === featureCards.length - 1 ? 'Finish' : 'Next'}</button>
+            </div>
+         `;
+
+         let top = rect.bottom + 20;
+         let left = rect.left;
+         
+         // Center on mobile or if it goes off screen
+         if (window.innerWidth < 1024 || left + 350 > window.innerWidth) {
+            left = window.innerWidth / 2 - 175;
+            if(left < 10) left = 10;
+            
+            // Adjust top to be above if it goes below screen
+            if(top + 250 > window.innerHeight) {
+               top = rect.top - 200;
+            }
+         } else {
+            // Desktop right side
+            top = rect.top + (rect.height / 2) - 100;
+            left = rect.right + 20;
+         }
+
+         tooltip.style.top = `${top}px`;
+         tooltip.style.left = `${left}px`;
+         tooltip.classList.remove('opacity-0', 'translate-y-4');
+
+         // Smooth scroll so the card and tooltip are in view
+         window.scrollTo({
+            top: window.scrollY + card.getBoundingClientRect().top - window.innerHeight / 3,
+            behavior: 'smooth'
+         });
+
+         tooltip.querySelector('.tour-next').addEventListener('click', () => {
+            step++;
+            showTourStep();
+         });
+         tooltip.querySelector('.tour-skip').addEventListener('click', endTour);
+      }
+
+      function endTour() {
+         overlay.classList.add('opacity-0');
+         tooltip.classList.add('opacity-0');
+         featureCards.forEach(c => {
+            c.style.zIndex = '1';
+            c.classList.remove('ring-4', 'ring-brand', 'scale-105');
+         });
+         setTimeout(() => {
+            overlay.remove();
+            tooltip.remove();
+         }, 500);
+      }
+   }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   CartState._patchPrices();
   setTimeout(initCartDOM, 50);
   setTimeout(initMarketerBar, 100);
+  setTimeout(initOnboardingModal, 150);
+  setTimeout(initVariantSelectors, 200);
+  setTimeout(initFeatureTour, 250);
 });

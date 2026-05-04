@@ -30,9 +30,9 @@ const CONTENT = {
     shopLinks: [
       { label: "all products",   href: "shop.html" },
       { label: "the mattress",   href: "mattress.html" },
-      { label: "sheets",         href: "shop.html#sheets" },
-      { label: "pillows",        href: "shop.html#pillows" },
-      { label: "bed frame",      href: "shop.html#frame" }
+      { label: "sheets",         href: "sheets.html" },
+      { label: "pillows",        href: "pillows.html" },
+      { label: "bed frame",      href: "frame.html" }
     ],
     companyLinks: [
       { label: "about us",       href: "about.html" },
@@ -71,10 +71,10 @@ const CONTENT = {
       eyebrow:  "the collection",
       headline: "a complete sleep system",
       products: [
-        { name: "the mattress",  price: "$2,495", desc: "wider than king. smarter than the rest.",         img: "img/mattress-overhead.jpg", imgAlt: "the mattress",   href: "shop.html#mattress" },
-        { name: "the sheets",    price: "$295",   desc: "custom-fit for extra room. breathable linen.",   img: "img/sheets-product.jpg",    imgAlt: "the sheets",    href: "shop.html#sheets" },
-        { name: "the pillows",   price: "$195",   desc: "set of 3. because math.",                        img: "img/pillows-product.jpg",   imgAlt: "the pillows",   href: "shop.html#pillows" },
-        { name: "the bed frame", price: "$1,195", desc: "minimal. modular. built to anchor a wider bed.", img: "img/frame-product.jpg",     imgAlt: "the bed frame", href: "shop.html#frame" }
+        { name: "the mattress",  price: "$2,495", desc: "wider than king. smarter than the rest.",         img: "img/mattress-overhead.jpg", imgAlt: "the mattress",   href: "mattress.html" },
+        { name: "the sheets",    price: "$295",   desc: "custom-fit for extra room. breathable linen.",   img: "img/sheets-product.jpg",    imgAlt: "the sheets",    href: "sheets.html" },
+        { name: "the pillows",   price: "$195",   desc: "set of 3. because math.",                        img: "img/pillows-product.jpg",   imgAlt: "the pillows",   href: "pillows.html" },
+        { name: "the bed frame", price: "$1,195", desc: "minimal. modular. built to anchor a wider bed.", img: "img/frame-product.jpg",     imgAlt: "the bed frame", href: "frame.html" }
       ],
       ctaText: "view all products",
       ctaHref: "shop.html"
@@ -167,7 +167,8 @@ const CONTENT = {
         shipping: "free shipping · 120-night trial",
         img:      "img/mattress-overhead.jpg",
         imgAlt:   "the one more mattress",
-        bg:       "bg-background"
+        bg:       "bg-background",
+        href:     "mattress.html"
       },
       {
         id: "sheets",
@@ -186,7 +187,8 @@ const CONTENT = {
         shipping: "free shipping · 120-night trial",
         img:      "img/sheets-product.jpg",
         imgAlt:   "the one more sheets",
-        bg:       "bg-cream-dark"
+        bg:       "bg-cream-dark",
+        href:     "sheets.html"
       },
       {
         id: "pillows",
@@ -205,7 +207,8 @@ const CONTENT = {
         shipping: "free shipping · 120-night trial",
         img:      "img/pillows-product.jpg",
         imgAlt:   "the one more pillows",
-        bg:       "bg-background"
+        bg:       "bg-background",
+        href:     "pillows.html"
       },
       {
         id: "frame",
@@ -224,7 +227,8 @@ const CONTENT = {
         shipping: "free shipping · 120-night trial",
         img:      "img/frame-product.jpg",
         imgAlt:   "the one more bed frame",
-        bg:       "bg-cream-dark"
+        bg:       "bg-cream-dark",
+        href:     "frame.html"
       }
     ],
     bundle: {
