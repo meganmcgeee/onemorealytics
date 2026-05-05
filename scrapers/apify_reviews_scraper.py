@@ -2,7 +2,7 @@ import sys
 import json
 from apify_client import ApifyClient
 
-def scrape_amazon_reviews(asin="B012H0K93I", limit=30, output_file="scraped_reviews.json"):
+def scrape_amazon_reviews(asin="B012H0K93I", limit=30, output_file="public/data/scraped_reviews.json"):
     import os
     from dotenv import load_dotenv
     load_dotenv()

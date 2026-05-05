@@ -2,7 +2,7 @@ import sys
 import json
 from apify_client import ApifyClient
 
-def scrape_instagram_apify(hashtag="mattress", limit=25, output_file="scraped_instagram.json"):
+def scrape_instagram_apify(hashtag="mattress", limit=25, output_file="public/data/scraped_instagram.json"):
     import os
     from dotenv import load_dotenv
     load_dotenv()

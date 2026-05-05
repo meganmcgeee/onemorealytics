@@ -1207,7 +1207,7 @@
                 details.style.display = 'block';
                 
                 // Fetch the scraped posts to count them dynamically
-                fetch('scraped_posts.json?t=' + Date.now())
+                fetch('data/scraped_posts.json?t=' + Date.now())
                     .then(res => res.json())
                     .then(data => {
                         const count = Array.isArray(data) ? data.length : 0;
@@ -1229,7 +1229,7 @@
             }
             
             // Dynamically load the AI Synthesized Profile
-            fetch('ai_personas.json?t=' + Date.now())
+            fetch('data/ai_personas.json?t=' + Date.now())
                 .then(res => res.json())
                 .then(dataArray => {
                     const dataList = Array.isArray(dataArray) ? dataArray : [dataArray];

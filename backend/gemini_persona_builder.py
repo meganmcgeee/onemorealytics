@@ -8,7 +8,7 @@ except ImportError:
     print("Error: The 'google.genai' library is not installed.")
     sys.exit(1)
 
-def build_personas(input_file="edited_profile.json", output_file="ai_personas.json"):
+def build_personas(input_file="public/data/edited_profile.json", output_file="public/data/ai_personas.json"):
     from dotenv import load_dotenv
     load_dotenv()
     

@@ -785,7 +785,7 @@
         function loadDashboardData() {
             let fetchedData = null;
             
-            fetch('ai_synthesized_profile.json?t=' + Date.now())
+            fetch('data/ai_synthesized_profile.json?t=' + Date.now())
                 .then(res => {
                     if(!res.ok) throw new Error("No data file");
                     return res.json();
@@ -839,7 +839,7 @@
                     }
                     
                     // Fetch Telemetry Data
-                    return fetch('scraped_posts.json?t=' + Date.now());
+                    return fetch('data/scraped_posts.json?t=' + Date.now());
                 })
                 .then(res => res.json())
                 .then(postData => {
@@ -977,18 +977,19 @@
                                     loadDashboardData();
                                     setTimeout(() => loader.classList.remove('active'), 1000);
                                 } else {
-                                    // It errored
-                                    setTimeout(() => loader.classList.remove('active'), 3000);
+                                    // It errored: Show the exact error message and add a retry button
+                                    loaderDesc.innerHTML = `<span style="color: var(--destructive);">${statusData.status}</span><br><button class="btn btn-outline" style="margin-top: 1rem;" onclick="document.getElementById('loader').classList.remove('active')">Dismiss</button>`;
                                 }
                             }
                         })
-                        .catch(err => console.error("Poll error:", err));
+                        .catch(err => {
+                            console.error("Poll error:", err);
+                        });
                 }, 1000);
             })
             .catch(err => {
                 console.error("Error starting pipeline:", err);
-                loaderDesc.innerText = "Error: Could not start pipeline. Check terminal.";
-                setTimeout(() => loader.classList.remove('active'), 3000);
+                loaderDesc.innerHTML = `<span style="color: var(--destructive);">Error: Could not start pipeline. Ensure the Python backend (server.py) is running instead of a static server.</span><br><button class="btn btn-outline" style="margin-top: 1rem;" onclick="document.getElementById('loader').classList.remove('active')">Dismiss</button>`;
             });
         });
 

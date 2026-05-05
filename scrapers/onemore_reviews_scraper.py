@@ -2,7 +2,7 @@ import sys
 import json
 import time
 
-def scrape_onemore_reviews(output_file="scraped_reviews.json"):
+def scrape_onemore_reviews(output_file="public/data/scraped_reviews.json"):
     print("Starting synthetic OneMoreAtHome store reviews generation...")
     
     # Simulate network delay for realism in demo

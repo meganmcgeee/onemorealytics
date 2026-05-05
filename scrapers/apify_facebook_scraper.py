@@ -2,7 +2,7 @@ import sys
 import json
 from apify_client import ApifyClient
 
-def scrape_facebook_apify(keyword="mattress", limit=20, output_file="scraped_facebook.json"):
+def scrape_facebook_apify(keyword="mattress", limit=20, output_file="public/data/scraped_facebook.json"):
     import os
     from dotenv import load_dotenv
     load_dotenv()

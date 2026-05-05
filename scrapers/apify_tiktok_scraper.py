@@ -2,7 +2,7 @@ import sys
 import json
 from apify_client import ApifyClient
 
-def scrape_tiktok_apify(hashtag="mattress", limit=25, output_file="scraped_tiktok.json"):
+def scrape_tiktok_apify(hashtag="mattress", limit=25, output_file="public/data/scraped_tiktok.json"):
     import os
     from dotenv import load_dotenv
     load_dotenv()

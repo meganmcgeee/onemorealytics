@@ -10,7 +10,7 @@ except ImportError:
     print("Please install it by running: pip3 install google.genai")
     sys.exit(1)
 
-def synthesize_audience(input_file="scraped_posts.json", output_file="ai_synthesized_profile.json"):
+def synthesize_audience(input_file="public/data/scraped_posts.json", output_file="public/data/ai_synthesized_profile.json"):
     import os
     from dotenv import load_dotenv
     load_dotenv()
