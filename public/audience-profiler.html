@@ -516,10 +516,10 @@
             <div class="data-sources-container flex-1 w-full" style="flex: 1 1 100%; border-bottom: 1px solid var(--border); padding-bottom: 2rem;">
                 <div class="source-pills" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
                     <button class="source-pill active" data-source="reddit" data-icon="fab fa-reddit" data-name="Reddit" style="background: var(--primary); color: var(--primary-foreground); border: 1px solid var(--primary); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
-                       <i class="fab fa-reddit"></i> r/ <input type="text" id="kw-reddit" placeholder="subreddit" value="" style="background:transparent; border:none; border-bottom:1px solid currentColor; color:currentColor; font-family:inherit; font-size:inherit; width:80px; outline:none;" onclick="event.stopPropagation()">
+                       <i class="fab fa-reddit"></i> r/ <input type="text" id="kw-reddit" placeholder="sleep" value="" style="background:transparent; border:none; border-bottom:1px solid currentColor; color:currentColor; font-family:inherit; font-size:inherit; width:80px; outline:none;" onclick="event.stopPropagation()">
                     </button>
                     <button class="source-pill" data-source="instagram" data-icon="fab fa-instagram" data-name="Instagram" style="background: transparent; color: var(--muted-foreground); border: 1px dashed var(--muted-foreground); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
-                       <i class="fab fa-instagram"></i> Instagram Comments
+                       <i class="fab fa-instagram"></i> IG # <input type="text" id="kw-instagram" placeholder="hashtag" value="" style="background:transparent; border:none; border-bottom:1px solid currentColor; color:currentColor; font-family:inherit; font-size:inherit; width:70px; outline:none;" onclick="event.stopPropagation()">
                     </button>
                     <button class="source-pill" data-source="facebook" data-icon="fab fa-facebook" data-name="Facebook" style="background: transparent; color: var(--muted-foreground); border: 1px dashed var(--muted-foreground); padding: 0.5rem 1rem; border-radius: 30px; cursor: pointer; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem;">
                        <i class="fab fa-facebook"></i> FB <input type="text" id="kw-facebook" placeholder="keyword" value="" style="background:transparent; border:none; border-bottom:1px solid currentColor; color:currentColor; font-family:inherit; font-size:inherit; width:70px; outline:none;" onclick="event.stopPropagation()">
@@ -535,13 +535,21 @@
                     </button>
                 </div>
                 
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                    <div class="source-tag" id="current-active-sources" style="margin-top: 0;">
                       <i class="fab fa-reddit"></i> r/sleep • Analysis Active
                    </div>
-                   <button class="btn btn-primary" id="regenerateBtn" style="padding: 0.8rem 1.5rem; border-radius: 30px;">
-                       <i class="fas fa-sparkles"></i> synthesize analysis
-                   </button>
+                   <div style="font-size: 0.8rem; color: var(--muted-foreground); max-width: 300px; line-height: 1.4;">
+                       <i class="fas fa-info-circle"></i> Instagram automatically runs a 2-step deep scrape to extract audience <b>comments</b> from the top posts, not just creator captions.
+                   </div>
+                   <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                       <input type="date" id="start-date" style="background: transparent; border: 1px solid var(--border); color: var(--foreground); padding: 0.5rem; border-radius: 4px; font-family: var(--font-sans); outline: none; font-size: 0.85rem;">
+                       <span style="color: var(--muted-foreground); font-size: 0.85rem;">to</span>
+                       <input type="date" id="end-date" style="background: transparent; border: 1px solid var(--border); color: var(--foreground); padding: 0.5rem; border-radius: 4px; font-family: var(--font-sans); outline: none; font-size: 0.85rem;">
+                       <button class="btn btn-primary" id="regenerateBtn" style="padding: 0.8rem 1.5rem; border-radius: 30px; margin-left: 0.5rem;">
+                           <i class="fas fa-sparkles"></i> synthesize analysis
+                       </button>
+                   </div>
                 </div>
             </div>
         </div>
@@ -666,7 +674,7 @@
             <!-- Demographics -->
             <div class="card demographics">
                 <div class="card-header">
-                    <div class="card-title"><i class="fas fa-users"></i> Demographic Signals</div>
+                    <div class="card-title"><i class="fas fa-users"></i> Demographic Signals*</div>
                     <button class="edit-toggle" onclick="toggleEdit('demo-content')"><i class="fas fa-pen"></i> edit</button>
                 </div>
                 <div class="editable-content" id="demo-content">
@@ -816,7 +824,7 @@
                     if(fetchedData.power_phrases) phrasesList.innerHTML = fetchedData.power_phrases.map(p => `<div class="quote-block"><span>"${p}"</span></div>`).join('');
                     
                     const demoContent = document.getElementById("demo-content");
-                    if(fetchedData.demographics) demoContent.innerHTML = `<div style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.75rem;">Demographics & Lifestyle:</div><div class="tag-group"><span class="tag">Age: ${fetchedData.demographics.age_range}</span><span class="tag" style="line-height: 1.5; text-align: left;">${fetchedData.demographics.lifestyle}</span></div>`;
+                    if(fetchedData.demographics) demoContent.innerHTML = `<div style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.75rem;">Demographics & Lifestyle:</div><div class="tag-group"><span class="tag">Age: ${fetchedData.demographics.age_range}</span><span class="tag" style="line-height: 1.5; text-align: left;">${fetchedData.demographics.lifestyle}</span></div><div style="font-size: 0.75rem; color: var(--muted-foreground); margin-top: 1rem; line-height: 1.4;">*Demographics are probabilistically inferred by AI based on linguistic and life-stage context clues in the raw scraped comments.</div>`;
                     
                     const objList = document.getElementById("obj-content");
                     objList.innerHTML = `<li class="ranked-item"><span class="ranked-item-idx"><i class="fas fa-bullseye"></i></span><div class="ranked-item-content"><b>Brand Angle:</b> ${fetchedData.brand_angle || "Focus on the One More trial."}</div></li>`;
@@ -839,29 +847,36 @@
                     }
                     
                     // Fetch Telemetry Data
-                    return fetch('data/scraped_posts.json?t=' + Date.now());
+                    return fetch('data/telemetry.json?t=' + Date.now());
                 })
                 .then(res => res.json())
-                .then(postData => {
-                    const count = Array.isArray(postData) ? postData.length : 0;
+                .then(telemetryData => {
                     const telemetryDiv = document.getElementById('telemetry-dashboard');
                     const telemetryList = document.getElementById('telemetry-list');
                     telemetryDiv.style.display = 'block';
                     
-                    if (fetchedData && fetchedData.data_source_stats) {
-                        telemetryList.innerHTML = `
-                            <li><b>Raw Volume:</b> Successfully ingested and analyzed <b>${fetchedData.data_source_stats.total_analyzed}</b> distinct posts.</li>
-                            <li><b>Sources:</b> ${fetchedData.data_source_stats.sources}</li>
-                            <li><b>Filtering Criteria:</b> ${fetchedData.data_source_stats.filtering_criteria || "Excluded null bodies, spam, and non-English results. Sorted by top engagement."}</li>
-                            <li><b>Processing:</b> Passed raw context window to Gemini 2.5 Flash for high-level thematic narrative synthesis.</li>
-                        `;
-                    } else {
-                        telemetryList.innerHTML = `
-                            <li><b>Raw Volume:</b> Successfully ingested <b>${count}</b> distinct posts, threads, and reviews.</li>
-                            <li><b>Filtering Criteria:</b> Excluded null bodies, spam, and non-English results. Sorted by 'most recent' and 'highest engagement' (upvotes/likes) to surface top pain points.</li>
-                            <li><b>Processing:</b> Passed raw context window to Gemini 2.5 Flash for high-level thematic narrative synthesis.</li>
-                        `;
+                    let platformHtml = Object.entries(telemetryData.platform_counts)
+                        .filter(([_, count]) => count > 0)
+                        .map(([platform, count]) => `<b>${platform}:</b> ${count} posts`)
+                        .join(' | ');
+                    
+                    if (!platformHtml) platformHtml = "None";
+                    
+                    let linksHtml = "";
+                    if (telemetryData.sample_links && telemetryData.sample_links.length > 0) {
+                        const linkItems = telemetryData.sample_links.map(l => 
+                            `<a href="${l.url}" target="_blank" style="color: var(--primary); text-decoration: none;">${l.platform} Link <i class="fas fa-external-link-alt" style="font-size: 0.7em;"></i></a>`
+                        ).join(', ');
+                        linksHtml = `<li><b>Source Links:</b> ${linkItems}</li>`;
                     }
+
+                    telemetryList.innerHTML = `
+                        <li><b>Raw Volume:</b> Successfully ingested <b>${telemetryData.total_posts}</b> distinct posts.</li>
+                        <li><b>Platform Breakdown:</b> ${platformHtml}</li>
+                        <li><b>Date Range:</b> ${telemetryData.date_range}</li>
+                        ${linksHtml}
+                        <li><b>Processing:</b> Passed raw context window to Gemini 2.5 Flash for high-level thematic narrative synthesis.</li>
+                    `;
                 })
                 .catch(err => {
                     console.error("Error hydrating dashboard data:", err);
@@ -917,7 +932,26 @@
                     pill.style.border = '1px solid var(--primary)';
                     activeSources.push({ id: sourceId, name: sourceName, icon: sourceIcon });
                 }
+                
+                updateActiveTagsUI();
             });
+        });
+
+        function updateActiveTagsUI() {
+            const html = activeSources.map(s => {
+                const input = document.getElementById(`kw-${s.id}`);
+                const val = input && input.value.trim() ? input.value.trim() : (s.id === 'reddit' ? 'sleep' : (s.id === 'amazon_reviews' ? 'ASIN' : 'keyword'));
+                return `<i class="${s.icon}"></i> ${s.name} (${val})`;
+            }).join(', ');
+            sourceTag.innerHTML = `${html} &bull; Selected`;
+        }
+        
+        // Initial setup
+        updateActiveTagsUI();
+        
+        // Add event listeners to input fields to update the tag dynamically as they type
+        document.querySelectorAll('.source-pill input').forEach(input => {
+            input.addEventListener('input', () => updateActiveTagsUI());
         });
 
         // Handle Regenerate button simulation
@@ -945,14 +979,26 @@
             
             const sourceIds = activeSources.map(s => {
                 const input = document.getElementById(`kw-${s.id}`);
-                return input ? `${s.id}:${input.value}` : s.id;
+                let val = input ? input.value.trim() : "";
+                
+                // Set defaults if empty
+                if (!val) {
+                    if (s.id === 'reddit') val = 'sleep';
+                    else if (s.id === 'amazon_reviews') val = 'B012H0K93I';
+                    else val = 'mattress';
+                }
+                
+                return `${s.id}:${val}`;
             });
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const selectedDateRange = (startDate && endDate) ? `${startDate} to ${endDate}` : 'Past Month (Default)';
             
             // Ping server to trigger python scripts asynchronously
             fetch('/api/synthesize', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ sources: sourceIds })
+                body: JSON.stringify({ sources: sourceIds, dateRange: selectedDateRange })
             })
             .then(res => res.json())
             .then(serverData => {
@@ -970,8 +1016,12 @@
                                 
                                 if (statusData.status === "Complete") {
                                     // Update active tags UI
-                                    const sourceNames = activeSources.map(s => s.name).join(', ');
-                                    sourceTag.innerHTML = activeSources.map(s => `<i class="${s.icon}"></i> ${s.name}`).join(' + ') + ' • Analysis Active';
+                                    const html = activeSources.map(s => {
+                                        const input = document.getElementById(`kw-${s.id}`);
+                                        const val = input && input.value.trim() ? input.value.trim() : (s.id === 'reddit' ? 'sleep' : (s.id === 'amazon_reviews' ? 'ASIN' : 'keyword'));
+                                        return `<i class="${s.icon}"></i> ${s.name} (${val})`;
+                                    }).join(', ');
+                                    sourceTag.innerHTML = `${html} &bull; Analysis Active`;
                                     
                                     // Fetch the newly generated JSON
                                     loadDashboardData();

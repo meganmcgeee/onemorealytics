@@ -25,7 +25,10 @@ def scrape_reddit(subreddit="sleep", limit=25, time_filter="month"):
         'User-Agent': 'python:com.onemore.scraper:v1.0.0 (by /u/onemore_admin)'
     }
     
-    url = f"https://www.reddit.com/r/{subreddit}/top.json?limit={limit}&t={time_filter}"
+    # Reddit's 'top.json' only accepts hour, day, week, month, year, all. 
+    # If the user passed a specific date range like "2024-01-01 to 2024-05-01", we pull 'all' to filter later.
+    reddit_t = time_filter if time_filter in ["hour", "day", "week", "month", "year", "all"] else "all"
+    url = f"https://www.reddit.com/r/{subreddit}/top.json?limit={limit}&t={reddit_t}"
     req = urllib.request.Request(url, headers=headers)
     
     try:
@@ -80,7 +83,8 @@ def scrape_reddit(subreddit="sleep", limit=25, time_filter="month"):
             "time": get_relative_time(post_data.get('created_utc', time.time())),
             "body": body,
             "upvotes": str(post_data.get('score', 0)),
-            "downvotes": "0" # Reddit API doesn't expose exact downvotes anymore
+            "downvotes": "0", # Reddit API doesn't expose exact downvotes anymore
+            "url": f"https://www.reddit.com{post_data.get('permalink', '')}" if post_data.get('permalink') else f"https://www.reddit.com/r/{subreddit}"
         }
         
         formatted_posts.append(formatted_post)
@@ -105,7 +109,10 @@ def scrape_reddit(subreddit="sleep", limit=25, time_filter="month"):
 if __name__ == "__main__":
     import sys
     target_subreddit = "sleep+Mattress"
+    time_filter = "month"
     if len(sys.argv) > 1:
         target_subreddit = sys.argv[1]
+    if len(sys.argv) > 2:
+        time_filter = sys.argv[2]
     
-    scrape_reddit(subreddit=target_subreddit, limit=100, time_filter="month")
+    scrape_reddit(subreddit=target_subreddit, limit=100, time_filter=time_filter)

@@ -26,7 +26,7 @@ def run_persona_builder_async():
     except Exception as e:
         update_status(f"Error: {str(e)}")
 
-def run_pipeline_async(sources):
+def run_pipeline_async(sources, date_range="month"):
     global is_synthesizing
     try:
         update_status("Initializing pipeline...")
@@ -70,27 +70,27 @@ def run_pipeline_async(sources):
             kw = source_obj.get('keyword', 'mattress')
             
             if sid == "reddit":
-                p = subprocess.Popen(['python3', 'scrapers/live_reddit_scraper.py', kw])
+                p = subprocess.Popen(['python3', 'scrapers/live_reddit_scraper.py', kw, date_range])
                 processes.append(("Reddit", p))
                 
             elif sid == "instagram":
-                p = subprocess.Popen(['python3', 'scrapers/apify_instagram_scraper.py', kw])
+                p = subprocess.Popen(['python3', 'scrapers/apify_instagram_scraper.py', kw, date_range])
                 processes.append(("Instagram", p))
                 
             elif sid == "tiktok":
-                p = subprocess.Popen(['python3', 'scrapers/apify_tiktok_scraper.py', kw])
+                p = subprocess.Popen(['python3', 'scrapers/apify_tiktok_scraper.py', kw, date_range])
                 processes.append(("TikTok", p))
                 
             elif sid == "facebook":
-                p = subprocess.Popen(['python3', 'scrapers/apify_facebook_scraper.py', kw])
+                p = subprocess.Popen(['python3', 'scrapers/apify_facebook_scraper.py', kw, date_range])
                 processes.append(("Facebook", p))
                 
             elif sid == "amazon_reviews":
-                p = subprocess.Popen(['python3', 'scrapers/apify_reviews_scraper.py', kw])
+                p = subprocess.Popen(['python3', 'scrapers/apify_reviews_scraper.py', kw, date_range])
                 processes.append(("Amazon Reviews", p))
                 
             elif sid == "onemore_reviews":
-                p = subprocess.Popen(['python3', 'scrapers/onemore_reviews_scraper.py'])
+                p = subprocess.Popen(['python3', 'scrapers/onemore_reviews_scraper.py', date_range])
                 processes.append(("OneMore Reviews", p))
             
         # Wait for all to finish
@@ -99,16 +99,48 @@ def run_pipeline_async(sources):
             
         update_status("Merging scraped data...")
         all_posts = []
-        for file in ["public/data/scraped_reddit.json", "public/data/scraped_instagram.json", "public/data/scraped_tiktok.json", "public/data/scraped_reviews.json", "public/data/scraped_facebook.json"]:
+        platform_counts = {}
+        sample_links = []
+        
+        file_mapping = {
+            "Reddit": "public/data/scraped_reddit.json",
+            "Instagram": "public/data/scraped_instagram.json",
+            "TikTok": "public/data/scraped_tiktok.json",
+            "Amazon/OneMore": "public/data/scraped_reviews.json",
+            "Facebook": "public/data/scraped_facebook.json"
+        }
+        
+        for platform, file in file_mapping.items():
             if os.path.exists(file):
                 try:
                     with open(file, "r", encoding="utf-8") as f:
-                        all_posts.extend(json.load(f))
+                        data = json.load(f)
+                        all_posts.extend(data)
+                        platform_counts[platform] = len(data)
+                        
+                        # Grab up to 2 unique sample links per platform
+                        added = 0
+                        for post in data:
+                            url = post.get('url') or post.get('video_url')
+                            if url and url not in [l['url'] for l in sample_links]:
+                                sample_links.append({"platform": platform, "url": url})
+                                added += 1
+                                if added >= 2:
+                                    break
                 except Exception as e:
                     print(f"Error reading {file}: {e}")
+                    platform_counts[platform] = 0
         
         with open("public/data/scraped_posts.json", "w", encoding="utf-8") as f:
             json.dump(all_posts, f, indent=4)
+            
+        with open("public/data/telemetry.json", "w", encoding="utf-8") as f:
+            json.dump({
+                "total_posts": len(all_posts),
+                "platform_counts": platform_counts,
+                "date_range": date_range,
+                "sample_links": sample_links
+            }, f, indent=4)
             
         # 2. Run Gemini AI
         update_status("Creating profile...")
@@ -150,6 +182,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             try:
                 data = json.loads(post_data)
                 sources = data.get('sources', [])
+                date_range = data.get('dateRange', 'month')
                 
                 if is_synthesizing:
                     self.send_response(400)
@@ -161,7 +194,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 is_synthesizing = True
                 
                 # Start the background thread
-                threading.Thread(target=run_pipeline_async, args=(sources,)).start()
+                threading.Thread(target=run_pipeline_async, args=(sources, date_range)).start()
                 
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')

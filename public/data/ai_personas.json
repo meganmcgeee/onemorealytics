@@ -1,128 +1,127 @@
 [
     {
-        "persona": "The Proud Sharer",
-        "demographics": {
-            "age_range": "28-50",
-            "lifestyle": "They are active on social media, curating their online presence and seeking platforms to celebrate their beloved pet's unique charm."
-        },
-        "core_problem": "They yearn for a platform to celebrate their pet's unique personality and receive affirmation for their special bond.",
-        "pain_points": [
-            "Wanting to show off pets",
-            "Validating pet's unique quirks",
-            "Lack of appreciative audience"
-        ],
-        "desired_outcomes": [
-            "Pet parenting validation",
-            "Share joyful moments",
-            "Recognition of pet's charm"
-        ],
-        "brand_angle": "One More empowers you to effortlessly showcase your cherished pet's individuality, turning fleeting moments into celebrated memories.",
-        "marketing_hero_headline": "Your Pet's Moment to Shine.",
-        "marketing_hero_subtitle": "You deserve to celebrate your extraordinary pet, and we make sharing their unique charm simple and rewarding.",
-        "marketing_features": [
-            {
-                "title": "Effortless Shareability",
-                "description": "One More provides intuitive tools for easily uploading and sharing your pet's best moments, ensuring they get the attention they deserve."
-            },
-            {
-                "title": "Curated Pet Profiles",
-                "description": "Showcase your pet's unique quirks and accomplishments with customizable profiles that highlight their individuality and story."
-            },
-            {
-                "title": "Positive Affirmation Hub",
-                "description": "Connect with a community that genuinely appreciates and validates your pet parenting journey and your pet's adorable antics."
-            }
-        ],
-        "power_phrases": [
-            "This cat is so orange and i\u2019m so glad he\u2019s mine",
-            "My Skippy is a professional Dangler and she is PERFECT."
-        ],
-        "effective_community_solutions": [
-            "Curated photo/video sharing contests"
-        ]
-    },
-    {
-        "persona": "The Community Connector",
+        "persona": "The Meticulous Researcher",
         "demographics": {
             "age_range": "30-55",
-            "lifestyle": "They actively seek out niche online groups and forums, valuing genuine connection over fleeting interactions, especially around their passions."
+            "lifestyle": "Busy professionals or affluent individuals who value quality but are exhausted by extensive market research and distrust marketing claims."
         },
-        "core_problem": "They crave a dedicated, understanding community where their intense pet adoration is shared and celebrated without judgment.",
+        "core_problem": "Overwhelmed by vast, often misleading market choices, they struggle to confidently identify a genuinely high-quality sleep solution without analysis paralysis or buyer's remorse.",
         "pain_points": [
-            "Seeking like-minded community",
-            "Feeling misunderstood",
-            "Isolated pet parenting"
+            "Overwhelmed by market choices",
+            "Skepticism towards 'greenwashing' BS",
+            "Fear of poor quality/disappointment"
         ],
         "desired_outcomes": [
-            "Sense of belonging",
-            "Connect with others",
-            "Shared appreciation"
+            "Find genuinely supportive mattress",
+            "Ensure non-toxic materials"
         ],
-        "brand_angle": "One More fosters a vibrant, inclusive community where you'll instantly belong among fellow passionate pet enthusiasts.",
-        "marketing_hero_headline": "Find Your Fur-mily Here.",
-        "marketing_hero_subtitle": "You're not just a pet owner; you're part of a passionate family, and we connect you with people who truly understand your unique bond.",
+        "brand_angle": "One More cuts through the noise, offering trusted, verified excellence for the discerning buyer seeking a confident, premium sleep investment.",
+        "marketing_hero_headline": "End Your Research, Begin Your Rest.",
+        "marketing_hero_subtitle": "You're tired of sifting through claims. Discover the transparent quality and expert guidance you deserve, making your premium sleep choice effortless.",
         "marketing_features": [
             {
-                "title": "Exclusive Pet Hubs",
-                "description": "Discover and join specialized groups and forums tailored to specific pet breeds, quirks, or interests, finding your perfect niche."
+                "title": "Curated & Verified Quality",
+                "description": "We've done the deep research and rigorous testing, so you can trust your investment with complete confidence."
             },
             {
-                "title": "Meaningful Connections",
-                "description": "Our platform encourages deeper interactions, allowing you to build lasting friendships with others who share your pet devotion."
+                "title": "Transparent by Design",
+                "description": "Say goodbye to 'greenwashing' BS with our clear, honest ingredient lists and ethical sourcing stories."
             },
             {
-                "title": "Judgment-Free Zone",
-                "description": "Participate in a moderated, positive environment where every pet and parent is celebrated for their unique journey."
+                "title": "Worry-Free Purchase",
+                "description": "Eliminate the fear of disappointment with a mattress guaranteed for lasting comfort and support."
             }
         ],
         "power_phrases": [
-            "Obviously there would be a specific sub for this.",
-            "They are my loves and our introduction on the sub."
+            "Don\u2019t buy a new mattress without watching this",
+            "sift through all the greenwashing BS"
         ],
         "effective_community_solutions": [
-            "Moderated niche interest forums"
+            "Expert Q&A sessions with sleep scientists"
         ]
     },
     {
-        "persona": "The Daily Delight Seeker",
+        "persona": "The Comfort-Driven Achiever",
         "demographics": {
-            "age_range": "25-45",
-            "lifestyle": "Often busy and stressed, they look for quick, joyful escapes and lighthearted content to brighten their day and de-stress."
+            "age_range": "35-55",
+            "lifestyle": "Ambitious, active professionals who prioritize peak performance and well-being, demanding restorative sleep to fuel their busy lives."
         },
-        "core_problem": "They seek reliable, lighthearted pet content and interactions to inject daily joy and escape from life's everyday stresses.",
+        "core_problem": "Persistent physical discomfort and restless nights are directly hindering their daily productivity, energy, and overall ability to perform at their best.",
         "pain_points": [
-            "Daily stress, need a break",
-            "Craving lighthearted amusement",
-            "Seeking simple joys"
+            "Waking up with body aches",
+            "Struggling with insomnia",
+            "Difficulty with setup/unboxing"
         ],
         "desired_outcomes": [
-            "Laughter and smiles",
-            "Discover new cat content",
-            "Moments of pure delight"
+            "Achieve ultimate comfort",
+            "Experience deep, restorative sleep",
+            "Wake up feeling refreshed"
         ],
-        "brand_angle": "One More delivers a consistent stream of heartwarming and humorous pet moments, offering instant joy and a delightful break whenever you need it.",
-        "marketing_hero_headline": "Your Daily Dose of Delight.",
-        "marketing_hero_subtitle": "You deserve more moments of pure joy, and we bring you endless heartwarming pet content to brighten every single day.",
+        "brand_angle": "One More provides the ultimate foundation for peak performance, ensuring every night delivers profound physical restoration and vibrant, energized mornings.",
+        "marketing_hero_headline": "Reclaim Your Rest. Reclaim Your Day.",
+        "marketing_hero_subtitle": "You're ready to stop waking stiff and groggy. Experience the transformative comfort that recharges your body and sharpens your mind for a successful day.",
         "marketing_features": [
             {
-                "title": "Endless Joy Feed",
-                "description": "Scroll through a personalized feed of adorable, funny, and heartwarming pet content designed to bring instant smiles and laughter."
+                "title": "Body-Hugging Support",
+                "description": "Eliminate aches and pains with unparalleled ergonomic comfort, engineered for deep, restorative sleep."
             },
             {
-                "title": "Instant Mood Boost",
-                "description": "Escape the daily grind with quick, engaging videos and photos that provide a perfect mental reset and a dose of happy."
+                "title": "Seamless Setup, Instant Comfort",
+                "description": "Experience effortless unboxing and immediate, profound comfort to start your journey to better sleep, faster."
             },
             {
-                "title": "Curated Content Discovery",
-                "description": "Effortlessly discover new and delightful pet content tailored to your preferences, ensuring a fresh stream of amusement."
+                "title": "Energizing Morning Rebirth",
+                "description": "Wake up truly revitalized, not just rested, ready to tackle challenges and conquer your day with full vigor."
             }
         ],
         "power_phrases": [
-            "This cat is so orange and i\u2019m so glad he\u2019s mine",
-            "My Skippy is a professional Dangler and she is PERFECT."
+            "The most comfortable bed in the world",
+            "Waking up actually refreshed"
         ],
         "effective_community_solutions": [
-            "Daily curated 'Joyful Moments' feed"
+            "Sleep optimization tips & guided meditations"
+        ]
+    },
+    {
+        "persona": "The Conscious Lifestyle Integrator",
+        "demographics": {
+            "age_range": "28-45",
+            "lifestyle": "Health-conscious, aesthetically driven individuals who curate their environment to reflect their values of sustainability, well-being, and effortless luxury."
+        },
+        "core_problem": "They seek a premium sleep solution that seamlessly integrates into their curated, health-conscious lifestyle, prioritizing ethical sourcing, non-toxic materials, and an effortless user experience.",
+        "pain_points": [
+            "Fear of poor quality/disappointment",
+            "Skepticism towards 'greenwashing' BS",
+            "Overwhelmed by market choices"
+        ],
+        "desired_outcomes": [
+            "Enhance overall sleep quality",
+            "Ensure non-toxic materials",
+            "Achieve ultimate comfort"
+        ],
+        "brand_angle": "One More offers a truly luxurious and ethical sleep experience, perfectly complementing a thoughtfully curated, healthy lifestyle without compromise.",
+        "marketing_hero_headline": "Sleep Better. Live Cleaner. Thrive.",
+        "marketing_hero_subtitle": "You deserve a sleep sanctuary that aligns perfectly with your values. Elevate your well-being with a sustainably crafted mattress, free from compromise.",
+        "marketing_features": [
+            {
+                "title": "Pure Sleep Environment",
+                "description": "Rest easy knowing your mattress is crafted with genuinely non-toxic, meticulously sourced materials for your health."
+            },
+            {
+                "title": "Curated for Your Lifestyle",
+                "description": "Seamlessly integrate premium design and thoughtful construction into a home that reflects your sophisticated, healthy values."
+            },
+            {
+                "title": "Sustainable Serenity",
+                "description": "Invest in a mattress that cares for you and the planet, providing peace of mind and unparalleled comfort."
+            }
+        ],
+        "power_phrases": [
+            "The most comfortable bed in the world",
+            "sift through all the greenwashing BS"
+        ],
+        "effective_community_solutions": [
+            "Sustainable living workshops & product certifications"
         ]
     }
 ]

@@ -1,61 +1,63 @@
 {
-    "persona": "The Quirky Cat Connoisseur",
+    "persona": "The Discerning Comfort Seeker",
     "demographics": {
-        "age_range": "25-55",
-        "lifestyle": "Cat owners who find immense joy and humor in their pets' unique quirks, actively seeking and sharing content within niche online communities for connection and lighthearted entertainment."
+        "age_range": "25-45",
+        "lifestyle": "They are busy individuals, potentially working professionals or parents, who prioritize personal well-being and home comfort, actively researching premium solutions to enhance their daily life and sleep quality."
     },
-    "core_problem": "They seek daily moments of simple, shareable joy and validation for the unique, often comical, behaviors of their beloved feline companions, often feeling a need to connect with others who understand this specific brand of pet adoration.",
+    "core_problem": "They struggle to find genuinely comfortable, supportive, and non-toxic sleep solutions amidst overwhelming market noise, leading to frustration, physical discomfort, and a yearning for truly restorative rest.",
     "pain_points": [
-        "Daily stress, need a break",
-        "Craving lighthearted amusement",
-        "Wanting to show off pets",
-        "Seeking like-minded community",
-        "Validating pet's unique quirks"
+        "Overwhelmed by market choices",
+        "Skepticism towards 'greenwashing' BS",
+        "Fear of poor quality/disappointment",
+        "Waking up with body aches",
+        "Struggling with insomnia",
+        "Difficulty with setup/unboxing"
     ],
     "desired_outcomes": [
-        "Laughter and smiles",
-        "Sense of belonging",
-        "Pet parenting validation",
-        "Share joyful moments",
-        "Discover new cat content"
+        "Achieve ultimate comfort",
+        "Experience deep, restorative sleep",
+        "Wake up feeling refreshed",
+        "Find genuinely supportive mattress",
+        "Ensure non-toxic materials",
+        "Enhance overall sleep quality"
     ],
-    "brand_angle": "One More can position itself as the purveyor of premium comfort and joyful moments, enhancing the lifestyle shared with beloved pets and their unique antics, emphasizing that there's always room for one more delightful experience or cherished companion.",
+    "brand_angle": "One More can position itself as the ultimate, thoughtfully curated choice for those seeking unparalleled comfort and quality, proving there's always room for one more transformative sleep experience.",
     "power_phrases": [
-        "This cat is so orange and i\u2019m so glad he\u2019s mine",
-        "My Skippy is a professional Dangler and she is PERFECT.",
-        "Obviously there would be a specific sub for this.",
-        "They are my loves and our introduction on the sub."
+        "The most comfortable bed in the world",
+        "Don\u2019t buy a new mattress without watching this",
+        "sift through all the greenwashing BS",
+        "Waking up actually refreshed"
     ],
     "effective_community_solutions": [
-        "User-generated content contests (e.g., 'Best Dangle of the Week')",
-        "Curated 'Moments of Zen' featuring pet quirks",
-        "Interactive polls on pet behaviors",
-        "Featured pet stories with 'One More' product integration"
+        "Showcase authentic, in-depth reviews and unboxings",
+        "Provide clear, transparent information on materials and benefits",
+        "Engage with common sleep problems and offer solutions",
+        "Highlight the 'premium' lifestyle connection"
     ],
     "action_triggers": [
-        "Witnessing a pet's funny pose",
-        "Desire to share pet's uniqueness",
-        "Recommendation from other communities",
-        "Seeking positive reinforcement/likes"
+        "Strong testimonials emphasizing comfort and relief",
+        "Addressing specific pain points (e.g., 'for hot sleepers')",
+        "Highlighting health and wellness benefits",
+        "Showcasing product durability and longevity"
     ],
     "emotional_state": {
         "emotion_1": {
-            "name": "Joyful",
-            "percentage": 90
-        },
-        "emotion_2": {
-            "name": "Amused",
+            "name": "Hopeful",
             "percentage": 80
         },
-        "emotion_3": {
-            "name": "Affectionate",
-            "percentage": 70
+        "emotion_2": {
+            "name": "Frustrated",
+            "percentage": 65
         },
-        "summary": "Their emotional state is primarily joyful and amused, stemming from deep affection for their pets and the shared camaraderie of like-minded enthusiasts."
+        "emotion_3": {
+            "name": "Satisfied",
+            "percentage": 50
+        },
+        "summary": "They are hopeful for better sleep, frustrated by confusing choices, and ultimately satisfied when they find a product that genuinely delivers on its promises."
     },
     "data_source_stats": {
-        "total_analyzed": 34,
-        "sources": "Reddit communities (r/danglers, r/cats)",
-        "filtering_criteria": "Posts centered around sharing humorous and affectionate images/stories of cats in unique 'dangling' poses, with high engagement."
+        "total_analyzed": 25,
+        "sources": "TikTok communities",
+        "filtering_criteria": "Social media posts, comments, and reviews explicitly discussing mattress purchases, reviews, comfort, sleep quality, and related consumer experiences."
     }
 }
