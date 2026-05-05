@@ -1296,27 +1296,32 @@
 
         // Launch Page implementation reading iframe DOM
         function launchPage() {
-            const iframe = document.getElementById('lp-canvas').contentWindow.document;
-            const heroTitle = iframe.getElementById('lp-hero-title').innerText;
-            const heroSub = iframe.getElementById('lp-hero-sub').innerText;
+            const iframeDoc = document.getElementById('lp-canvas').contentWindow.document;
+            const htmlContent = "<!DOCTYPE html>\\n" + iframeDoc.documentElement.outerHTML;
+            const lpId = "camp_" + Date.now() + "_" + Math.floor(Math.random()*1000);
             
-            const h4s = iframe.querySelectorAll('h4');
-            const ps = iframe.querySelectorAll('h4 + p');
+            localStorage.setItem('om_lp_' + lpId, htmlContent);
             
-            let html = `
-                <div class="copy-item"><span class="label">Hero Headline</span><span class="value">${heroTitle}</span></div>
-                <div class="copy-item"><span class="label">Hero Subcopy</span><span class="value">${heroSub}</span></div>
-                <hr style="border:none; border-top:1px solid var(--border); margin: 0.5rem 0;">
+            const liveUrl = window.location.origin + "/live-lp.html?id=" + lpId;
+            
+            let modalHtml = `
+                <div style="text-align: center; padding: 2rem 0;">
+                    <i class="fas fa-check-circle" style="color: var(--accent); font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 1rem;">Campaign Successfully Launched!</h3>
+                    <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Your dynamic landing page is now live and ready to receive traffic.</p>
+                    
+                    <div style="background: var(--background); padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem;">
+                        <input type="text" value="${liveUrl}" readonly style="flex: 1; border: none; background: transparent; color: var(--foreground); font-family: monospace; font-size: 0.9rem; outline: none;">
+                        <button class="btn btn-primary" onclick="navigator.clipboard.writeText('${liveUrl}'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy URL', 2000);" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Copy URL</button>
+                    </div>
+                    
+                    <a href="${liveUrl}" target="_blank" class="btn btn-primary" style="text-decoration: none; display: inline-flex; justify-content: center; width: 100%; padding: 1rem;">
+                        Visit Live Landing Page <i class="fas fa-external-link-alt" style="margin-left: 0.5rem;"></i>
+                    </a>
+                </div>
             `;
-            
-            h4s.forEach((h4, i) => {
-                html += `<div class="copy-item">
-                    <span class="label">Section ${i+1}: ${h4.innerText}</span>
-                    <span class="value">${ps[i].innerText}</span>
-                </div>`;
-            });
 
-            document.getElementById('copy-details').innerHTML = html;
+            document.getElementById('copy-details').innerHTML = modalHtml;
             document.getElementById('launch-modal').classList.add('active');
         }
 

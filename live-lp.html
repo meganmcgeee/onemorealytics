@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Landing Page | One More</title>
+</head>
+<body>
+    <div style="font-family: sans-serif; text-align: center; padding: 50px;">
+        <h2>Loading Campaign...</h2>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lpId = urlParams.get('id');
+            if (lpId) {
+                const lpContent = localStorage.getItem('om_lp_' + lpId);
+                if (lpContent) {
+                    document.open();
+                    document.write(lpContent);
+                    document.close();
+                } else {
+                    document.body.innerHTML = '<div style="font-family: sans-serif; text-align: center; padding: 50px;"><h2>Campaign not found or expired.</h2><p>Please generate and launch the campaign again from the admin dashboard.</p></div>';
+                }
+            } else {
+                document.body.innerHTML = '<div style="font-family: sans-serif; text-align: center; padding: 50px;"><h2>No campaign ID provided.</h2></div>';
+            }
+        });
+    </script>
+</body>
+</html>
