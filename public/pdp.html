@@ -32,22 +32,73 @@
       }
     }
   </script>
+  <style>
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: hsl(35, 15%, 85%); /* matches cardBorder */
+      border-radius: 10px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background-color: hsl(30, 10%, 60%); 
+    }
+    
+    /* Create a fade mask at the bottom so it doesn't look cut off abruptly */
+    .fade-bottom-mask {
+      -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    }
+    
+    /* Hide scrollbar for mobile image gallery slider */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
 </head>
 <body class="bg-bgTheme text-brand font-sans antialiased">
 
   <!-- TOP NAV PLACEHOLDER -->
   <header class="border-b border-cardBorder py-6 px-6 sm:px-12 flex justify-between items-center bg-transparent sticky top-0 z-50 backdrop-blur-md">
-    <div class="text-2xl font-serif text-brand tracking-tight">one more</div>
+    <a href="index.html" class="text-2xl font-serif text-brand tracking-tight hover:opacity-70 transition-opacity">one more</a>
     <div class="hidden md:flex gap-10 text-sm font-sans tracking-wide text-brand/60">
       <a href="mattress.html" class="text-brand border-b focus:border-brand border-transparent hover:border-brand pb-1 transition-all">mattresses</a>
       <a href="shop.html" class="hover:text-brand transition-colors">shop</a>
       <a href="why.html" class="hover:text-brand transition-colors">why one more</a>
       <a href="about.html" class="hover:text-brand transition-colors">about</a>
     </div>
-    <div class="flex gap-4">
+    <div class="flex gap-4 items-center">
       <span class="text-sm tracking-wide">cart (0)</span>
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden text-brand flex flex-col gap-1.5 focus:outline-none p-1">
+        <span class="block w-5 h-0.5 bg-brand rounded-full"></span>
+        <span class="block w-5 h-0.5 bg-brand rounded-full"></span>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 bg-bgTheme z-[100] flex flex-col p-6 translate-x-full transition-transform duration-300 md:hidden">
+    <div class="flex justify-between items-center mb-12">
+      <a href="index.html" class="text-2xl font-serif text-brand tracking-tight hover:opacity-70 transition-opacity">one more</a>
+      <button id="close-mobile-menu" class="text-brand p-2 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-8 text-2xl font-serif text-brand">
+      <a href="mattress.html" class="hover:text-brandHover transition-colors">mattresses</a>
+      <a href="shop.html" class="hover:text-brandHover transition-colors">shop</a>
+      <a href="why.html" class="hover:text-brandHover transition-colors">why one more</a>
+      <a href="about.html" class="hover:text-brandHover transition-colors">about</a>
+    </nav>
+  </div>
 
   <!-- SECONDARY NAV (Shop, Inside, Compare, Reviews) -->
   <div class="bg-transparent border-b border-cardBorder py-4 hidden md:block sticky top-0 z-50 bg-bgTheme/90 backdrop-blur">
@@ -59,36 +110,43 @@
     </div>
   </div>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-28 md:pb-12">
 
     <!-- HERO SECTION -->
-    <section id="shop" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-24 items-start scroll-mt-24">
+    <section id="shop" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-12 lg:mb-24 items-start scroll-mt-24">
       
       <!-- LEFT COL: Gallery structure using OneMore Photos -->
-      <div class="lg:col-span-7 flex flex-col gap-4">
-        <!-- Main Product Box -->
-        <div class="w-full aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
-            <img src="img/mattress-overhead.jpg" alt="the mattress" class="w-full h-full object-cover">
-        </div>
-        <!-- Grid Thumbnails -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="w-full aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
-             <img src="img/hero-bed.jpg" alt="hero bed" class="w-full h-full object-cover grayscale opacity-90 mix-blend-multiply hover:grayscale-0 hover:mix-blend-normal transition-all duration-500">
-          </div>
-          <div class="w-full aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
-             <img src="img/mattress-layers.jpg" alt="mattress layers" class="w-full h-full object-cover mix-blend-multiply hover:mix-blend-normal hover:scale-105 transition-all duration-700">
-          </div>
+      <!-- LEFT COL: Responsive Gallery structure -->
+      <div class="lg:col-span-7 w-full overflow-hidden">
+        <!-- Mobile Slide Gallery / Desktop Grid -->
+        <div class="flex overflow-x-auto lg:overflow-visible snap-x snap-mandatory hide-scrollbar gap-4 lg:grid lg:grid-cols-2 pb-4 lg:pb-0 w-full">
+            <!-- Main Product Box -->
+            <div class="snap-center shrink-0 w-[85vw] lg:w-auto lg:col-span-2 aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
+                <img src="img/mattress-overhead.jpg" alt="the mattress" class="w-full h-full object-cover">
+            </div>
+            <!-- Grid Thumbnail 1 -->
+            <div class="snap-center shrink-0 w-[85vw] lg:w-auto aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
+                 <img src="img/hero-bed.jpg" alt="hero bed" class="w-full h-full object-cover grayscale opacity-90 mix-blend-multiply hover:grayscale-0 hover:mix-blend-normal transition-all duration-500">
+            </div>
+            <!-- Grid Thumbnail 2 -->
+            <div class="snap-center shrink-0 w-[85vw] lg:w-auto aspect-[4/3] bg-lightBlue rounded-xl border border-cardBorder overflow-hidden">
+                 <img src="img/mattress-layers.jpg" alt="mattress layers" class="w-full h-full object-cover mix-blend-multiply hover:mix-blend-normal hover:scale-105 transition-all duration-700">
+            </div>
+            <!-- Lifestyle Full Box -->
+            <div class="snap-center shrink-0 w-[85vw] lg:w-auto lg:col-span-2 aspect-[4/3] bg-creamDark rounded-xl border border-cardBorder overflow-hidden">
+                <img src="img/lifestyle-family.jpg" alt="family sleeping on mattress" class="w-full h-full object-cover mix-blend-multiply opacity-95">
+            </div>
         </div>
       </div>
 
-      <!-- RIGHT COL: Add To Cart sticky area -->
-      <div class="lg:col-span-5 flex flex-col pt-2 lg:sticky lg:top-32 max-h-[calc(100vh-120px)] overflow-y-auto pb-10 hide-scrollbar scroll-smooth">
+      <!-- RIGHT COL: Add To Cart area -->
+      <div class="lg:col-span-5 flex flex-col pt-2 pb-10 lg:sticky lg:top-32 lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto custom-scroll fade-bottom-mask scroll-smooth pr-4">
         
-        <div class="flex items-center gap-2 mb-3">
+        <a href="#reviews" class="flex items-center gap-2 mb-3 hover:opacity-70 transition-opacity cursor-pointer w-fit">
            <div class="flex text-brand text-[15px] gap-0.5">★★★★★</div>
            <span class="text-[13px] font-bold text-brand ml-1">4.9</span>
            <span class="text-[13px] text-brand/60">(420 reviews)</span>
-        </div>
+        </a>
 
         <p class="text-[10px] uppercase tracking-[0.2em] font-medium text-brand/60 mb-2">the hero product</p>
         <h1 class="font-serif text-[42px] leading-[1.1] text-brand mb-2 tracking-tight">the one more mattress</h1>
@@ -114,16 +172,16 @@
           </div>
           <div class="grid grid-cols-2 gap-3">
              <!-- Solo Option -->
-             <label class="border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors text-center block bg-bgTheme">
-                <input type="radio" name="model" class="hidden">
+             <label id="label-solo" class="border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors text-center block bg-bgTheme">
+                <input type="radio" name="model" id="radio-solo" class="hidden">
                 <div class="flex justify-between items-center mb-1 w-full text-center">
                    <div class="font-bold text-sm mx-auto">mattress only</div>
                 </div>
                 <p class="text-xs text-brand/60 mt-1">the standalone mattress.</p>
              </label>
              <!-- Bundle Option -->
-             <label class="border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer relative text-center block">
-                <input type="radio" name="model" class="hidden" checked>
+             <label id="label-bundle" class="border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer relative text-center block">
+                <input type="radio" name="model" id="radio-bundle" class="hidden" checked>
                 <div class="absolute -top-2.5 right-3 bg-brand text-bgTheme text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">SAVE $135</div>
                 <div class="font-bold text-sm mb-1 text-brand">the bundle</div>
                 <p class="text-xs text-brand/70 mt-1">mattress + sheets + pillows + frame.</p>
@@ -131,29 +189,17 @@
           </div>
         </div>
 
-        <!-- Size Selector -->
-        <div class="mb-8">
-          <div class="flex justify-between items-center mb-3">
-             <span class="text-[13px] tracking-wide font-medium text-brand">select your size:</span>
-             <button id="size-chart-trigger" class="text-[11px] font-bold uppercase tracking-wider text-brand/60 hover:text-brand underline decoration-brand/30 underline-offset-4">Size guide</button>
-          </div>
-          <div class="flex flex-wrap gap-2.5">
-             <button class="border-2 border-brand bg-brand text-bgTheme font-medium rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-default">one more size (84" x 80")</button>
-             <div class="relative group">
-                 <button class="border border-cardBorder text-brand/40 bg-bgTheme rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-not-allowed line-through">king</button>
-             </div>
-             <div class="relative group">
-                 <button class="border border-cardBorder text-brand/40 bg-bgTheme rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-not-allowed line-through">queen</button>
-             </div>
-          </div>
+        <!-- Size Guide Only -->
+        <div class="mb-8 flex justify-end">
+           <button id="size-chart-trigger" class="text-[11px] font-bold uppercase tracking-wider text-brand/60 hover:text-brand underline decoration-brand/30 underline-offset-4">Size guide</button>
         </div>
 
         <!-- Cross-sells (Add to save) -->
         <div class="mb-8 border-t border-cardBorder pt-6">
            <h3 class="text-[13px] tracking-wide font-medium text-brand mb-4">Add 1 or more and save:</h3>
            <div class="flex flex-col gap-3">
-                  <!-- Sheets -->
-               <div class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
+               <!-- Sheets -->
+               <label for="chk-sheets" class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
                   <div class="w-14 h-14 bg-creamDark rounded border border-cardBorder flex items-center justify-center overflow-hidden relative shrink-0">
                      <span class="absolute top-0 left-0 bg-brand text-bgTheme text-[8px] font-bold px-1 py-0.5 z-10 w-full text-center tracking-widest">SAVE</span>
                      <img src="img/sheets-product.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
@@ -166,10 +212,10 @@
                   <div class="pr-2">
                      <input type="checkbox" id="chk-sheets" data-price="295" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
                   </div>
-               </div>
+               </label>
 
                <!-- Pillows -->
-               <div class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
+               <label for="chk-pillows" class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
                   <div class="w-14 h-14 bg-lightBlue rounded border border-cardBorder flex items-center justify-center overflow-hidden relative shrink-0">
                      <img src="img/pillows-product.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
                   </div>
@@ -181,10 +227,10 @@
                   <div class="pr-2">
                      <input type="checkbox" id="chk-pillows" data-price="195" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
                   </div>
-               </div>
+               </label>
 
                <!-- Frame -->
-               <div class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
+               <label for="chk-frame" class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
                   <div class="w-14 h-14 bg-creamDark rounded border border-cardBorder flex items-center justify-center overflow-hidden relative shrink-0">
                      <img src="img/frame-product.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
                   </div>
@@ -196,7 +242,7 @@
                   <div class="pr-2">
                      <input type="checkbox" id="chk-frame" data-price="1195" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
                   </div>
-               </div>
+               </label>
                
            </div>
         </div>
@@ -221,7 +267,7 @@
     </section>
 
     <!-- TAKE A LOOK UNDER THE COVERS SECTION -->
-    <section id="inside" class="mb-32 mt-16 max-w-5xl mx-auto border-t border-cardBorder pt-20 scroll-mt-24">
+    <section id="inside" class="mb-16 lg:mb-32 mt-8 lg:mt-16 max-w-5xl mx-auto border-t border-cardBorder pt-12 lg:pt-20 scroll-mt-24">
        <div class="text-center mb-16">
           <p class="eyebrow text-[10px] uppercase tracking-[0.2em] font-medium text-brand/60 mb-4">engineered for sharing</p>
           <h2 class="font-serif text-4xl lg:text-5xl text-brand tracking-tight">every layer, designed with intention.</h2>
@@ -667,6 +713,15 @@
   </main>
 
   <!-- ============================================== -->
+  <!-- MOBILE STICKY ADD TO CART -->
+  <!-- ============================================== -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-bgTheme/95 backdrop-blur-md border-t border-cardBorder p-4 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-6">
+     <button id="mobile-add-to-cart-btn" class="w-full bg-brand hover:bg-brandHover text-bgTheme py-4 rounded-sm tracking-[0.05em] font-medium text-[15px] lowercase transition-colors">
+       add to cart — $2,495
+     </button>
+  </div>
+
+  <!-- ============================================== -->
   <!-- CART DRAWER MODAL -->
   <!-- ============================================== -->
   <div id="cart-drawer-overlay" class="fixed inset-0 bg-brand/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
@@ -852,6 +907,7 @@
        const chkPillows = document.getElementById("chk-pillows");
        const chkFrame = document.getElementById("chk-frame");
        const addToCartBtn = document.getElementById("add-to-cart-btn");
+       const mobileAddToCartBtn = document.getElementById("mobile-add-to-cart-btn");
        const savingsMessage = document.getElementById("savings-message");
 
        const cartItemsContainer = document.getElementById("cart-items-container");
@@ -888,7 +944,18 @@
 
           // Update Button
           if (addToCartBtn) {
-             addToCartBtn.innerText = `add to cart — ${formatPrice(subtotal)}`;
+             if (discountAmt > 0) {
+                 const originalTotal = subtotal + discountAmt;
+                 addToCartBtn.innerHTML = `add to cart — <span class="line-through text-bgTheme/60 mr-1">${formatPrice(originalTotal)}</span> ${formatPrice(subtotal)}`;
+                 if (mobileAddToCartBtn) {
+                     mobileAddToCartBtn.innerHTML = `add to cart — <span class="line-through text-bgTheme/60 mr-1">${formatPrice(originalTotal)}</span> ${formatPrice(subtotal)}`;
+                 }
+             } else {
+                 addToCartBtn.innerHTML = `add to cart — ${formatPrice(subtotal)}`;
+                 if (mobileAddToCartBtn) {
+                     mobileAddToCartBtn.innerHTML = `add to cart — ${formatPrice(subtotal)}`;
+                 }
+             }
           }
 
           // Render Drawer Items
@@ -908,7 +975,12 @@
                  </div>`;
               }).join('');
               
-              cartTotal.innerText = formatPrice(subtotal);
+              if (discountAmt > 0) {
+                  const originalTotal = subtotal + discountAmt;
+                  cartTotal.innerHTML = `<span class="line-through text-brand/40 mr-2 text-sm">${formatPrice(originalTotal)}</span>${formatPrice(subtotal)}`;
+              } else {
+                  cartTotal.innerHTML = formatPrice(subtotal);
+              }
           }
        }
 
@@ -918,8 +990,54 @@
            chk.addEventListener('change', renderCart);
        });
 
+       const radioSolo = document.getElementById("radio-solo");
+       const radioBundle = document.getElementById("radio-bundle");
+       const labelSolo = document.getElementById("label-solo");
+       const labelBundle = document.getElementById("label-bundle");
+
+       function updateModelSelection() {
+           if (radioSolo.checked) {
+               labelSolo.className = "border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer text-center block";
+               labelBundle.className = "border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors relative text-center block bg-bgTheme";
+               if (chkSheets) chkSheets.checked = false;
+               if (chkPillows) chkPillows.checked = false;
+               if (chkFrame) chkFrame.checked = false;
+               renderCart();
+           } else if (radioBundle.checked) {
+               labelBundle.className = "border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer relative text-center block";
+               labelSolo.className = "border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors text-center block bg-bgTheme";
+               if (chkSheets) chkSheets.checked = true;
+               if (chkPillows) chkPillows.checked = true;
+               if (chkFrame) chkFrame.checked = true;
+               renderCart();
+           }
+       }
+       if(radioSolo) radioSolo.addEventListener("change", updateModelSelection);
+       if(radioBundle) radioBundle.addEventListener("change", updateModelSelection);
+
+       // Sync radio buttons when individual checkboxes are manually clicked
+       function syncBundleRadios() {
+           if (chkSheets && chkPillows && chkFrame) {
+               if (!chkSheets.checked && !chkPillows.checked && !chkFrame.checked) {
+                   if(radioBundle.checked) { radioSolo.checked = true; updateModelSelection(); }
+               } else if (chkSheets.checked && chkPillows.checked && chkFrame.checked) {
+                   if(radioSolo.checked) { radioBundle.checked = true; updateModelSelection(); }
+               }
+           }
+       }
+       document.querySelectorAll('.bundle-chk').forEach(chk => {
+           chk.addEventListener('change', syncBundleRadios);
+       });
+
        if (cartBtn) {
            cartBtn.addEventListener("click", () => {
+               renderCart(); 
+               toggleDrawer(cartDrawer, cartOverlay);
+           });
+       }
+
+       if (mobileAddToCartBtn) {
+           mobileAddToCartBtn.addEventListener("click", () => {
                renderCart(); 
                toggleDrawer(cartDrawer, cartOverlay);
            });
@@ -1120,6 +1238,27 @@
               observer.observe(section);
           }
        });
+
+       // Mobile Menu Toggle
+       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+       const closeMobileMenuBtn = document.getElementById("close-mobile-menu");
+       const mobileMenu = document.getElementById("mobile-menu");
+
+       if(mobileMenuBtn && closeMobileMenuBtn && mobileMenu) {
+           mobileMenuBtn.addEventListener("click", () => {
+               mobileMenu.classList.remove("translate-x-full");
+           });
+           closeMobileMenuBtn.addEventListener("click", () => {
+               mobileMenu.classList.add("translate-x-full");
+           });
+           
+           // Close menu when a link is clicked
+           mobileMenu.querySelectorAll("a").forEach(link => {
+               link.addEventListener("click", () => {
+                   mobileMenu.classList.add("translate-x-full");
+               });
+           });
+       }
 
     });
   </script>
