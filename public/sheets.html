@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WNM4876N');</script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>the sheets | one more</title>
@@ -34,6 +41,10 @@
   </script>
 </head>
 <body class="bg-bgTheme text-brand font-sans antialiased">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNM4876N"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   <!-- TOP NAV PLACEHOLDER -->
   <header class="border-b border-cardBorder py-6 px-6 sm:px-12 flex justify-between items-center bg-transparent sticky top-0 z-50 backdrop-blur-md">
@@ -52,8 +63,7 @@
   <!-- SECONDARY NAV (Shop, Inside, Compare, Reviews) -->
   <div class="bg-transparent border-b border-cardBorder py-4 hidden md:block sticky top-0 z-50 bg-bgTheme/90 backdrop-blur">
     <div class="max-w-7xl mx-auto px-4 flex justify-center gap-12 text-xs uppercase tracking-wide font-medium items-center">
-      <a href="#shop" class="sec-nav-link text-brand bg-cardBorder/50 border-cardBorder rounded-full px-5 py-1.5 border transition-all duration-300">Shop</a>
-      <a href="#inside" class="sec-nav-link text-brand/60 hover:text-brand border-transparent rounded-full px-5 py-1.5 border transition-all duration-300">What's inside</a>
+      <a href="#inside" class="sec-nav-link text-brand bg-cardBorder/50 border-cardBorder rounded-full px-5 py-1.5 border transition-all duration-300">What's inside</a>
       <a href="#compare" class="sec-nav-link text-brand/60 hover:text-brand border-transparent rounded-full px-5 py-1.5 border transition-all duration-300">Compare</a>
       <a href="#reviews" class="sec-nav-link text-brand/60 hover:text-brand border-transparent rounded-full px-5 py-1.5 border transition-all duration-300">Reviews</a>
     </div>
@@ -82,7 +92,7 @@
       </div>
 
       <!-- RIGHT COL: Add To Cart sticky area -->
-      <div class="lg:col-span-5 flex flex-col pt-2 lg:sticky lg:top-32 max-h-[calc(100vh-120px)] overflow-y-auto pb-10 hide-scrollbar scroll-smooth">
+      <div class="lg:col-span-5 flex flex-col pt-2 lg:sticky lg:top-32 lg:max-h-[calc(100vh-120px)] lg:overflow-y-auto pb-28 lg:pb-10 hide-scrollbar scroll-smooth">
         
         <div class="flex items-center gap-2 mb-3">
            <div class="flex text-brand text-[15px] gap-0.5">★★★★★</div>
@@ -108,22 +118,22 @@
         </p>
 
         <!-- Model Selector (Repurposed for Bed Frame Bundle vs Solo) -->
-        <div class="mb-8">
+        <div class="mb-4">
           <div class="flex justify-between items-center mb-3">
              <span class="text-[13px] tracking-wide font-medium text-brand">select sleep system:</span>
           </div>
           <div class="grid grid-cols-2 gap-3">
              <!-- Solo Option -->
-             <label class="border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors text-center block bg-bgTheme">
-                <input type="radio" name="model" class="hidden">
+             <label id="label-solo" class="border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer text-center block">
+                <input type="radio" name="model" id="radio-solo" class="hidden" checked>
                 <div class="flex justify-between items-center mb-1 w-full text-center">
-                   <div class="font-bold text-sm mx-auto">mattress only</div>
+                   <div class="font-bold text-sm mx-auto">sheets only</div>
                 </div>
                 <p class="text-xs text-brand/60 mt-1">the standalone sheets.</p>
              </label>
              <!-- Bundle Option -->
-             <label class="border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer relative text-center block">
-                <input type="radio" name="model" class="hidden" checked>
+             <label id="label-bundle" class="border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors relative text-center block bg-bgTheme">
+                <input type="radio" name="model" id="radio-bundle" class="hidden">
                 <div class="absolute -top-2.5 right-3 bg-brand text-bgTheme text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">SAVE $135</div>
                 <div class="font-bold text-sm mb-1 text-brand">the bundle</div>
                 <p class="text-xs text-brand/70 mt-1">mattress + sheets + pillows + frame.</p>
@@ -131,40 +141,24 @@
           </div>
         </div>
 
-        <!-- Size Selector -->
-        <div class="mb-8">
-          <div class="flex justify-between items-center mb-3">
-             <span class="text-[13px] tracking-wide font-medium text-brand">select your size:</span>
-             <button id="size-chart-trigger" class="text-[11px] font-bold uppercase tracking-wider text-brand/60 hover:text-brand underline decoration-brand/30 underline-offset-4">Size guide</button>
-          </div>
-          <div class="flex flex-wrap gap-2.5">
-             <button class="border-2 border-brand bg-brand text-bgTheme font-medium rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-default">one more size (84" x 80")</button>
-             <div class="relative group">
-                 <button class="border border-cardBorder text-brand/40 bg-bgTheme rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-not-allowed line-through">king</button>
-             </div>
-             <div class="relative group">
-                 <button class="border border-cardBorder text-brand/40 bg-bgTheme rounded-full px-6 py-[9px] text-[13px] tracking-wide cursor-not-allowed line-through">queen</button>
-             </div>
-          </div>
-        </div>
+
 
         <!-- Cross-sells (Add to save) -->
-        <div class="mb-8 border-t border-cardBorder pt-6">
+        <div class="mb-6 border-t border-cardBorder pt-4">
            <h3 class="text-[13px] tracking-wide font-medium text-brand mb-4">Add 1 or more and save:</h3>
            <div class="flex flex-col gap-3">
-                  <!-- Sheets -->
+               <!-- Mattress -->
                <div class="border border-cardBorder rounded-lg p-3 flex gap-3 items-center bg-bgTheme cursor-pointer hover:border-brand transition-colors">
                   <div class="w-14 h-14 bg-creamDark rounded border border-cardBorder flex items-center justify-center overflow-hidden relative shrink-0">
-                     <span class="absolute top-0 left-0 bg-brand text-bgTheme text-[8px] font-bold px-1 py-0.5 z-10 w-full text-center tracking-widest">SAVE</span>
-                     <img src="img/sheets-product.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
+                     <img src="img/mattress-overhead.jpg" class="w-full h-full object-cover mix-blend-multiply absolute inset-0">
                   </div>
                   <div class="flex-1">
-                     <h4 class="text-xs font-bold text-brand">the one more sheets</h4>
-                     <p class="text-[10px] text-brand/60 mb-1">cotton percale</p>
-                     <span class="text-xs font-bold text-accent">+$295</span>
+                     <h4 class="text-xs font-bold text-brand">the one more mattress</h4>
+                     <p class="text-[10px] text-brand/60 mb-1">wider than king. smarter than the rest.</p>
+                     <span class="text-xs font-bold text-accent">+$2,495</span>
                   </div>
                   <div class="pr-2">
-                     <input type="checkbox" id="chk-sheets" data-price="295" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
+                     <input type="checkbox" id="chk-mattress" data-price="2495" class="bundle-chk w-5 h-5 rounded border-cardBorder text-brand focus:ring-brand cursor-pointer">
                   </div>
                </div>
 
@@ -667,6 +661,15 @@
   </main>
 
   <!-- ============================================== -->
+  <!-- MOBILE STICKY ADD TO CART -->
+  <!-- ============================================== -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-bgTheme/95 backdrop-blur-md border-t border-cardBorder p-4 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-6">
+     <button id="mobile-add-to-cart-btn" class="w-full bg-brand hover:bg-brandHover text-bgTheme py-4 rounded-sm tracking-[0.05em] font-medium text-[15px] lowercase transition-colors">
+       add to cart
+     </button>
+  </div>
+
+  <!-- ============================================== -->
   <!-- CART DRAWER MODAL -->
   <!-- ============================================== -->
   <div id="cart-drawer-overlay" class="fixed inset-0 bg-brand/40 z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
@@ -842,16 +845,17 @@
 
        // Cart Dynamic Render Logic
        const productData = {
-           mattress: { name: "the one more sheets", desc: "size: one more size", price: 2495, img: "mattress-overhead.jpg", bg: "bg-lightBlue" },
+           mattress: { name: "the one more mattress", desc: "wider than king", price: 2495, img: "mattress-overhead.jpg", bg: "bg-lightBlue" },
            sheets: { name: "the one more sheets", desc: "cotton percale", price: 295, img: "sheets-product.jpg", bg: "bg-creamDark" },
            pillows: { name: "the one more pillows", desc: "set of 3", price: 195, img: "pillows-product.jpg", bg: "bg-lightBlue" },
            frame: { name: "the bed frame", desc: "minimal architecture", price: 1195, img: "frame-product.jpg", bg: "bg-creamDark" }
        };
 
-       const chkSheets = document.getElementById("chk-sheets");
+       const chkMattress = document.getElementById("chk-mattress");
        const chkPillows = document.getElementById("chk-pillows");
        const chkFrame = document.getElementById("chk-frame");
        const addToCartBtn = document.getElementById("add-to-cart-btn");
+       const mobileAddToCartBtn = document.getElementById("mobile-add-to-cart-btn");
        const savingsMessage = document.getElementById("savings-message");
 
        const cartItemsContainer = document.getElementById("cart-items-container");
@@ -862,11 +866,11 @@
        const formatPrice = (num) => "$" + num.toLocaleString();
 
        function renderCart() {
-          let items = ['mattress'];
-          let subtotal = productData.mattress.price;
+          let items = ['sheets'];
+          let subtotal = productData.sheets.price;
           let addonTotal = 0;
 
-          if (chkSheets?.checked) { items.push('sheets'); addonTotal += productData.sheets.price; }
+          if (chkMattress?.checked) { items.push('mattress'); addonTotal += productData.mattress.price; }
           if (chkPillows?.checked) { items.push('pillows'); addonTotal += productData.pillows.price; }
           if (chkFrame?.checked) { items.push('frame'); addonTotal += productData.frame.price; }
 
@@ -888,7 +892,16 @@
 
           // Update Button
           if (addToCartBtn) {
-             addToCartBtn.innerText = `add to cart — ${formatPrice(subtotal)}`;
+             if (discountAmt > 0) {
+                 const originalTotal = subtotal + discountAmt;
+                 const btnHtml = `add to cart — <span class="line-through text-bgTheme/60 mr-1">${formatPrice(originalTotal)}</span> ${formatPrice(subtotal)}`;
+                 addToCartBtn.innerHTML = btnHtml;
+                 if (mobileAddToCartBtn) mobileAddToCartBtn.innerHTML = btnHtml;
+             } else {
+                 const btnHtml = `add to cart — ${formatPrice(subtotal)}`;
+                 addToCartBtn.innerHTML = btnHtml;
+                 if (mobileAddToCartBtn) mobileAddToCartBtn.innerHTML = btnHtml;
+             }
           }
 
           // Render Drawer Items
@@ -908,7 +921,12 @@
                  </div>`;
               }).join('');
               
-              cartTotal.innerText = formatPrice(subtotal);
+              if (discountAmt > 0) {
+                  const originalTotal = subtotal + discountAmt;
+                  cartTotal.innerHTML = `<span class="line-through text-brand/40 mr-2 text-sm">${formatPrice(originalTotal)}</span>${formatPrice(subtotal)}`;
+              } else {
+                  cartTotal.innerHTML = formatPrice(subtotal);
+              }
           }
        }
 
@@ -917,6 +935,52 @@
        document.querySelectorAll('.bundle-chk').forEach(chk => {
            chk.addEventListener('change', renderCart);
        });
+
+       const radioSolo = document.getElementById("radio-solo");
+       const radioBundle = document.getElementById("radio-bundle");
+       const labelSolo = document.getElementById("label-solo");
+       const labelBundle = document.getElementById("label-bundle");
+
+       function updateModelSelection() {
+           if (radioSolo.checked) {
+               labelSolo.className = "border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer text-center block";
+               labelBundle.className = "border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors relative text-center block bg-bgTheme";
+               if (chkMattress) chkMattress.checked = false;
+               if (chkPillows) chkPillows.checked = false;
+               if (chkFrame) chkFrame.checked = false;
+               renderCart();
+           } else if (radioBundle.checked) {
+               labelBundle.className = "border border-brand border-[1.5px] bg-lightBlue/30 rounded-lg p-4 cursor-pointer relative text-center block";
+               labelSolo.className = "border border-cardBorder rounded-lg p-4 cursor-pointer hover:border-brand transition-colors text-center block bg-bgTheme";
+               if (chkMattress) chkMattress.checked = true;
+               if (chkPillows) chkPillows.checked = true;
+               if (chkFrame) chkFrame.checked = true;
+               renderCart();
+           }
+       }
+       if(radioSolo) radioSolo.addEventListener("change", updateModelSelection);
+       if(radioBundle) radioBundle.addEventListener("change", updateModelSelection);
+
+       // Sync radio buttons when individual checkboxes are manually clicked
+       function syncBundleRadios() {
+           if (chkMattress && chkPillows && chkFrame) {
+               if (!chkMattress.checked && !chkPillows.checked && !chkFrame.checked) {
+                   if(radioBundle.checked) { radioSolo.checked = true; updateModelSelection(); }
+               } else if (chkMattress.checked && chkPillows.checked && chkFrame.checked) {
+                   if(radioSolo.checked) { radioBundle.checked = true; updateModelSelection(); }
+               }
+           }
+       }
+       document.querySelectorAll('.bundle-chk').forEach(chk => {
+           chk.addEventListener('change', syncBundleRadios);
+       });
+
+       if (mobileAddToCartBtn) {
+           mobileAddToCartBtn.addEventListener("click", () => {
+               renderCart(); 
+               toggleDrawer(cartDrawer, cartOverlay);
+           });
+       }
 
        if (cartBtn) {
            cartBtn.addEventListener("click", () => {

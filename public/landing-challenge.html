@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WNM4876N');</script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>landing-challenge | one more</title>
@@ -17,13 +24,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- Styles -->
-  <link rel="stylesheet" href="/css/style.css?v=3" />
+  <link rel="stylesheet" href="/css/style.css?v=4" />
   <!-- Mustache.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
   <!-- Data store -->
   <script src="/content.js"></script>
 </head>
 <body data-page="landing-challenge">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNM4876N"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   <!-- HEADER rendered by Mustache -->
   <div id="header-mount"></div>
@@ -42,22 +53,26 @@
       <!-- Mobile menu button -->
       <div class="lg:hidden flex items-center gap-4">
         <button class="nav-link text-sm tracking-wide text-foreground cart-btn-mobile" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
-        <button id="mobile-menu-btn" class="flex flex-col gap-1.5 p-2" aria-label="menu">
-          <span class="w-6 h-px bg-foreground block transition-all"></span>
-          <span class="w-6 h-px bg-foreground block transition-all"></span>
-          <span class="w-4 h-px bg-foreground block transition-all"></span>
+        <button id="mobile-menu-btn" class="text-foreground flex flex-col gap-1.5 focus:outline-none p-1" aria-label="menu">
+          <span class="block w-5 h-0.5 bg-foreground rounded-full"></span>
+          <span class="block w-5 h-0.5 bg-foreground rounded-full"></span>
         </button>
       </div>
     </div>
   </nav>
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden lg:hidden bg-background border-t border-border">
-    <div class="container-padding py-6 flex flex-col gap-4">
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="mobile-menu-overlay lg:hidden">
+    <div class="flex justify-between items-center mb-12">
+      <a href="/index.html" class="font-serif text-2xl text-foreground tracking-tight hover:opacity-70 transition-opacity">{{site.brand}}</a>
+      <button id="close-mobile-menu" class="text-foreground p-2 focus:outline-none" aria-label="close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-8 text-2xl font-serif text-foreground">
       {{#nav.links}}
-      <a href="{{href}}" class="nav-link text-sm tracking-wide text-foreground hover:opacity-60 transition-opacity">{{label}}</a>
-              {{/nav.links}}
-        <button class="nav-link text-sm tracking-wide transition-all duration-300 hover:opacity-60 text-muted-foreground cart-btn-desktop" aria-label="cart">cart (<span class="cart-count">0</span>)</button>
-      </div>
+      <a href="{{href}}" class="hover:opacity-70 transition-colors">{{label}}</a>
+      {{/nav.links}}
+    </nav>
   </div>
 </header>
   </script>
@@ -128,11 +143,6 @@
   <!-- Scripts -->
   <script src="/js/main.js"></script>
 
-<script>
-  document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
-  });
-</script>
+
 </body>
 </html>

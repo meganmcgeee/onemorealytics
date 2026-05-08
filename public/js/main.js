@@ -45,9 +45,24 @@
   // Mobile menu toggle
   var mobileBtn = document.getElementById('mobile-menu-btn');
   var mobileMenu = document.getElementById('mobile-menu');
+  var closeMobileMenu = document.getElementById('close-mobile-menu');
   if (mobileBtn && mobileMenu) {
     mobileBtn.addEventListener('click', function() {
-      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  if (closeMobileMenu && mobileMenu) {
+    closeMobileMenu.addEventListener('click', function() {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
     });
   }
 })();
