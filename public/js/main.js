@@ -97,10 +97,31 @@ const CartState = {
   add: function(id, name, price, img) {
     this.items.push({ id, name, price, img });
     this.save();
+    
+    // GTM DataLayer Push
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'add_to_cart',
+      ecommerce: {
+        items: [{ item_id: id, item_name: name, price: price }]
+      }
+    });
+
     window.openCartDrawer();
   },
   
   remove: function(index) {
+    const item = this.items[index];
+    
+    // GTM DataLayer Push
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'remove_from_cart',
+      ecommerce: {
+        items: [{ item_id: item.id, item_name: item.name, price: item.price }]
+      }
+    });
+
     this.items.splice(index, 1);
     this.save();
   },
@@ -183,7 +204,7 @@ function initCartDOM() {
         <span class="font-medium text-lg">subtotal</span>
         <span class="font-medium text-lg" id="cart-subtotal">$0.00</span>
       </div>
-      <a href="checkout.html" class="btn-primary" style="width:100%; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box;">checkout</a>
+      <a href="checkout.html" class="btn-primary" style="width:100%; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box;" onclick="window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'begin_checkout', ecommerce: { value: CartState.total(), items: CartState.items.map(i => ({ item_id: i.id, item_name: i.name, price: i.price })) } });">checkout</a>
     </div>
   `;
   
@@ -536,4 +557,28 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(initOnboardingModal, 150);
   setTimeout(initVariantSelectors, 200);
   setTimeout(initFeatureTour, 250);
+
+  // GTM View Item / Page View
+  const page = document.body.dataset.page;
+  if (page) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'page_view',
+      page_type: page
+    });
+    
+    // If it's a product page, fire view_item
+    if (['mattress', 'sheets', 'pillows', 'frame', 'pdp'].includes(page) && typeof CONTENT !== 'undefined' && CONTENT.shop) {
+      // Find the first product that matches this page or just push a generic view_item
+      const prod = CONTENT.shop.products.find(p => p.id === page || p.href.includes(page));
+      if (prod) {
+        window.dataLayer.push({
+          event: 'view_item',
+          ecommerce: {
+            items: [{ item_id: prod.id, item_name: prod.name, price: prod.price }]
+          }
+        });
+      }
+    }
+  }
 });

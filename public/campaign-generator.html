@@ -1318,6 +1318,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // Launch Page implementation reading iframe DOM
         function launchPage() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'campaign_launched' });
             const iframeDoc = document.getElementById('lp-canvas').contentWindow.document;
             const htmlContent = "<!DOCTYPE html>\\n" + iframeDoc.documentElement.outerHTML;
             const lpId = "camp_" + Date.now() + "_" + Math.floor(Math.random()*1000);
@@ -1349,6 +1351,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // Export HTML function retaining any inline edits
         function generateHTMLCode() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'campaign_downloaded_html' });
             const iframe = document.getElementById('lp-canvas');
             const html = iframe.contentWindow.document.documentElement.outerHTML;
             const blob = new Blob(["<!DOCTYPE html>\\n" + html], {type: "text/html"});
@@ -1361,6 +1365,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // Export Meta CSV function
         function exportToCSV() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'campaign_exported_csv' });
             // Very simplified CSV generation for Meta Ads bulk uploader
             let csvContent = "data:text/csv;charset=utf-8,";
             csvContent += "Campaign Name,Ad Set Name,Ad Name,Primary Text,Headline,Link Description,Call To Action\n";

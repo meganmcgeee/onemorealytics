@@ -37,7 +37,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
       <div class="text-center">
-        <button class="btn-primary" onclick="alert('thank you for pretending to buy!')">place order</button>
+        <button class="btn-primary" onclick="
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'purchase',
+            ecommerce: {
+              transaction_id: 'ORDER_' + Math.floor(Math.random() * 1000000),
+              value: CartState.total(),
+              items: CartState.items.map(i => ({ item_id: i.id, item_name: i.name, price: i.price }))
+            }
+          });
+          alert('thank you for pretending to buy!');
+          CartState.items = []; CartState.save(); window.location.href = '/index.html';
+        ">place order</button>
       </div>
     </div>
   </main>

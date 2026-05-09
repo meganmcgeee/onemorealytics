@@ -1062,6 +1062,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const lpProgress = document.getElementById("lp-gen-progress");
 
         function triggerLaunchLpGen() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'persona_generated' });
             lpGen.classList.add("active");
             lpStep.innerText = "Saving edited profile data..."; 
             lpProgress.style.width = "20%";
@@ -1120,6 +1122,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
 
         function exportToPDF() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'persona_exported' });
             const element = document.querySelector('main');
             
             // Apply temporary styles for better PDF formatting
